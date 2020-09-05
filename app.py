@@ -1,11 +1,32 @@
-from flask import Flask,render_template
-
+from flask import Flask,render_template,session,request,redirect,url_for
+from DBConnection import Db
 app = Flask(__name__)
+app.secret_key ="mech"
+static_path="C:\\Users\\ajmal\\PycharmProjects\\mechfinder\\static\\"
 
 
 @app.route('/')
 def hello_world():
     return render_template('login.html')
+@app.route('/login_check' ,methods=['post'])
+def login_check():
+    username=request.form['Username']
+    password=request.form['password']
+    db=Db()
+    res=db.selectOne("SELECT * FROM login WHERE username='"+username+"' AND PASSWORD='"+password+"'")
+    if res is not None:
+        session['lid'] = res['login_id']
+        user_type=res['user_type']
+        if username=='admin':
+            return redirect(url_for('admin_home'))
+        elif username=='owner':
+            return redirect(url_for('owner_home'))
+
+    else:
+        return '<script>alert("invalid username or password");window.location="/"</script>'
+
+
+
 ###################admin###################
 
 @app.route('/admin_home')
@@ -39,6 +60,17 @@ def View_rating():
 @app.route('/Add_Notification')
 def Add_Notification():
     return render_template('admin/add_Notification.html')
+@app.route('/Add_Notification_post',methods=['post'])
+def Add_Notification_post():
+    subject=request.form['textfield']
+    content=request.form['textarea']
+    files=request.files['fileField']
+    db=Db()
+    res=db.insert("INSERT INTO notification(DATE,SUBJECT,description,image) VALUES (CURDATE(),'"+subject+"','"+content+"','')")
+    file_name='notification_'+str(res)+'.jpg'
+    files.save(static_path+"notification\\"+file_name)
+    db.update("update notification set image='"+file_name+"' where notification_id='"+str(res)+"'")
+    return '<script>alert("notification adedd");window.location="/Add_Notification"</script>'
 
 @app.route('/View_Notification')
 def View_Notification():
@@ -47,6 +79,18 @@ def View_Notification():
 @app.route('/Add_news')
 def Add_news():
     return render_template('admin/add news.html')
+
+@app.route('/Add_news_post',methods=['post'])
+def Add_news_post():
+    title=request.form['textfield']
+    discription=request.form['textarea']
+    files = request.files['fileField']
+    db = Db()
+    res = db.insert("INSERT INTO news(DATE,news_title,news_description,image) VALUES (CURDATE(),'"+title+"','"+discription+"','')")
+    file_name = 'news_' + str(res) + '.jpg'
+    files.save(static_path + "news\\" + file_name)
+    db.update("update news set image='" + file_name + "' where news_id='" + str(res) + "'")
+    return '<script>alert("news added");window.location="/Add_news"</script>'
 
 @app.route('/view_news')
 def view_news():
