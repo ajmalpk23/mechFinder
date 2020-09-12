@@ -30,18 +30,20 @@
         <td width="94">Phone number</td>
         <td width="114">&nbsp;</td>
       </tr>
+      {% for k in data %}
       <tr>
-        <td>&nbsp;</td>
-        <td>&nbsp;</td>
-        <td>&nbsp;</td>
-        <td>&nbsp;</td>
-        <td>&nbsp;</td>
-        <td>&nbsp;</td>
-        <td>&nbsp;</td>
-        <td>&nbsp;</td>
-        <td>&nbsp;</td>
+        <td>{{ loop.index }}</td>
+        <td>{{ k['shop_name'] }}</td>
+        <td>&nbsp;{{ k['place'] }}</td>
+        <td>&nbsp;{{ k['city'] }}</td>
+        <td>{{ k['pincode'] }}</td>
+        <td>&nbsp;{{ k['district'] }}</td>
+        <td>{{ k['shop_lisence'] }}</td>
+        <td>{{ k['email'] }}</td>
+        <td>&nbsp;{{ k['phone'] }}</td>
         <td><a href="#">verify</a></td>
       </tr>
+    {% endfor %}
     </tbody>
   </table>
   <p>&nbsp;</p>

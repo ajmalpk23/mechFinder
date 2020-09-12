@@ -19,13 +19,15 @@
       <td width="180">Description</td>
       <td width="62">&nbsp;</td>
     </tr>
+      {% for k in data %}
     <tr>
-      <td><label for="textfield"></label></td>
-      <td><label for="textfield2"></label>
-      <td><label for="textfield2"></label>
-      <td><label for="textfield3"></label>
+      <td>{{ loop.index }}</td>
+        <td>{{ k['date'] }}</td>
+        <td>{{ k['news_title'] }}</td>
+        <td>{{ k['news_description'] }}</td>
       <td><a href="#">Edit</a><a href="#">Delete</a></td>
     </tr>
+      {% endfor %}
   </table>
 </form>
 </body>

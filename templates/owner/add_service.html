@@ -5,7 +5,7 @@
 <title>Untitled Document</title>
 </head>
 
-<body><form><table width="471" border="0" align="center">
+<body><form action="/add_services_post" method="post"><table width="471" border="0" align="center">
   <tbody>
     <tr>
       <td align="center" colspan="2">Add Services</td>
@@ -15,7 +15,8 @@
       <td>Service</td>
       
       <td>
-	  <select name="service">
+	   <select  name="filed">
+           <option>water service</option>
 	  
 	  </select>
 	  </td>
@@ -24,6 +25,7 @@
       <td>Vehicle Type</td>
     
       <td><select name="service">
+          <option> 3 wheeler</option>
 	  
 	  </select>
 	  </td>
@@ -34,7 +36,7 @@
       <td><input type="text" name="price"/></td>
     </tr>
     <tr>
-      <td colspan="2" align="center"><input type="button" name="button" id="button" value="Add"></td>
+      <td colspan="2" align="center"><input type="submit" name="button" id="button" value="Add"></td>
     </tr>
   </tbody>
 </table>
