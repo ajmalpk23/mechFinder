@@ -7,10 +7,11 @@
 
 <body>
 <form id="form1" name="form1" method="post" action="">
-  <p><h2>Delete Notification</h2></p>
-  <table width="462" height="80" border="1" align="center">
+  <p ><h2 align="center">View Notification
+  </h2>
+  <table width="765" height="184" border="1" align="center">
     <tr>
-      <td colspan="5" align="right"><label for="textfield4"></label>
+      <td colspan="6" align="right"><label for="textfield4"></label>
       <input type="text" name="textfield" id="textfield4" placeholder="Search"/></td>
     </tr>
     <tr>
@@ -18,6 +19,7 @@
       <td width="142">Date</td>
       <td width="142">Subject</td>
       <td width="180">Content</td>
+      <td width="62">Image</td>
       <td width="62">&nbsp;</td>
     </tr>
       {% for k in data %}
@@ -26,6 +28,7 @@
         <td>{{ k['date'] }}</td>
         <td>{{ k['subject'] }}</td>
         <td>{{ k['description'] }}</td>
+        <td><img src="static/notification/{{ k['image'] }}" alt="" height="100" width="100" alt=""/></td>
       <td><a href="#">Delete</a></td>
     </tr>
       {% endfor %}

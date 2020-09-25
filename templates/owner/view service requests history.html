@@ -16,14 +16,16 @@
       <th width="218" scope="col">Description</th>
       <th width="93" scope="col">&nbsp;</th>
     </tr>
+    {% for k in data %}
     <tr>
-      <td>&nbsp;</td>
-      <td>&nbsp;</td>
-      <td>&nbsp;</td>
-      <td>&nbsp;</td>
-      <td>&nbsp;</td>
+      <td>{{ loop.index }}</td>
+      <td>&nbsp;{{ k['name'] }}</td>
+      <td>{{ k['place'] }}</td>
+      <td>&nbsp;{{ k['request_date'] }}</td>
+      <td>&nbsp;{{ k['description'] }}</td>
       <td><a href="#">More info</a></td>
     </tr>
+  {% endfor %}
   </tbody>
 </table>
 </body>

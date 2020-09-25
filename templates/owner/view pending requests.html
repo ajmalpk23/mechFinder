@@ -16,14 +16,16 @@
       <th width="218" scope="col">Description</th>
       <th width="93" scope="col">&nbsp;</th>
     </tr>
+    {% for k in data %}
     <tr>
-      <td>&nbsp;</td>
-      <td>&nbsp;</td>
-      <td>&nbsp;</td>
-      <td>&nbsp;</td>
-      <td>&nbsp;</td>
-      <td><a href="#">more info</a></td>
+      <td>&nbsp;{{ loop.index }}</td>
+      <td>&nbsp;{{ k['name'] }}</td>
+      <td>{{ k['place'] }}</td>
+      <td>{{ k['request_date']}}</td>
+      <td>{{ k['description'] }}</td>
+      <td><a href="/more_info_pending_request/{{ k['service_request_id'] }}">more info</a></td>
     </tr>
+  {% endfor %}
   </tbody>
 </table>
 </body>

@@ -18,13 +18,16 @@
       <td width="180">Price</td>
       <td width="62">&nbsp;</td>
     </tr>
+
+       {% for k in data %}
     <tr>
-      <td><label for="textfield"></label></td>
-      <td><label for="textfield2"></label>
-      <td><label for="textfield2"></label>
-      <td><label for="textfield3"></label>
-      <td><a href="#">Edit</a><br/><a href="#">Delete</a></td>
+      <td>{{ loop.index }}</td>
+        <td>{{ k['service'] }}</td>
+        <td>{{ k['vehichle_type'] }}</td>
+        <td>{{ k['amount'] }}</td>
+      <td><a href="/edit_service/{{ k['service_id'] }}">Edit</a><br/><a href="#">Delete</a></td>
     </tr>
+       {% endfor %}
   </table>
   <p>&nbsp;</p>
 </form>

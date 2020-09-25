@@ -5,7 +5,7 @@
 <title>Untitled Document</title>
 </head>
 
-<body><form><table width="471" border="0" align="center">
+<body><form action="/edit_service_post" method="post"><table width="471" border="0" align="center" >
   <tbody>
     <tr>
       <td align="center" colspan="2">Edit Services</td>
@@ -15,7 +15,10 @@
       <td>Service</td>
       
       <td>
-	  <select name="service">
+	  <select name="filde" >
+          <option {% if data['service']=='water service' %} selected {% endif %}>water service</option>
+           <option {% if data['service']=='oile change' %} selected {% endif %}>oile change</option>
+           <option {% if data['service']=='Ac service' %} selected {% endif %}> Ac service</option>
 	  
 	  </select>
 	  </td>
@@ -24,6 +27,8 @@
       <td>Vehicle Type</td>
     
       <td><select name="service">
+          <option  {% if data['service']=='3 wheeler' %} selected {% endif %}> 3 wheeler</option>
+          <option {% if data['service']=='2 wheeler' %} selected {% endif %}>2 wheeler</option>
 	  
 	  </select>
 	  </td>
@@ -31,10 +36,10 @@
     <tr>
       <td>Price</td>
     
-      <td><input type="text" name="price"/></td>
+      <td><input type="text" name="price" value="{{ data['amount'] }}"/></td>
     </tr>
     <tr>
-      <td colspan="2" align="center"><input type="button" name="button" id="button" value="Update"></td>
+      <td colspan="2" align="center"><input type="submit" name="button" id="button" value="Update"></td>
     </tr>
   </tbody>
 </table>

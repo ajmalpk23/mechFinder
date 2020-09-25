@@ -6,22 +6,26 @@
 </head>
 
 <body>
-<form method="post" enctype="multipart/form-data" name="form1" id="form1">
+<form method="post" enctype="multipart/form-data" name="form1" id="form1" action="/edit_news_post">
   <p>&nbsp;</p>
   <p>&nbsp;</p>
   <p>&nbsp;</p>
-  <table width="577" height="244" border="0" align="center">
+  <table width="577" height="304" border="0" align="center">
     <tbody>
       <tr>
         <td width="246" height="47">title</td>
-        <td width="273"><input type="text" name="textfield" id="textfield"></td>
+        <td width="273"><input type="text" name="textfield" id="textfield" value="{{ data['news_title'] }}"></td>
       </tr>
       <tr>
         <td height="80">Discription</td>
-        <td><textarea name="textarea" id="textarea"></textarea></td>
+        <td><textarea name="textarea" id="textarea" {{ data['news_discription'] }} >{{ data['news_description'] }}</textarea></td>
       </tr>
       <tr>
-        <td>image</td>
+        <td height="63"> image</td>
+        <td><img src="/static/news/{{ data['image'] }}" height="100" width="100" alt="no image"></td>
+      </tr>
+      <tr>
+        <td>replace</td>
         <td><input type="file" name="fileField" id="fileField"></td>
       </tr>
       <tr>

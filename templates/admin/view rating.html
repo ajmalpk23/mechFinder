@@ -7,9 +7,12 @@
 
 <body>
 <form id="form1" name="form1" method="post" action="">
-  <table width="521" height="75" border="1" align="center">
+  <p>&nbsp;</p>
+  <p>&nbsp;</p>
+  <p>&nbsp;</p>
+  <table width="610" height="75" border="1" align="center">
     <tr>
-      <td height="23" colspan="5" align="right"><label for="textfield6"></label>
+      <td height="23" colspan="6" align="right"><label for="textfield6"></label>
       <input type="text" name="textfield" placeholder="Search" id="textfield6" /></td>
     </tr>
     <tr>
@@ -17,15 +20,20 @@
       <td width="98">User Name</td>
       <td width="94">Workshop</td>
       <td width="160">Rating</td>
+      <td width="83">feedback</td>
+        
       <td width="83">Date</td>
     </tr>
+      {% for k in data %}
     <tr>
-      <td height="17"><label for="textfield"></label></td>
-      <td><label for="textfield2"></label></td>
-      <td><label for="textfield3"></label></td>
-      <td><label for="textfield4"></label></td>
-      <td><label for="textfield5"></label></td>
+      <td height="17">{{ loop.index }}</td>
+      <td>{{ k['name'] }}</td>
+      <td>{{ k['shop_name'] }}</td>
+      <td>{{ k['rating'] }}</td>
+      <td>&nbsp;{{ k['feedback'] }}</td>
+      <td>{{ k['date'] }}</td>
     </tr>
+      {% endfor %}
   </table>
 </form>
 </body>

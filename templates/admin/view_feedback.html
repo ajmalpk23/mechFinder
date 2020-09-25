@@ -20,12 +20,14 @@
       <td width="208">Feedback</td>
       <td width="82">Date</td>
     </tr>
+      {% for k in data %}
     <tr>
-      <td height="21"><label for="textfield"></label></td>
-      <td><label for="textfield2"></label></td>
-      <td><label for="textfield3"></label></td>
-      <td><label for="textfield4"></label></td>
+      <td height="21">{{ loop.index }}</td>
+      <td>{{ k['name'] }}</td>
+      <td>{{ k['feedback'] }}</td>
+      <td>{{ k['feedback_date'] }}</td>
     </tr>
+      {% endfor %}
   </table>
 </form>
 </body>

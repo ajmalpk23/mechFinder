@@ -16,14 +16,16 @@
       <th width="160" scope="col">Feedback</th>
       <th width="160" scope="col">Rating</th>
     </tr>
+    {% for k in data %}
     <tr>
-      <td>&nbsp;</td>
-      <td>&nbsp;</td>
-      <td>&nbsp;</td>
-      <td>&nbsp;</td>
-      <td>&nbsp;</td>
-      <td>&nbsp;</td>
+      <td>{{ loop.index}}</td>
+      <td>{{ k['name'] }}</td>
+      <td>&nbsp;{{ k['place'] }}</td>
+      <td>{{ k['date'] }}</td>
+      <td>&nbsp;{{ k['feedback'] }}</td>
+      <td>&nbsp;{{ k['rating'] }}</td>
     </tr>
+  {% endfor %}
   </tbody>
 </table>
 </body>

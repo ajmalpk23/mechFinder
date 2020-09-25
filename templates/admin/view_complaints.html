@@ -22,15 +22,17 @@
       <td width="86">Reply Date</td>
       <td width="86"></td>
     </tr>
+      {% for k in data %}
     <tr>
-      <td height="15"><label for="textfield"></label></td>
-      <td><label for="textfield2"></label></td>
-      <td><label for="textfield3"></label></td>
-      <td><label for="textfield4"></label></td>
-      <td><label for="textfield3"></label></td>
-      <td><label for="textfield4"></label></td>
+      <td height="15">{{ loop.index }}</td>
+      <td>{{ k['name'] }}</td>
+      <td>{{ k['complaint'] }}</td>
+      <td>{{ k['complaint_date'] }}</td>
+      <td>{{ k['replay'] }}</td>
+      <td>{{ k['replay_date'] }}</td>
       <td><a href="">Edit</a></td>
     </tr>
+      {% endfor %}
   </table>
 </form>
 </body>
