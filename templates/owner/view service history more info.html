@@ -11,26 +11,26 @@
     <tbody>
       <tr>
         <td width="108">Name</td>
-        <td width="228">&nbsp;</td>
+        <td width="228">{{ data['name'] }}&nbsp;</td>
         <td width="150">Vehicle Type</td>
-        <td width="155">&nbsp;</td>
-        <td width="126" rowspan="4"><img src="" width="120" height="120"/>&nbsp;</td>
+        <td width="155">&nbsp;{{ data['vehicle_type'] }}</td>
+        <td width="126" rowspan="4"><img src="/static/user/{{ data['user_image'] }}" width="120" height="120"/>&nbsp;&nbsp;</td>
       </tr>
       <tr>
         <td>Place</td>
-        <td>&nbsp;</td>
+        <td>{{ data['place'] }}</td>
         <td>Company &amp; Model</td>
-        <td>&nbsp;</td>
+        <td>&nbsp;{{ data['company'] }}     {{ data['model'] }}</td>
       </tr>
       <tr>
         <td>Date</td>
-        <td>&nbsp;</td>
+        <td>{{ data['request_date']}}</td>
         <td>Manufacture year</td>
-        <td>&nbsp;</td>
+        <td>{{ data['manfctr_year'] }}</td>
       </tr>
       <tr>
         <td align="justify">Description</td>
-        <td>&nbsp;</td>
+        <td>&nbsp;&nbsp;{{ data['description'] }}</td>
         <td colspan="2">&nbsp;</td>
       </tr>
     </tbody>
@@ -39,12 +39,22 @@
   <table width="786" border="0">
     <tbody>
       <tr>
-        <th height="37" colspan="3" scope="col">Services</th>
+        <th height="37" colspan="2" scope="col">Services</th>
+		  <td><table width="271" height="34" border="0">
+		     <tbody>
+            {% for k in data1 %}
+		      <tr>
+		        <td>{{ k['service'] }}</td>
+		        <td>{{ k['amount'] }}</td>
+	          </tr>
+            {% endfor %}
+	        </tbody>
+	      </table></td>
       </tr>
       <tr>
-        <td width="76" height="41">Sl.no</td>
-        <td width="428">Service</td>
-        <td width="268">Amount</td>
+        <td width="76" height="41">Sl.no:  {{ data['service_request_id'] }}</td>
+        <td width="428">&nbsp;</td>
+        <td width="268">Amount {{ data['payment'] }}</td>
       </tr>
       <tr>
         <td height="30">&nbsp;</td>

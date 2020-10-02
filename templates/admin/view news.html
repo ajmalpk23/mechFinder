@@ -29,7 +29,7 @@
         <td>{{ k['news_title'] }}</td>
         <td>{{ k['news_description'] }}</td>
         <td><img src="static/news/{{ k['image'] }}" width="100" height="100" /></td>
-      <td><a href="/edit_news/{{ k['news_id'] }}">Edit</a><a href="#">Delete</a></td>
+      <td><a href="/edit_news/{{ k['news_id'] }}">Edit</a>    <a href="/delete_news/{{ k['news_id'] }}">Delete</a></td>
     </tr>
       {% endfor %}
   </table>

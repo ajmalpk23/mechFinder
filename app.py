@@ -96,7 +96,16 @@ def more_info(wid):
     db = Db()
     res=db.selectOne("SELECT workshop.* FROM workshop WHERE  workshop.login_id='"+wid+"' ")
     res2=db.select("SELECT * FROM services WHERE shop_id='"+wid+"'")
+    session['ad']=wid
     return  render_template('admin/more_info.html',data=res,data2=res2)
+
+@app.route('/block_workshop',methods=['post'])
+def block_workshop():
+    wid=session['ad']
+    db =Db()
+    db.update("UPDATE login SET user_type='rejected' WHERE login_id='"+wid+"'")
+    return '<script>alert("successfully rejected");window.location="/view_approved_workshop"</script>'
+
 
 
 
@@ -107,8 +116,30 @@ def view_rejected_workshop():
         "SELECT workshop.* FROM login,workshop WHERE login.user_type='rejected' AND login.login_id=workshop.login_id ")
     return render_template('admin/rejected_workshop.html',data=res)
 
+@app.route('/verify_reject/<wid>')
+def verify_reject(wid):
+    db = Db()
+    res = db.selectOne("SELECT workshop.* FROM workshop WHERE  workshop.login_id='" + wid + "' ")
+    res2 = db.select("SELECT * FROM services WHERE shop_id='" + wid + "'")
+    session['ad'] = wid
+    return render_template('admin/verify_reject.html', data=res, data2=res2)
 
 
+
+@app.route('/approve_rejected_workshop',methods=['post'])
+def approve_rejected_workshop():
+    wid = session['ad']
+    db = Db()
+    db.update("UPDATE login SET user_type='owner' WHERE login_id='" + wid + "'")
+    return '<script>alert("successfully approved");window.location="/view_rejected_workshop"</script>'
+
+
+@app.route('/delete_rejected_workshop/<qid>')
+def delete_rejected_workshop(qid):
+    db = Db()
+    db.delete("DELETE FROM login WHERE login_id='"+qid+"'")
+    db.delete("DELETE FROM workshop WHERE login_id='"+qid+"'")
+    return '<script>alert("successfully deleted");window.location="/view_rejected_workshop"</script>'
 
 @app.route('/Manage_complaints')
 def Manage_complaints():
@@ -148,6 +179,12 @@ def View_Notification():
     db=Db()
     res=db.select("SELECT * FROM notification ORDER BY notification.notification_id desc ")
     return render_template('admin/view_Notification.html',data=res)
+
+@app.route('/delete_notification/<nid>')
+def delete_notification(nid):
+    db =Db()
+    db.delete("DELETE FROM notification WHERE notification_id='"+nid+"'")
+    return '<script>alert("notification deleted");window.location="/View_Notification"</script>'
 
 @app.route('/Add_news')
 def Add_news():
@@ -189,6 +226,12 @@ def edit_news_post():
     files.save(static_path + "news\\" + file_name)
     db.update("UPDATE news SET DATE=CURDATE(),news_title='"+title+"',news_description='"+discription+"',image='"+file_name+"' WHERE news_id='"+nid+"'")
     return '<script>alert("successfully updated");window.location="/view_news"</script>'
+
+@app.route('/delete_news/<neid>')
+def delete_news(neid):
+    db =Db()
+    db.delete("DELETE FROM news WHERE news_id='"+neid+"'")
+    return '<script>alert("successfully deleted");window.location="/view_news"</script>'
 
 
 @app.route('/change_password')
@@ -308,6 +351,12 @@ def edit_service_post():
     db.update("UPDATE services SET service='"+service+"',vehichle_type='"+vehicle_type+"',amount='"+price+"' WHERE service_id='"+sid+"'")
     return '<script>alert("successfully updated");window.location="/view_services"</script>'
 
+@app.route('/delete_service/<seid>')
+def delete_service(seid):
+    db= Db()
+    db.delete("DELETE FROM services WHERE service_id='"+seid+"' ")
+    return '<script>alert("successfully deleted");window.location="/view_services"</script>'
+
 
 @app.route('/add_services')
 def add_services():
@@ -337,7 +386,23 @@ def pending_service_requestes():
 @app.route('/more_info_pending_request/<sid>')
 def more_info_pending_request(sid):
     db =Db()
-    res=db.selectOne("")
+    res=db.selectOne("SELECT  service_request.*,vehicle.*,user.* FROM service_request,vehicle,USER WHERE service_request.service_request_id='"+sid+"' AND service_request.user_id=user.login_id AND service_request.vehichle_id=vehicle.vehicle_id")
+    res1=db.select("SELECT services.*,service_request.*,user_service.* FROM services,service_request,user_service WHERE service_request.service_request_id='"+sid+"' AND service_request.service_request_id=user_service.service_request_id AND user_service.service_id=services.service_id")
+    session['id']=sid
+    return render_template('owner/service request more info.html',data=res,data1=res1)
+
+@app.route('/accepet_reject_service_request',methods=['post'])
+def accepet_reject_service_request():
+    db =Db()
+    sid=session['id']
+    submit = request.form['submit']
+    if submit =='Accept':
+        db.update("UPDATE service_request SET STATUS='approved' WHERE service_request_id='"+sid+"'")
+        return '<script>alert("request approved");window.location="/pending_service_requestes"</script>'
+    else:
+        db.update("UPDATE service_request SET STATUS='rejected' WHERE service_request_id='"+sid+"'")
+        return '<script>alert("request rejected");window.location="/pending_service_requestes"</script>'
+
 
 @app.route('/approved_service_requestes')
 def approved_service_requestes():
@@ -346,12 +411,27 @@ def approved_service_requestes():
     res=db.select("SELECT service_request.*,user.* FROM workshop,USER,service_request WHERE service_request.user_id=user.login_id AND service_request.workshop_id=workshop.login_id AND workshop.login_id='"+lid+"' AND service_request.status='approved' ORDER BY service_request.service_request_id DESC")
     return render_template('owner/view approved service requests.html',data=res)
 
+@app.route('/upadte_service_status/<sid>')
+def upadte_service_status(sid):
+    db =Db()
+    res = db.selectOne("SELECT  service_request.*,vehicle.*,user.* FROM service_request,vehicle,USER WHERE service_request.service_request_id='" + sid + "' AND service_request.user_id=user.login_id AND service_request.vehichle_id=vehicle.vehicle_id")
+    res1 = db.select("SELECT services.*,service_request.*,user_service.* FROM services,service_request,user_service WHERE service_request.service_request_id='" + sid + "' AND service_request.service_request_id=user_service.service_request_id AND user_service.service_id=services.service_id")
+    return render_template('owner/update service status.html',data=res,data1=res1)
+
 @app.route('/service_request_history')
 def service_request_history():
     lid = str(session['lid'])
     db = Db()
     res=db.select("SELECT service_request.*,user.* FROM workshop,USER,service_request WHERE service_request.user_id=user.login_id AND service_request.workshop_id=workshop.login_id AND workshop.login_id='"+lid+"' AND service_request.status='done' ORDER BY service_request.service_request_id DESC")
     return render_template('owner/view service requests history.html',data=res)
+
+@app.route('/service_history_more_info/<sid>')
+def service_history_more_info(sid):
+    db = Db()
+    res = db.selectOne("SELECT  service_request.*,vehicle.*,user.* FROM service_request,vehicle,USER WHERE service_request.service_request_id='" + sid + "' AND service_request.user_id=user.login_id AND service_request.vehichle_id=vehicle.vehicle_id")
+    res1 = db.select("SELECT services.*,service_request.*,user_service.* FROM services,service_request,user_service WHERE service_request.service_request_id='" + sid + "' AND service_request.service_request_id=user_service.service_request_id AND user_service.service_id=services.service_id")
+    return render_template('owner/view service history more info.html', data=res, data1=res1)
+
 
 @app.route('/view_rating')
 def view_rating():

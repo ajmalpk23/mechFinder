@@ -23,7 +23,7 @@
       <td>{{ k['place'] }}</td>
       <td>&nbsp;{{ k['request_date'] }}</td>
       <td>&nbsp;{{ k['description'] }}</td>
-      <td><a href="#">More info</a></td>
+      <td><a href="/service_history_more_info/{{ k['service_request_id'] }}">More info</a></td>
     </tr>
   {% endfor %}
   </tbody>

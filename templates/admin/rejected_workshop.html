@@ -42,8 +42,8 @@
         <td>&nbsp;{{ k['district'] }}</td>
         <td>&nbsp;{{ k['email'] }}</td>
         <td>&nbsp;{{ k['phone'] }}</td>
-        <td width="42"><a href="#">Delete   </a> </td>
-		  <td width="42"><a href="/approve_workshop/{{ k['login_id'] }}">Verify   </a> </td>
+        <td width="42"><a href="/delete_rejected_workshop/{{ k['login_id'] }}">Delete   </a> </td>
+		  <td width="42"><a href="/verify_reject/{{ k['login_id'] }}">Verify   </a> </td>
 		
       </tr>
     {% endfor %}

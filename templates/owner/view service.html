@@ -25,7 +25,7 @@
         <td>{{ k['service'] }}</td>
         <td>{{ k['vehichle_type'] }}</td>
         <td>{{ k['amount'] }}</td>
-      <td><a href="/edit_service/{{ k['service_id'] }}">Edit</a><br/><a href="#">Delete</a></td>
+      <td><a href="/edit_service/{{ k['service_id'] }}">Edit</a><br/><a href="/delete_service/{{ k['service_id'] }}">Delete</a></td>
     </tr>
        {% endfor %}
   </table>

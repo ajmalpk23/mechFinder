@@ -29,7 +29,7 @@
         <td>{{ k['subject'] }}</td>
         <td>{{ k['description'] }}</td>
         <td><img src="static/notification/{{ k['image'] }}" alt="" height="100" width="100" alt=""/></td>
-      <td><a href="#">Delete</a></td>
+      <td><a href="/delete_notification/{{ k['notification_id'] }}">Delete</a></td>
     </tr>
       {% endfor %}
   </table>
