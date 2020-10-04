@@ -147,6 +147,21 @@ def Manage_complaints():
     res=db.select("SELECT complaint.*,user.name FROM complaint,USER WHERE complaint.user_id=user.login_id ORDER BY complaint.complaint_id DESC")
     return render_template('admin/view_complaints.html',data=res)
 
+@app.route('/send_reply/<cid>')
+def send_reply(cid):
+    
+    session['id']=cid
+    return render_template('admin/send reply.html')
+
+@app.route('/send_reply_post',methods=['post'])
+def send_replay():
+    reply=request.form['reply']
+    cid=session['id']
+    db = Db()
+    db.update("UPDATE complaint SET replay='"+reply+"',replay_date=CURDATE() WHERE complaint_id='"+cid+"'")
+    return '<script>alert("successfully sent");window.location="/Manage_complaints"</script>'
+
+
 @app.route('/View_feedback')
 def View_feedback():
     db = Db()
@@ -416,7 +431,20 @@ def upadte_service_status(sid):
     db =Db()
     res = db.selectOne("SELECT  service_request.*,vehicle.*,user.* FROM service_request,vehicle,USER WHERE service_request.service_request_id='" + sid + "' AND service_request.user_id=user.login_id AND service_request.vehichle_id=vehicle.vehicle_id")
     res1 = db.select("SELECT services.*,service_request.*,user_service.* FROM services,service_request,user_service WHERE service_request.service_request_id='" + sid + "' AND service_request.service_request_id=user_service.service_request_id AND user_service.service_id=services.service_id")
+    session['id']=sid
     return render_template('owner/update service status.html',data=res,data1=res1)
+
+@app.route('/generate_invoice',methods=['post'])
+def generate_invoice():
+    amount=request.form.getlist('number')
+    user_service_id = request.form.getlist('user_service_id')
+    sid=session['id']
+    db = Db()
+    for k in range (len(user_service_id)):
+        db.update("UPDATE user_service SET amount='"+amount[k]+"' WHERE user_service_id='"+user_service_id[k]+"'")
+    # res=db.update("")
+    print(amount)
+    return 'ok'
 
 @app.route('/service_request_history')
 def service_request_history():

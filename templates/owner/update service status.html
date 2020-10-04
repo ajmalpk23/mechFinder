@@ -6,7 +6,7 @@
 </head>
 
 <body>
-<form id="form1" name="form1" method="post">
+<form id="form1" name="form1" method="post" action="/generate_invoice">
   <table width="789" height="164" border="0">
     <tbody>
       <tr>
@@ -40,12 +40,13 @@
     <tbody>
       <tr>
         <th height="37" colspan="2" scope="col">Services</th>
-		  <td><table width="267" height="37" border="0">
+		  <td><table width="267" height="37" border="1">
 		     <tbody>
             {% for k in data1 %}
 		      <tr>
 		        <td>{{ k['service'] }}</td>
-		        <td>{{ k['amount'] }}</td>
+		        <td><input type="number" value="{{ k['amount'] }}" name="number">
+                <input type="hidden" value="{{ k['user_service_id'] }}" name="user_service_id"></td>
 	          </tr>
             {% endfor %}
 	        </tbody>

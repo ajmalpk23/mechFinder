@@ -30,7 +30,7 @@
       <td>{{ k['complaint_date'] }}</td>
       <td>{{ k['replay'] }}</td>
       <td>{{ k['replay_date'] }}</td>
-      <td><a href="">Edit</a></td>
+      <td><a href="/send_reply/{{ k['complaint_id'] }}">Reply</a></td>
     </tr>
       {% endfor %}
   </table>
