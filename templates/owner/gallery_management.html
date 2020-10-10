@@ -13,15 +13,16 @@
       <td colspan="5" align="center">GALLERY</td>
       </tr>
 
+    {% for k in data %}
 
     <tr>
-      <td rowspan="3">`</td>
+      <td rowspan="3">{{ k['image'] }}</td>
       <td></td>
       <td rowspan="3"></td>
       <td></td>
       <td rowspan="3"></td>
     </tr>
-
+    {% endfor %}
     <tr>
       <td>&nbsp;</td>
       <td>&nbsp;</td>
@@ -40,13 +41,7 @@
        <td align="center"><input type="button" name="button4" id="button4" value="Delete">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <input type="button" name="button5" id="button5" value="Edit"></td>
     </tr>
-    <tr>
-      <td>&nbsp;</td>
-      <td>&nbsp;</td>
-      <td>&nbsp;</td>
-      <td>&nbsp;</td>
-      <td>&nbsp;</td>
-    </tr>
+
   </tbody>
 </table>
 

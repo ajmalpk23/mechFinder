@@ -3,10 +3,64 @@
 <head>
 <meta charset="utf-8">
 <title>Untitled Document</title>
+    <script>
+        function  calculate() {
+
+            no_service = document.getElementById("no_service").value;
+            part=0;
+
+            sum = 0;
+            for (var i=1;i<=no_service;i++)
+            {
+                var amount = document.getElementById(i+"").value;
+                if(amount==""){
+                    amount="0";
+                }
+                sum=sum+parseFloat(amount);
+
+            }
+            document.getElementById("amount").innerHTML=sum;
+            total();
+        }
+
+        function total() {
+            var discount=0;
+            if(document.getElementById("discount").value!=""){
+
+                discount=parseFloat(document.getElementById("discount").value);
+            }
+            var part=0;
+            if(document.getElementById("part").value!=""){
+                part=parseFloat(document.getElementById("part").value);
+            }
+            var amount=0;
+            if(document.getElementById("amount").innerHTML!="") {
+                amount = parseFloat(document.getElementById("amount").innerHTML);
+            }
+            var total_at=amount+part-discount;
+            document.getElementById("total_amount").innerHTML=total_at;
+        }
+        function printDiv() {
+        var printContents = document.getElementById("to_print").innerHTML;
+        var originalContents = document.body.innerHTML;
+        document.body.innerHTML = "<html><head><title></title></head><body>" + printContents + "</body>";
+        window.print();
+        document.body.innerHTML = originalContents;
+   }
+
+
+
+
+    </script>
+
 </head>
 
-<body>
+<body onload="calculate()">
+
 <form id="form1" name="form1" method="post" action="/generate_invoice">
+<div id="to_print">
+<input type="hidden" id="no_service" value="{{ data1|length }}">
+<input type="hidden" id="pa" value="{{ parts }}">
   <table width="789" height="164" border="0">
     <tbody>
       <tr>
@@ -45,7 +99,7 @@
             {% for k in data1 %}
 		      <tr>
 		        <td>{{ k['service'] }}</td>
-		        <td><input type="number" value="{{ k['amount'] }}" name="number">
+		        <td><input type="number" value="{{ k['uamount'] }}" name="number" id="{{ loop.index }}" onkeyup="calculate()">
                 <input type="hidden" value="{{ k['user_service_id'] }}" name="user_service_id"></td>
 	          </tr>
             {% endfor %}
@@ -55,27 +109,38 @@
       <tr>
         <td width="76" height="51">Sl.no:  {{ data['service_request_id'] }}</td>
         <td width="428">&nbsp;</td>
-        <td width="268">Amount {{ data['payment'] }}</td>
+        <td width="268"> Amount <label id="amount"> {{ data['payment'] }}</label></td>
       </tr>
       <tr>
         <td height="30">&nbsp;</td>
-        <td>&nbsp;</td>
-        <td>&nbsp;</td>
+        <td align="right">parts</td>
+        <td><input type="number" name="part" id="part" value="0"   onkeyup="total()"></td>
+      </tr>
+      <tr>
+        <td height="30">&nbsp;</td>
+        <td align="right">Discount</td>
+        <td><input type="number" name="dis" id="discount" value="0" onkeyup="total()"></td>
       </tr>
 		      <tr>
         <td height="43">&nbsp;</td>
-        <td align="right">Total Amount:</td>
+        <td align="right">Total Amount: <label id="total_amount"></label></td>.
         <td>&nbsp;</td>
       </tr>
-		      <tr>
-        <td height="57" colspan="2">&nbsp;</td>
-        <td><input type="submit" name="submit" id="submit" value="Generate Invoice"></td>
-      </tr>
+
     </tbody>
   </table>
+</div>
+<table width="786" border="0">
+<tr>
+
+        <td height="57" colspan="2" align="right"><input type="button" name="submit2" id="submit2" value="print" onclick="printDiv()"></td>
+        <td><input type="submit" name="submit" id="submit" value="Conform"></td>
+      </tr>
+ </table>
   <p>&nbsp;</p>
   <p>&nbsp;</p>
   <p>&nbsp;</p>
 </form>
+
 </body>
 </html>

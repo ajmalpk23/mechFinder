@@ -37,9 +37,12 @@
         <td><p>E-mail</p></td>
         <td><input type="email" name="email" id="email" value="{{ data['email'] }}"></td>
       </tr>
+
       <tr>
         <td>Shop License</td>
-        <td><input type="file" name="file" id="file" value="{{ data['shop_lisence'] }}"></td>
+        <td><img src="static/worckshop/{{ data['shop_lisence'] }}" height="100" width="100">
+            <br>
+            <input type="file" name="file" id="file" value="{{ data['shop_lisence'] }}"></td>
       </tr>
       <tr>
         <td height="31">Phone</td>

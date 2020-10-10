@@ -236,10 +236,14 @@ def edit_news_post():
     discription = request.form['textarea']
     files = request.files['fileField']
     nid = session['neid']
+    if files is not None:
+        fn=files.filename
+        if fn != '':
+            file_name = 'news_' + str(nid) + '.jpg'
+            files.save(static_path + "news\\" + file_name)
     db = Db()
-    file_name = 'news_' + str(nid) + '.jpg'
-    files.save(static_path + "news\\" + file_name)
-    db.update("UPDATE news SET DATE=CURDATE(),news_title='"+title+"',news_description='"+discription+"',image='"+file_name+"' WHERE news_id='"+nid+"'")
+
+    db.update("UPDATE news SET DATE=CURDATE(),news_title='"+title+"',news_description='"+discription+"' WHERE news_id='"+nid+"'")
     return '<script>alert("successfully updated");window.location="/view_news"</script>'
 
 @app.route('/delete_news/<neid>')
@@ -291,12 +295,15 @@ def update_view_profile():
     phone = request.form['number2']
     latitude = request.form['latitude']
     longitude = request.form['longitude']
-    db =Db()
     lid = str(session['lid'])
-    file_name = 'worckshop_' + str(lid) + '.jpg'
-    files.save(static_path + "worckshop\\" + file_name)
+    if files is not None:
+        fn=files.filename
+        if fn != '':
+            file_name = 'worckshop_' + str(lid) + '.jpg'
+            files.save(static_path + "worckshop\\" + file_name)
+    db =Db()
 
-    db.update("UPDATE  workshop SET shop_name='"+shop_name+"',place='"+place+"',city='"+city+"',district='"+district+"',pincode='"+pincode+"',email='"+emial+"',shop_lisence='"+file_name+"',phone='"+phone+"',lati='"+latitude+"',longi='"+longitude+"' WHERE login_id='"+lid+"'")
+    db.update("UPDATE  workshop SET shop_name='"+shop_name+"',place='"+place+"',city='"+city+"',district='"+district+"',pincode='"+pincode+"',email='"+emial+"',phone='"+phone+"',lati='"+latitude+"',longi='"+longitude+"' WHERE login_id='"+lid+"'")
     db.update("UPDATE login SET username='"+emial+"' WHERE login_id='"+lid+"'")
     return '<script>alert("updated successfully");window.location="/view_profile"</script>'
 
@@ -430,7 +437,7 @@ def approved_service_requestes():
 def upadte_service_status(sid):
     db =Db()
     res = db.selectOne("SELECT  service_request.*,vehicle.*,user.* FROM service_request,vehicle,USER WHERE service_request.service_request_id='" + sid + "' AND service_request.user_id=user.login_id AND service_request.vehichle_id=vehicle.vehicle_id")
-    res1 = db.select("SELECT services.*,service_request.*,user_service.* FROM services,service_request,user_service WHERE service_request.service_request_id='" + sid + "' AND service_request.service_request_id=user_service.service_request_id AND user_service.service_id=services.service_id")
+    res1 = db.select("SELECT services.*,service_request.*,user_service.*,user_service.amount as uamount FROM services,service_request,user_service WHERE service_request.service_request_id='" + sid + "' AND service_request.service_request_id=user_service.service_request_id AND user_service.service_id=services.service_id")
     session['id']=sid
     return render_template('owner/update service status.html',data=res,data1=res1)
 
@@ -440,11 +447,19 @@ def generate_invoice():
     user_service_id = request.form.getlist('user_service_id')
     sid=session['id']
     db = Db()
+    sum =0;
     for k in range (len(user_service_id)):
         db.update("UPDATE user_service SET amount='"+amount[k]+"' WHERE user_service_id='"+user_service_id[k]+"'")
-    # res=db.update("")
-    print(amount)
-    return 'ok'
+        sum=sum+float(amount[k]);
+    parts = request.form['part']
+    discount = request.form['dis']
+
+    total_amount= sum+float(parts)-float(discount);
+    db.update("UPDATE service_request SET parts='" + parts + "',discount='" + discount + "',payment='"+str(total_amount)+"',,STATUS='done' WHERE service_request_id='" + sid + "'")
+
+
+
+    return '<script>alert(" done");window.location="/approved_service_requestes"</script>'
 
 @app.route('/service_request_history')
 def service_request_history():
