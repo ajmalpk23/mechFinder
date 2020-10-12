@@ -68,12 +68,24 @@ def view_pending_workshop():
     res=db.select("SELECT workshop.* FROM login,workshop WHERE login.user_type='pending' AND login.login_id=workshop.login_id ")
     return render_template('admin/view_pending_workshop.html',data=res)
 
+@app.route('/searcch_pending_workshop',methods=['post'])
+def searcch_pending_workshop():
+    search = request.form['search']
+
+    db = Db()
+    res = db.select("SELECT workshop.* FROM login,workshop WHERE login.user_type='pending' AND login.login_id=workshop.login_id AND (shop_name like '%"+search+"%' or place like '%"+search+"%')")
+    return render_template('admin/view_pending_workshop.html', data=res)
+
+
 @app.route('/approve_workshop/<wid>')
 def approve_workshop(wid):
     db=Db()
     res=db.selectOne("SELECT workshop.* FROM workshop WHERE  workshop.login_id='"+wid+"'")
     session['wlid']=wid
     return render_template('admin/approve_worckshop.html',data=res)
+
+
+
 
 @app.route('/approve_workshop_post',methods=['post'])
 def approve_workshop_post():
@@ -89,6 +101,13 @@ def view_approved_workshop():
     res = db.select(
         "SELECT workshop.* FROM login,workshop WHERE login.user_type='owner' AND login.login_id=workshop.login_id ")
     return render_template('admin/view_approved_workshop.html',data=res)
+
+@app.route('/search_approved_workshop',methods=['post'])
+def search_approved_workshop():
+    search = request.form['search']
+    db = Db()
+    res = db.select("SELECT workshop.* FROM login,workshop WHERE login.user_type='owner' AND login.login_id=workshop.login_id  AND (shop_name like '%"+search+"%' or place like '%"+search+"%')")
+    return render_template('admin/view_approved_workshop.html', data=res)
 
 
 @app.route('/more_info/<wid>')
@@ -115,6 +134,13 @@ def view_rejected_workshop():
     res = db.select(
         "SELECT workshop.* FROM login,workshop WHERE login.user_type='rejected' AND login.login_id=workshop.login_id ")
     return render_template('admin/rejected_workshop.html',data=res)
+
+@app.route('/search_rejected_workshop',methods=['post'])
+def search_rejected_workshop():
+    search = request.form['search']
+    db = Db()
+    res = db.select("SELECT workshop.* FROM login,workshop WHERE login.user_type='rejected' AND login.login_id=workshop.login_id AND (shop_name like '%"+search+"%' or place like '%"+search+"%')")
+    return render_template('admin/rejected_workshop.html', data=res)
 
 @app.route('/verify_reject/<wid>')
 def verify_reject(wid):
@@ -147,6 +173,15 @@ def Manage_complaints():
     res=db.select("SELECT complaint.*,user.name FROM complaint,USER WHERE complaint.user_id=user.login_id ORDER BY complaint.complaint_id DESC")
     return render_template('admin/view_complaints.html',data=res)
 
+@app.route('/search_complaints',methods=['post'])
+def search_complaints():
+    search = request.form['search']
+    db = Db()
+    res = db.select(
+        "SELECT complaint.*,user.name FROM complaint,USER WHERE complaint.user_id=user.login_id AND (name like '%"+search+"%' or complaint like '%"+search+"%')")
+    return render_template('admin/view_complaints.html', data=res)
+
+
 @app.route('/send_reply/<cid>')
 def send_reply(cid):
     
@@ -168,11 +203,29 @@ def View_feedback():
     res=db.select("SELECT feedback.*,user.name FROM USER,feedback  WHERE feedback.user_id=user.user_id ORDER BY feedback.feedback_id DESC")
     return render_template('admin/view_feedback.html',data=res)
 
+@app.route('/search_feedback',methods=['post'])
+def search_feedback():
+    search = request.form['search']
+    db = Db()
+    res = db.select(
+        "SELECT feedback.*,user.name FROM USER,feedback  WHERE feedback.user_id=user.user_id AND (name like '%"+search+"%' or feedback like '%"+search+"%')")
+    return render_template('admin/view_feedback.html', data=res)
+
+
+
 @app.route('/View_rating')
 def View_rating():
     db =Db()
     res=db.select("SELECT rating.*,workshop.shop_name,user.name FROM rating,workshop,USER,service_request WHERE rating.service_request_id=service_request.service_request_id AND service_request.user_id=user.login_id AND service_request.workshop_id=workshop.login_id ORDER BY rating.rating_id DESC")
     return render_template('admin/view rating.html',data=res)
+
+@app.route('/search_rating',methods=['post'])
+def search_rating():
+    search = request.form['search']
+    db = Db()
+    res = db.select(
+        "SELECT rating.*,workshop.shop_name,user.name FROM rating,workshop,USER,service_request WHERE rating.service_request_id=service_request.service_request_id AND service_request.user_id=user.login_id AND service_request.workshop_id=workshop.login_id AND (name like '%"+search+"%' or shop_name like '%"+search+"%' or rating like '%"+search+"%')")
+    return render_template('admin/view rating.html', data=res)
 
 @app.route('/Add_Notification')
 def Add_Notification():
@@ -194,6 +247,14 @@ def View_Notification():
     db=Db()
     res=db.select("SELECT * FROM notification ORDER BY notification.notification_id desc ")
     return render_template('admin/view_Notification.html',data=res)
+
+@app.route('/search_notification',methods=['post'])
+def search_notification():
+    search = request.form['search']
+    db = Db()
+    res = db.select("SELECT * FROM notification WHERE (subject like '%"+search+"%' or date like '%"+search+"%') ")
+    return render_template('admin/view_Notification.html', data=res)
+
 
 @app.route('/delete_notification/<nid>')
 def delete_notification(nid):
@@ -222,6 +283,14 @@ def view_news():
     db=Db()
     res=db.select("SELECT * FROM news ORDER BY news.news_id desc ")
     return render_template('admin/view news.html',data=res)
+
+@app.route('/search_news',methods=['post'])
+def search_news():
+    search = request.form['search']
+    db = Db()
+    res = db.select("SELECT * FROM news WHERE (date like '%"+search+"%' or news_title like '%"+search+"%' ) ")
+    return render_template('admin/view news.html', data=res)
+
 
 @app.route('/edit_news/<nid>')
 def edit_news(nid):
@@ -455,7 +524,7 @@ def generate_invoice():
     discount = request.form['dis']
 
     total_amount= sum+float(parts)-float(discount);
-    db.update("UPDATE service_request SET parts='" + parts + "',discount='" + discount + "',payment='"+str(total_amount)+"',,STATUS='done' WHERE service_request_id='" + sid + "'")
+    db.update("UPDATE service_request SET parts='" + parts + "',discount='" + discount + "',payment='"+str(total_amount)+"',STATUS='done' WHERE service_request_id='" + sid + "'")
 
 
 
@@ -472,7 +541,7 @@ def service_request_history():
 def service_history_more_info(sid):
     db = Db()
     res = db.selectOne("SELECT  service_request.*,vehicle.*,user.* FROM service_request,vehicle,USER WHERE service_request.service_request_id='" + sid + "' AND service_request.user_id=user.login_id AND service_request.vehichle_id=vehicle.vehicle_id")
-    res1 = db.select("SELECT services.*,service_request.*,user_service.* FROM services,service_request,user_service WHERE service_request.service_request_id='" + sid + "' AND service_request.service_request_id=user_service.service_request_id AND user_service.service_id=services.service_id")
+    res1 = db.select("SELECT services.*,service_request.*,user_service.*,user_service.amount as uamount FROM services,service_request,user_service WHERE service_request.service_request_id='" + sid + "' AND service_request.service_request_id=user_service.service_request_id AND user_service.service_id=services.service_id")
     return render_template('owner/view service history more info.html', data=res, data1=res1)
 
 

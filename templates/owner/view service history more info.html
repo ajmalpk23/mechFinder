@@ -45,26 +45,31 @@
             {% for k in data1 %}
 		      <tr>
 		        <td>{{ k['service'] }}</td>
-		        <td>{{ k['amount'] }}</td>
+		        <td>{{ k['uamount'] }}</td>
 	          </tr>
             {% endfor %}
 	        </tbody>
 	      </table></td>
       </tr>
       <tr>
-        <td width="76" height="41">Sl.no:  {{ data['service_request_id'] }}</td>
+        <td width="76" height="66">Sl.no:  {{ data['service_request_id'] }}</td>
         <td width="428">&nbsp;</td>
-        <td width="268">Amount {{ data['payment'] }}</td>
+        <td width="268"></td>
       </tr>
       <tr>
         <td height="30">&nbsp;</td>
-        <td>&nbsp;</td>
-        <td>&nbsp;</td>
+        <td align="right">Parts</td>
+        <td>&nbsp;{{ data['parts'] }}</td>
+      </tr>
+      <tr>
+        <td height="30">&nbsp;</td>
+        <td align="right">Discound</td>
+        <td>&nbsp;{{ data['discount'] }}</td>
       </tr>
 		      <tr>
         <td height="43">&nbsp;</td>
         <td align="right">Total Amount:</td>
-        <td>&nbsp;</td>
+        <td>&nbsp;{{ data['payment'] }}</td>
       </tr>
     </tbody>
   </table>
