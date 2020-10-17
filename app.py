@@ -1,7 +1,15 @@
 from flask import Flask,render_template,session,request,redirect,url_for
+from flask_mail import Mail, Message
 from DBConnection import Db
 app = Flask(__name__)
 app.secret_key ="mech"
+app.config['MAIL_SERVER'] = 'smtp.gmail.com'
+app.config['MAIL_PORT'] = 587
+app.config['MAIL_USE_TLS'] = True
+app.config['MAIL_USERNAME'] = 'mechfinder4@gmail.com'  # enter your email here
+app.config['MAIL_DEFAULT_SENDER'] = 'mechfinder4@gmail.com' # enter your email here
+app.config['MAIL_PASSWORD'] = 'mech1234' # enter your password here
+mail = Mail(app)
 static_path="C:\\Users\\ajmal\\PycharmProjects\\mechfinder\\static\\"
 
 
@@ -54,6 +62,27 @@ def sinup_post():
     files.save(static_path + "worckshop\\" + file_name)
     db.update("update workshop set shop_lisence='" + file_name + "' where shop_id='" + str(res) + "'")
     return '<script>alert("DONE");window.location="/"</script>'
+
+@app.route('/forgot_password')
+def forgot_password():
+    return render_template('forgot_password.html')
+
+@app.route('/forgot_password_post',methods=['post'])
+def forgot_password_post():
+    email = request.form['mail']
+    db =Db()
+    res = db.selectOne("SELECT * FROM login WHERE username='"+email+"'")
+    if res is not None:
+        msg = Message(subject="My Password",
+                      sender=app.config.get("mechfinder4@gmail.com"),
+                      recipients=[email],
+                      body="account password " + res['password'])
+        mail.send(msg)
+        return '<script>alert("password send sussfuly");window.location="/"</script>'
+
+    else:
+        return '<script>alert("Check your email");window.location="/forgot_password"</script>'
+    return 'ok'
 
 
 ###################admin###################
@@ -339,6 +368,10 @@ def change_password_post():
     else:
         return '<script>alert("invalid current password");window.location="/change_password"</script>'
 
+@app.route('/logout_admin')
+def logout_admin():
+    session.pop('lid')
+    return redirect(url_for('hello_world'))
 
 ###############owner###############
 @app.route('/owner_home')
@@ -551,6 +584,11 @@ def view_rating():
     db =Db()
     res=db.select("SELECT rating.*,user.name,user.place FROM rating,workshop,USER,service_request WHERE rating.service_request_id=service_request.service_request_id AND service_request.user_id=user.login_id AND service_request.workshop_id=workshop.login_id AND workshop.login_id='"+lid+"' ORDER BY rating.rating_id DESC")
     return render_template('owner/view rating.html',data=res)
+
+@app.route('/logout_shop')
+def logout_shop():
+    session.pop('lid')
+    return redirect(url_for('hello_world'))
 
 
 

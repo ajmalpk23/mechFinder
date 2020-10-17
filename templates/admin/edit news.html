@@ -14,11 +14,11 @@
     <tbody>
       <tr>
         <td width="246" height="47">title</td>
-        <td width="273"><input type="text" name="textfield" id="textfield" value="{{ data['news_title'] }}"></td>
+        <td width="273"><input type="text" name="textfield" id="textfield" value="{{ data['news_title'] }}" required></td>
       </tr>
       <tr>
         <td height="80">Discription</td>
-        <td><textarea name="textarea" id="textarea" {{ data['news_discription'] }} >{{ data['news_description'] }}</textarea></td>
+        <td><textarea name="textarea" id="textarea" {{ data['news_discription'] }} required >{{ data['news_description'] }}</textarea></td>
       </tr>
       <tr>
         <td height="63"> image</td>
@@ -26,7 +26,7 @@
       </tr>
       <tr>
         <td>replace</td>
-        <td><input type="file" name="fileField" id="fileField"></td>
+        <td><input type="file" name="fileField" id="fileField" required></td>
       </tr>
       <tr>
         <td colspan="2" align="center"><input type="submit" name="submit" id="submit" value="edit">
