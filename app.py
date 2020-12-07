@@ -289,6 +289,9 @@ def search_notification():
 def delete_notification(nid):
     db =Db()
     db.delete("DELETE FROM notification WHERE notification_id='"+nid+"'")
+    import os
+    file_name = "notification_"+nid+".jpg"
+    os.remove(static_path + "notification\\" + file_name)
     return '<script>alert("notification deleted");window.location="/View_Notification"</script>'
 
 @app.route('/Add_news')
@@ -348,6 +351,9 @@ def edit_news_post():
 def delete_news(neid):
     db =Db()
     db.delete("DELETE FROM news WHERE news_id='"+neid+"'")
+    import os
+    file_name = "news_"+neid+".jpg"
+    os.remove(static_path + "news\\" + file_name)
     return '<script>alert("successfully deleted");window.location="/view_news"</script>'
 
 
@@ -432,7 +438,24 @@ def gallery_management():
     db =Db()
     lid = str(session['lid'])
     res=db.select("SELECT * FROM gallery WHERE shop_id='"+lid+"'")
-    return render_template('owner/gallery_management.html',data=res)
+    lent=len(res)
+    for_loop=0
+    if lent>0:
+        for_loop=int(lent/3)
+        if lent%3!=0:
+            for_loop=for_loop+1
+    return render_template('owner/gallery_management.html',data=res,lp=for_loop)
+
+@app.route('/gallery_delete/<id>')
+def gallery_delete(id):
+    db = Db()
+    db.delete("DELETE FROM gallery WHERE gallery_id='"+id+"'")
+    import os
+    file_name="gallery_"+id+".jpg"
+    os.remove(static_path+"gallery\\"+file_name)
+    return '<script>alert("successfully deleted");window.location="/gallery_management"</script>'
+
+
 
 @app.route('/add_photo')
 def add_photo():

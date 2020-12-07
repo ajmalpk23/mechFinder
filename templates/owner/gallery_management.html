@@ -7,26 +7,42 @@
 
 <body>
 <form id="form1" name="form1" method="post">
-	<table width="662" border="1" align="center">
+	<table width="780" border="0" align="center">
   <tbody>
     <tr>
-      <td colspan="5" align="center">GALLERY</td>
+      <td height="100" colspan="5" align="center">GALLERY</td>
       </tr>
-    {% set k=0 %}
-    {% for p in range(0,10) %}
+    {% set count = namespace(value=0) %}
+    {% for p in range(0,lp) %}
 
     <tr>
-    {% if k<10 %}
-      <td>{{ k }}</td>
+    {% if count.value<data|length %}
+      <td align="center">
+          <img src="/static/gallery/{{ data[count.value]['image'] }}" width="180" height="180"/><br/>
+
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <a href="/gallery_delete/{{ data[count.value]['gallery_id'] }}"><input type="button" value="Delete"></a>
+      </td>
         {% endif %}
-    {% set k = k + 1 %}
-     {% if k<10 %}
-      <td>{{ k }}</td>
+    {% set count.value = count.value + 1 %}
+     {% if count.value<data|length %}
+      <td align="center">
+          <img src="/static/gallery/{{ data[count.value]['image'] }}" width="180" height="180"/><br/>
+
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <a href="/gallery_delete/{{ data[count.value]['gallery_id'] }}"><input type="button" value="Delete"></a>
+      </td>
         {% endif %}
-    {% set k = k + 1 %}
-      {% if k<10 %}
-      <td>{{ k }}</td>
-        {% endif %}
+    {% set count.value = count.value + 1 %}
+      {% if count.value<data|length %}
+      <td align="center">
+          <img src="/static/gallery/{{ data[count.value]['image'] }}" width="180" height="180"/><br/>
+
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <a href="/gallery_delete/{{ data[count.value]['gallery_id'] }}"><input type="button" value="Delete"></a>
+      </td>
+          {% endif %}
+    {% set count.value = count.value + 1 %}
 
     </tr>
     {% endfor %}
