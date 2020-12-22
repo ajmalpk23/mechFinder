@@ -1,0 +1,10 @@
+.form-round{
+    border-radius: 50px;
+    border-color: 	#D3D3D3;
+
+
+}
+.form-round:focus{
+    border-color: #0000FF;
+        box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25);
+}

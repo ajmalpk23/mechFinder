@@ -1,5 +1,6 @@
 from flask import Flask,render_template,session,request,redirect,url_for
 from flask_mail import Mail, Message
+import demjson
 from DBConnection import Db
 app = Flask(__name__)
 app.secret_key ="mech"
@@ -615,6 +616,115 @@ def logout_shop():
 
 
 
+################android
+@app.route('/and_login',methods=['post'])
+def and_login():
+    username=request.form['username']
+    password=request.form['password']
+    db = Db()
+    k={}
+    res = db.selectOne("SELECT * FROM login WHERE username='" + username + "' AND PASSWORD='" + password + "' and user_type='user'")
+    if res is not None:
+        k['status']='valid'
+        k['lid'] = res['login_id']
+
+    else:
+        k['status']='invalid'
+    return demjson.encode(k)
+
+
+@app.route('/and_singup',methods=['post'])
+def and_singup():
+    name=request.form['name']
+    password=request.form['password']
+    conpassword=request.form['conpassword']
+    email=request.form['email']
+    phone=request.form['phone']
+    files = request.files['userimage']
+    db=Db()
+    k={}
+    lid = db.insert("INSERT INTO login(username,PASSWORD,user_type) VALUE ('" + email + "','" +password+ "','user')")
+    login_id = str(lid)
+    res=db.insert("INSERT INTO USER(,login_id,NAME,email,phone)VALUE ('"+login_id+"','"+name+"','"+name+"','"+phone+"')")
+    files=request.files['fileField']
+
+    file_name='profil_'+str(res)+'.jpg'
+    files.save(static_path+"user\\profile\\"+file_name)
+    db.update("update user set image='"+file_name+"' where user_id='"+str(res)+"'")
+    if res is not None:
+        k['status']='ok'
+        k['lid'] = res['login_id']
+
+    else:
+        k['status']='missing'
+    return demjson.encode(k)
+
+@app.route('/and_sinup_location',methods=['post'])
+def and_sinup_location():
+    place=request.form['place']
+    city=request.form['city']
+    district=request.form['district']
+    pincode=request.form['pincode']
+
+    lid=request.form['login_id']
+    db=Db()
+    k = {}
+    res=db.update("update user set place='" + place + "',city='" + city + "',district='" + district + "',pincode='" + pincode + "'where user_id='" + str(lid) + "'")
+    if res is not None:
+        k['status']='ok'
+        k['lid'] = res['login_id']
+
+    else:
+        k['status']='missing'
+    return demjson.encode(k)
+
+@app.route('/and_home')
+def and_home():
+    lid=request.form['login_id']
+
+    db=Db()
+    vehicle = db.selectOne("SELECT company,model,image FROM vehicle WHERE user_id='"+lid+"'")
+    news=db.select("SELECT * FROM news order by desc ")
+    k={}
+    if vehicle is not None:
+        k['v_status']="1"
+        k['v_data']=vehicle
+    else:
+        k['v_status']='0'
+    if len(news)>0:
+        k['n_status']="1"
+        k['n_data']=news
+    else:
+        k['n_status'] = '0'
+@app.route('/and_notification')
+def and_notification():
+    db=Db()
+    notification=db.select("SELECT * FROM notification")
+    k={}
+    if  len(notification)>0:
+        k['not_status'] = "1"
+        k['not_data'] = notification
+
+    else:
+        k['not_status'] = '0'
+
+@app.route('/and_services')
+def and_services():
+    db=Db()
+    service=request.form['service']
+    services=db.select("SELECT services.*,workshop.shop_name,workshop.place,workshop.phone FROM services,workshop WHERE service='"+service+"' AND services.shop_id=workshop.shop_id")
+    k={}
+    if  len(services)>0:
+        k['ser_status'] = "1"
+        k['ser_data'] = services
+
+    else:
+        k['ser_status'] = '0'
+
+@app.route('/and_workshop')
+def and_workshop():
+    db=Db()
+    workshop=request.form['shop_id']
 
 if __name__ == '__main__':
     app.run()
