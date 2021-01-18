@@ -637,48 +637,46 @@ def and_login():
 def and_singup():
     name=request.form['name']
     password=request.form['password']
-    conpassword=request.form['conpassword']
     email=request.form['email']
     phone=request.form['phone']
-    files = request.files['userimage']
+    files = request.files['fileField']
     db=Db()
     k={}
     lid = db.insert("INSERT INTO login(username,PASSWORD,user_type) VALUE ('" + email + "','" +password+ "','user')")
     login_id = str(lid)
-    res=db.insert("INSERT INTO USER(,login_id,NAME,email,phone)VALUE ('"+login_id+"','"+name+"','"+name+"','"+phone+"')")
-    files=request.files['fileField']
 
-    file_name='profil_'+str(res)+'.jpg'
+    res=db.insert("INSERT INTO USER(login_id,NAME,email,phone)VALUE ('"+login_id+"','"+name+"','"+name+"','"+phone+"')")
+
+    file_name='profile_'+str(lid)+'.jpg'
     files.save(static_path+"user\\profile\\"+file_name)
-    db.update("update user set image='"+file_name+"' where user_id='"+str(res)+"'")
+    db.update("update user set user_image='"+file_name+"' where user_id='"+str(res)+"'")
     if res is not None:
         k['status']='ok'
-        k['lid'] = res['login_id']
-
+        k['lid']=login_id
     else:
         k['status']='missing'
     return demjson.encode(k)
 
-@app.route('/and_sinup_location',methods=['post'])
-def and_sinup_location():
+@app.route('/and_sinup_locations',methods=['post'])
+def and_sinup_locations():
     place=request.form['place']
     city=request.form['city']
     district=request.form['district']
     pincode=request.form['pincode']
 
-    lid=request.form['login_id']
+    lid=request.form['lid']
     db=Db()
     k = {}
-    res=db.update("update user set place='" + place + "',city='" + city + "',district='" + district + "',pincode='" + pincode + "'where user_id='" + str(lid) + "'")
+    res=db.update("update user set place='" + place + "',city='" + city + "',district='" + district + "',pincode='" + pincode + "'where login_id='" + lid + "'")
     if res is not None:
         k['status']='ok'
-        k['lid'] = res['login_id']
+        k['lid'] = lid
 
     else:
         k['status']='missing'
     return demjson.encode(k)
 
-@app.route('/and_home')
+@app.route('/and_home',methods=['post'])
 def and_home():
     lid=request.form['login_id']
 
@@ -696,6 +694,7 @@ def and_home():
         k['n_data']=news
     else:
         k['n_status'] = '0'
+    return demjson.encode(k)
 @app.route('/and_notification')
 def and_notification():
     db=Db()
@@ -707,8 +706,9 @@ def and_notification():
 
     else:
         k['not_status'] = '0'
+    return demjson.encode(k)
 
-@app.route('/and_services')
+@app.route('/and_services',methods=['post'])
 def and_services():
     db=Db()
     service=request.form['service']
@@ -720,11 +720,334 @@ def and_services():
 
     else:
         k['ser_status'] = '0'
+    return demjson.encode(k)
 
-@app.route('/and_workshop')
+@app.route('/and_workshop',methods=['post'])
 def and_workshop():
     db=Db()
-    workshop=request.form['shop_id']
+    shop_id=request.form['shop_id']
+    workshop=db.select("SELECT * FROM workshop WHERE workshop.shop_id='"+shop_id+"'")
+    services=db.select("SELECT * FROM services WHERE services.shop_id='"+shop_id+"'")
+    gallery=db.select("SELECT * FROM gallery WHERE gallery.shop_id='"+shop_id+"'")
+    k = {}
+    if len(workshop) > 0:
+        k['shop_status'] = "1"
+        k['shop_data'] = workshop
+
+    else:
+        k['shop_status'] = '0'
+    if len(gallery) > 0:
+        k['gall_status'] = "1"
+        k['gall_data'] = gallery
+
+    else:
+        k['gall_status'] = '0'
+    k = {}
+    if len(services) > 0:
+        k['ser_status'] = "1"
+        k['ser_data'] = services
+
+    else:
+        k['ser_status'] = '0'
+    return demjson.encode(k)
+
+@app.route('/and_reviews',methods=['post'])
+def and_reviews():
+    db=Db()
+    shop_id = request.form['shop_id']
+    service_request_id=request.form['service_request_id']
+    feedback=request.form['review']
+    rating = request.form['rating']
+    reviews=db.select("SELECT rating.*,service_request.*,user.name FROM rating,service_request,`user` WHERE rating.service_request_id=service_request.service_request_id AND service_request.workshop_id='"+shop_id+"' AND service_request.user_id=user.login_id")
+    add_review=db.insert("INSERT INTO rating (service_request_id,rating,DATE,feedback) VALUE ('"+service_request_id+"','"+rating+"',CURDATE(),'"+feedback+"')")
+    k = {}
+    if len(reviews) > 0:
+        k['ser_status'] = "1"
+        k['ser_data'] = reviews
+
+    else:
+        k['ser_status'] = '0'
+    if add_review is not None:
+        k['adr_status'] = 'ok'
+        k['adr_lid'] = add_review['rating_id']
+
+    else:
+        k['adr_status'] = 'missing'
+    return demjson.encode(k)
+
+
+@app.route('/and_checkout',methods=['post'])
+def and_checkout():
+    db=Db()
+    user_id=request.form['login_id']
+    vehicle_id=request.form['vehicle_id']
+    shop_id=request.form['shop_id']
+    sid=db.insert("INSERT INTO service_request (user_id,vehicle_id,request_date,STATUS,workshop_id)VALUE('"+user_id+"','"+vehicle_id+"',CURDATE(),'pending','"+shop_id+"')")
+    service_id=request.form['service_id']
+    amount=request.form['amount']
+    user_ser=db.insert("INSERT INTO user_service (service_request_id,service_id,amount)VALUE ('"+sid+"','"+service_id+"','"+amount+"')")
+    k={}
+    if sid is not None:
+        k['sid_status']='ok'
+        k['sid_vlid'] = sid['login_id']
+
+    else:
+        k['sid_status']='missing'
+    if user_ser is not None:
+        k['user_ser_status']='ok'
+        k['user_ser_vlid'] = user_ser['login_id']
+
+    else:
+        k['user_ser_status']='missing'
+    return demjson.encode(k)
+
+
+
+@app.route('/and_vehicle',methods=['post'])
+def and_vehicle():
+    db=Db()
+    login_id = request.form['login_id']
+    vehicle=db.select("SELECT * FROM vehicle WHERE vehicle.user_id='"+login_id+"'")
+    k = {}
+    if len(vehicle) > 0:
+        k['veh_status'] = "1"
+        k['veh_data'] = vehicle
+
+    else:
+        k['veh_status'] = '0'
+    return demjson.encode(k)
+@app.route('/and_add_vehicle',methods=['post'])
+def and_add_vehicle():
+    db=Db()
+    login_id = request.form['lid']
+    vehicle_type=request.form['type']
+    company=request.form['company']
+    model=request.form['model']
+    manfctr_year=request.form['year']
+    regno=request.form['regno']
+    add_vechle=db.insert("INSERT INTO vehicle(user_id,vehicle_type,company,model,manfctr_year,regno)VALUE('"+login_id+"','"+vehicle_type+"','"+company+"','"+model+"','"+manfctr_year+"','"+regno+"')")
+    files = request.files['fileField']
+
+    file_name = 'vehicle_' + str(add_vechle) + '.jpg'
+    files.save(static_path + "user\\vehicle\\" + file_name)
+    db.update("update vehicle set image='" + file_name + "' where vehicle_id='" + str(add_vechle) + "'")
+    k ={}
+    if add_vechle is not None:
+        k['status']='ok'
+
+    else:
+        k['addv_status']='missing'
+    return demjson.encode(k)
+@app.route('/and_profile',methods=['post'])
+def and_profile():
+    db=Db()
+    login_id = request.form['lid']
+    profile=db.selectOne("SELECT user.name,user.email,user.phone,user.user_image FROM USER WHERE user_id='"+login_id+"'")
+    k = {}
+    if profile is not None:
+        k['profile_status'] = 'ok'
+        k['profile_vlid'] = profile
+
+    else:
+        k['profile_status'] = 'missing'
+    return demjson.encode(k)
+@app.route('/and_edit_profile',methods=['post'])
+def and_edit_profile():
+    db=Db()
+    login_id = request.form['lid']
+    name=request.form['name']
+    email=request.form['email']
+    phone=request.form['phone']
+    files = request.files['fileField']
+    file_name = 'profile_' + str(login_id) + '.jpg'
+    files.save(static_path + "user\\profile\\" + file_name)
+    edt_profile=db.update("UPDATE USER SET NAME='"+name+"',email='"+email+"',phone='"+phone+"',user_image='" + file_name + "' WHERE user_id='"+login_id+"'")
+    k = {}
+    if edt_profile is not None:
+        k['edt_profile_status'] = 'ok'
+    else:
+        k['edt_profile_status'] = 'missing'
+    return demjson.encode(k)
+
+@app.route('/and_edit_profile_without_image',methods=['post'])
+def and_edit_profile_without_image():
+    db=Db()
+    login_id = request.form['lid']
+    name=request.form['name']
+    email=request.form['email']
+    phone=request.form['phone']
+    edt_profile=db.update("UPDATE USER SET NAME='"+name+"',email='"+email+"',phone='"+phone+"' WHERE user_id='"+login_id+"'")
+    k = {}
+    if edt_profile is not None:
+        k['edt_profile_status'] = 'ok'
+    else:
+        k['edt_profile_status'] = 'missing'
+    return demjson.encode(k)
+
+@app.route('/and_profile_loc',methods=['post'])
+def and_profile_loc():
+    db=Db()
+    login_id = request.form['lid']
+
+    profile_loc=db.selectOne("SELECT user.place,user.city,user.district,user.pincode FROM USER WHERE user_id='"+login_id+"'")
+    k = {}
+    if profile_loc is not None:
+        k['profile_loc_status'] = 'ok'
+        k['profile_loc_vlid'] = profile_loc
+
+    else:
+        k['profile_loc_status'] = 'missing'
+    return demjson.encode(k)
+
+@app.route('/and_edit_profile_loc',methods=['post'])
+def and_edit_profile_loc():
+    db=Db()
+    login_id = request.form['lid']
+    place = request.form['place']
+    city = request.form['city']
+    district = request.form['district']
+    pincode = request.form['pincode']
+    edt_profile_loc=db.update("UPDATE USER SET place='"+place+"',city='"+city+"',district='"+district+"',pincode='"+pincode+"' WHERE user_id='"+login_id+"'")
+    k = {}
+    if edt_profile_loc is not None:
+        k['edt_profile_loc_status'] = 'ok'
+
+    else:
+        k['edt_profile_loc_status'] = 'missing'
+    return demjson.encode(k)
+@app.route('/and_order_history',methods=['post'])
+def and_order_history():
+    db=Db()
+    login_id = request.form['login_id']
+    order_history=db.select("SELECT * FROM service_request,vehicle,services,user_service WHERE service_request.vehichle_id=vehicle.vehicle_id AND service_request.service_request_id=user_service.service_request_id AND user_service.service_id=services.service_id AND service_request.user_id='"+login_id+"'")
+    k = {}
+    if len(order_history) > 0:
+        k['order_history_status'] = "1"
+        k['order_history_data'] = order_history
+
+    else:
+        k['order_history_status'] = '0'
+    return demjson.encode(k)
+@app.route('/and_invoice',methods=['post'])
+def and_invoice():
+    db=Db()
+    login_id = request.form['login_id']
+    invoice=db.select("SELECT * FROM service_request,vehicle,services,user_service,USER WHERE service_request.vehichle_id=vehicle.vehicle_id AND service_request.service_request_id=user_service.service_request_id AND user_service.service_id=services.service_id AND service_request.user_id=user.login_id AND service_request.user_id='"+login_id+"'")
+    k = {}
+    if len(invoice) > 0:
+        k['invoice_status'] = "1"
+        k['invoice_data'] = invoice
+
+    else:
+        k['invoice_status'] = '0'
+    return demjson.encode(k)
+
+@app.route('/and_app_feedback',methods=['post'])
+def and_app_feedback():
+    db=Db()
+    login_id = request.form['lid']
+    feedback=request.form['feedback']
+    feedback=db.insert("INSERT INTO feedback (user_id,feedback,feedback_date) VALUE('"+login_id+"','"+feedback+"',CURDATE())")
+    k = {}
+    if len(feedback) > 0:
+        k['feedback_status'] = "1"
+        k['feedback_data'] = feedback
+
+    else:
+        k['feedback_status'] = '0'
+    return demjson.encode(k)
+
+
+@app.route('/and_compalint',methods=['post'])
+def and_compalint():
+    db=Db()
+    login_id = request.form['lid']
+    complaint_f=request.form['complaint']
+
+    add_complaint=db.update("INSERT INTO complaint (user_id,complaint,complaint_date)VALUE('"+login_id+"','"+complaint_f+"',CURDATE())")
+    k = {}
+
+    if add_complaint is not None:
+        k['add_complaint_status']='ok'
+
+    else:
+        k['add_complaint_status']='missing'
+    return demjson.encode(k)
+@app.route('/and_change_passsword',methods=['post'])
+def and_change_passsword():
+    db=Db()
+    k = {}
+    login_id = request.form['lid']
+    password=request.form['newpass']
+    current_password=request.form['currentpass']
+    curr_db=db.selectOne("SELECT PASSWORD FROM login WHERE login_id='"+login_id+"' and password='"+current_password+"'")
+    if curr_db is not None:
+        change_password = db.update("UPDATE login SET PASSWORD='" + password + "' WHERE login_id='" + login_id + "'")
+        k['change_password_status'] = 'ok'
+    else:
+        error='incorrect password'
+        k['change_password_status'] = 'missing'
+
+    return demjson.encode(k)
+
+@app.route('/and_view_compalint',methods=['post'])
+def and_view_compalint():
+    db=Db()
+    login_id = request.form['lid']
+    compalint = db.select("SELECT * FROM complaint WHERE user_id='" + login_id + "'")
+    k = {}
+    if len(compalint) > 0:
+        k['compalint_status'] = "1"
+        k['compalint_data'] = compalint
+
+    else:
+        k['compalint_status'] = '0'
+    return demjson.encode(k)
+
+@app.route('/and_vehicle_select_type',methods=['post'])
+def and_vehicle_select_type():
+    db=Db()
+
+    vehicle_type=db.select("SELECT DISTINCT vehicle_type FROM vehicledb")
+    k ={}
+    if len (vehicle_type) > 0:
+        k['vehicle_type_status'] = "1"
+        k['vehicle_type_data'] = vehicle_type
+
+    else:
+        k['vehicle_type_status'] = '0'
+    return demjson.encode(k)
+@app.route('/and_vehicle_select_company',methods=['post'])
+def and_vehicle_select_company():
+    db=Db()
+    vehicle_type=request.form['type']
+    vehicle_company=db.select("SELECT DISTINCT company FROM vehicledb WHERE vehicle_type='"+vehicle_type+"'")
+
+    k = {}
+    if len(vehicle_company) > 0:
+        k['vehicle_company_status'] = "1"
+        k['vehicle_company_data'] = vehicle_company
+
+    else:
+        k['vehicle_company_status'] = '0'
+    return demjson.encode(k)
+
+@app.route('/and_vehicle_select_model',methods=['post'])
+def and_vehicle_select_model():
+    db=Db()
+    vehicle_type=request.form['type']
+    vehicle_company=request.form['company']
+    vehicle_model=db.select("SELECT DISTINCT model FROM vehicledb WHERE vehicle_type='"+vehicle_type+"' AND company='"+vehicle_company+"'")
+    k = {}
+    if len(vehicle_model) > 0:
+        k['vehicle_model_status'] = "1"
+        k['vehicle_model_data'] = vehicle_model
+
+    else:
+        k['vehicle_model_status'] = '0'
+    return demjson.encode(k)
+
+
 
 if __name__ == '__main__':
-    app.run()
+    app.run(host='0.0.0.0')
