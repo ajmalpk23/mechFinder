@@ -1,4 +1,4 @@
-from flask import Flask,render_template,session,request,redirect,url_for
+from flask import Flask, render_template, session, request, redirect, url_for, jsonify
 from flask_mail import Mail, Message
 import demjson
 from DBConnection import Db
@@ -270,7 +270,7 @@ def Add_Notification_post():
     file_name='notification_'+str(res)+'.jpg'
     files.save(static_path+"notification\\"+file_name)
     db.update("update notification set image='"+file_name+"' where notification_id='"+str(res)+"'")
-    return '<script>alert("notification adedd");window.location="/Add_Notification"</script>'
+    return Add_Notification()
 
 @app.route('/View_Notification')
 def View_Notification():
@@ -712,7 +712,8 @@ def and_notification():
 def and_services():
     db=Db()
     service=request.form['service']
-    services=db.select("SELECT services.*,workshop.shop_name,workshop.place,workshop.phone FROM services,workshop WHERE service='"+service+"' AND services.shop_id=workshop.shop_id")
+
+    services=db.select("SELECT services.*,workshop.shop_name,workshop.place,workshop.phone, FROM services,workshop WHERE service='"+service+"' AND services.shop_id=workshop.shop_id")
     k={}
     if  len(services)>0:
         k['ser_status'] = "1"
@@ -726,14 +727,22 @@ def and_services():
 def and_workshop():
     db=Db()
     shop_id=request.form['shop_id']
-    workshop=db.select("SELECT * FROM workshop WHERE workshop.shop_id='"+shop_id+"'")
+    print(shop_id)
+    workshop=db.selectOne("SELECT * FROM workshop WHERE workshop.shop_id='"+shop_id+"'")
+    print(workshop['shop_name'])
+
     services=db.select("SELECT * FROM services WHERE services.shop_id='"+shop_id+"'")
     gallery=db.select("SELECT * FROM gallery WHERE gallery.shop_id='"+shop_id+"'")
     k = {}
-    if len(workshop) > 0:
+    if workshop is not None:
         k['shop_status'] = "1"
-        k['shop_data'] = workshop
-
+        k['shop_name']=workshop['shop_name']
+        k['email']=workshop['email']
+        k['phone']=workshop['phone']
+        k['place']=workshop['place']
+        k['city']=workshop['city']
+        k['district']=workshop['district']
+        # k['shop_data'] = workshop
     else:
         k['shop_status'] = '0'
     if len(gallery) > 0:
@@ -742,7 +751,7 @@ def and_workshop():
 
     else:
         k['gall_status'] = '0'
-    k = {}
+    # k = {}
     if len(services) > 0:
         k['ser_status'] = "1"
         k['ser_data'] = services
@@ -755,50 +764,81 @@ def and_workshop():
 def and_reviews():
     db=Db()
     shop_id = request.form['shop_id']
-    service_request_id=request.form['service_request_id']
-    feedback=request.form['review']
-    rating = request.form['rating']
-    reviews=db.select("SELECT rating.*,service_request.*,user.name FROM rating,service_request,`user` WHERE rating.service_request_id=service_request.service_request_id AND service_request.workshop_id='"+shop_id+"' AND service_request.user_id=user.login_id")
-    add_review=db.insert("INSERT INTO rating (service_request_id,rating,DATE,feedback) VALUE ('"+service_request_id+"','"+rating+"',CURDATE(),'"+feedback+"')")
+    print("JJJ ",shop_id)
+    # service_request_id=request.form['service_request_id']
+    # feedback=request.form['review']
+    # rating = request.form['rating']
+    reviews=db.select("SELECT rating.*,user.name FROM rating,service_request,USER WHERE rating.service_request_id=service_request.service_request_id AND service_request.user_id=user.user_id AND service_request.workshop_id='"+shop_id+"' ")
+    # add_review=db.insert("INSERT INTO rating (service_request_id,rating,DATE,feedback) VALUE ('"+service_request_id+"','"+rating+"',CURDATE(),'"+feedback+"')")
+    print(reviews)
     k = {}
     if len(reviews) > 0:
-        k['ser_status'] = "1"
-        k['ser_data'] = reviews
+        k['riv_status'] = "1"
+        k['riv_data'] = reviews
 
     else:
-        k['ser_status'] = '0'
-    if add_review is not None:
-        k['adr_status'] = 'ok'
-        k['adr_lid'] = add_review['rating_id']
+        k['riv_status'] = '0'
+    # if add_review is not None:
+    #     k['adr_status'] = 'ok'
+    #     k['adr_lid'] = add_review['rating_id']
+    #
+    # else:
+    #     k['adr_status'] = 'missing'
+    return demjson.encode(k)
+@app.route('/and_checkout_invoice',methods=['post'])
+def and_checkout_invoice():
+    db=Db()
+    shop_id=request.form['shop_id']
+    login_id=request.form['lid']
+    # print(shop_id)
+    # selected_vehicle_id=request.form['vid']
+    workshop=db.selectOne("SELECT * FROM workshop WHERE shop_id='"+shop_id+"'")
+    print(workshop)
+    user=db.selectOne("SELECT user.name FROM USER WHERE user_id='"+login_id+"'")
+    k ={}
+    if workshop is not None:
+        k['wokshop_status']='ok'
+        k['workshop_data']=workshop
 
     else:
-        k['adr_status'] = 'missing'
+        k['wokshop_status']='missing'
+    if user is not None:
+        k['user_status']='ok'
+        k['user_data']=user
+
+    else:
+        k['wokshop_status']='missing'
     return demjson.encode(k)
 
 
 @app.route('/and_checkout',methods=['post'])
 def and_checkout():
     db=Db()
-    user_id=request.form['login_id']
-    vehicle_id=request.form['vehicle_id']
+    user_id=request.form['lid']
+    vehicle_id=request.form['Vid']
     shop_id=request.form['shop_id']
-    sid=db.insert("INSERT INTO service_request (user_id,vehicle_id,request_date,STATUS,workshop_id)VALUE('"+user_id+"','"+vehicle_id+"',CURDATE(),'pending','"+shop_id+"')")
-    service_id=request.form['service_id']
-    amount=request.form['amount']
-    user_ser=db.insert("INSERT INTO user_service (service_request_id,service_id,amount)VALUE ('"+sid+"','"+service_id+"','"+amount+"')")
-    k={}
-    if sid is not None:
-        k['sid_status']='ok'
-        k['sid_vlid'] = sid['login_id']
+    services=request.form['servicecs']
+    serv=services.split("#")
+    amount=request.form['amount_place']
+    amt=amount.split('#')
+    print(amt)
+    sid = db.insert(
+        "INSERT INTO service_request (user_id,vehichle_id,request_date,STATUS,workshop_id)VALUE('" + user_id + "','" + vehicle_id + "',CURDATE(),'pending','" + shop_id + "')")
 
-    else:
-        k['sid_status']='missing'
-    if user_ser is not None:
-        k['user_ser_status']='ok'
-        k['user_ser_vlid'] = user_ser['login_id']
+    for sr in range(1,len(serv)):
 
-    else:
-        k['user_ser_status']='missing'
+        user_ser=db.insert("INSERT INTO user_service (service_request_id,service_id,amount)VALUE ('"+str(sid)+"','"+serv[sr]+"','"+amt[sr]+"')")
+        k={}
+        if user_ser is not None:
+            k['user_ser_status']='ok'
+
+        else:
+            k['user_ser_status']='no'
+            if sid is not None:
+                k['sid_status'] = 'ok'
+
+            else:
+                k['sid_status'] = 'no'
     return demjson.encode(k)
 
 
@@ -806,8 +846,10 @@ def and_checkout():
 @app.route('/and_vehicle',methods=['post'])
 def and_vehicle():
     db=Db()
-    login_id = request.form['login_id']
+    login_id = request.form['lid']
+    # print(login_id)
     vehicle=db.select("SELECT * FROM vehicle WHERE vehicle.user_id='"+login_id+"'")
+    # print(vehicle)
     k = {}
     if len(vehicle) > 0:
         k['veh_status'] = "1"
@@ -919,7 +961,7 @@ def and_edit_profile_loc():
 def and_order_history():
     db=Db()
     login_id = request.form['login_id']
-    order_history=db.select("SELECT * FROM service_request,vehicle,services,user_service WHERE service_request.vehichle_id=vehicle.vehicle_id AND service_request.service_request_id=user_service.service_request_id AND user_service.service_id=services.service_id AND service_request.user_id='"+login_id+"'")
+    order_history=db.select("SELECT * FROM service_request,user_service,vehicle,services,workshop WHERE service_request.service_request_id=user_service.service_request_id AND service_request.vehichle_id=vehicle.vehicle_id AND user_service.service_id=services.service_id AND service_request.workshop_id=workshop.shop_id AND service_request.user_id='"+login_id+"'")
     k = {}
     if len(order_history) > 0:
         k['order_history_status'] = "1"
@@ -1047,6 +1089,54 @@ def and_vehicle_select_model():
         k['vehicle_model_status'] = '0'
     return demjson.encode(k)
 
+
+
+@app.route('/and_nearest',methods=['post'])
+def and_nearest():
+    db=Db()
+    print("yyyyy")
+    and_lati=request.form['lati']
+    and_longi=request.form['longi']
+
+    print(and_lati)
+    print(and_longi)
+
+
+    service=request.form['service']
+    print("hdfsjhg")
+    qq="select * from workshop,services where workshop.shop_id=services.shop_id and services.service='"+service+"' "
+    print(qq)
+    workshop=db.select(qq)
+    print(workshop)
+    aa=""
+    res=[]
+    for i in workshop:
+
+        from math import radians, cos, sin, asin, sqrt
+        lat1 = float(and_lati)
+        long1 = float(and_longi)
+        lat2 = float(i['lati'])
+        long2 = float(i['longi'])
+        print("pppp")
+        lat1, long1, lat2, long2 = map(radians, [lat1, long1, lat2, long2])
+            # ## haversine formula
+        dlon = long2 - long1
+        dlat = lat2 - lat1
+        a = sin(dlat / 2) ** 2 + cos(lat1) * cos(lat2) * sin(dlon / 2) ** 2
+        c = 2 * asin(sqrt(a))
+            # ## Radius of earth in kilometers is 6371
+        km = 6371 * c
+        print("kkk=",km)
+        if km>=0 :
+            c={ 'id':i['shop_id'],'shop_name':i['shop_name'],'place':i['place'],'city':i['city'],'district':i['district'],'pincode':i['pincode'],'email':i['email'],'phone':i['phone'],'amount':i['amount'] }
+            res.append(c)
+
+            # aa=aa+"#"+"i['shop_id']"+"i['shop_name']"+"i['place']"+"i['city']"+"i['district']"+"['pincode']"+"['email']"+"i['phone']"+","
+        else:
+            ssss=0
+
+
+    return jsonify(status="ok",data=res)
 
 
 if __name__ == '__main__':

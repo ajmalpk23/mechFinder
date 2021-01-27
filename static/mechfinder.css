@@ -1,0 +1,44 @@
+.form-round{
+    border-radius: 50px;
+    border-color: 	#D3D3D3;
+
+
+}
+.form-round:focus{
+    border-color: #0000FF;
+        box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25);
+}
+.button-mechfinder-search{
+    font-size:smaller;
+}
+.btn-mechfinder-verify{
+    font-size: 5px;
+    border-radius: 50%;
+}
+.box {
+  box-shadow:
+  0 2.8px 2.2px rgba(0, 0, 0, 0.034),
+  0 6.7px 5.3px rgba(0, 0, 0, 0.048),
+  0 12.5px 10px rgba(0, 0, 0, 0.048),
+  0 22.3px 17.9px rgba(0, 0, 0, 0.048),
+  0 41.8px 33.4px rgba(0, 0, 0, 0.048),
+  0 100px 80px rgba(0, 0, 0, 0.048)
+;
+
+
+
+  /*min-height: 200px;*/
+  /*width: 50vw;*/
+  /*margin: 100px auto;*/
+  /*background: white;*/
+  border-radius: 5px;
+}
+.mechfinder-form{
+    padding: 10px;
+    padding-left:200px;
+}
+.pading-td-form{
+    padding-left: 15px;
+}
+
+

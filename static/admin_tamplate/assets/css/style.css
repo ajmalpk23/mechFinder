@@ -16443,18 +16443,18 @@ body.dark {
   body.dark .page-header:before {
     background-color: rgba(76, 98, 109, 0.8); }
 
-.fixed-button {
-  position: fixed;
-  bottom: -50px;
-  right: 30px;
-  -webkit-box-shadow: 0 15px 50px rgba(0, 0, 0, 0.35);
-  box-shadow: 0 15px 50px rgba(0, 0, 0, 0.35);
-  opacity: 0;
-  z-index: 9;
-  -webkit-transition: all 0.5s ease;
-  transition: all 0.5s ease;
-}
-.fixed-button.active {
-  bottom: 50px;
-  opacity: 1;
-}
+/*.fixed-button {*/
+/*  position: fixed;*/
+/*  bottom: -50px;*/
+/*  right: 30px;*/
+/*  -webkit-box-shadow: 0 15px 50px rgba(0, 0, 0, 0.35);*/
+/*  box-shadow: 0 15px 50px rgba(0, 0, 0, 0.35);*/
+/*  opacity: 0;*/
+/*  z-index: 9;*/
+/*  -webkit-transition: all 0.5s ease;*/
+/*  transition: all 0.5s ease;*/
+/*}*/
+/*.fixed-button.active {*/
+/*  bottom: 50px;*/
+/*  opacity: 1;*/
+/*}*/
