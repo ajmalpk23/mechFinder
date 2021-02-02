@@ -1,19 +1,22 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Untitled Document</title>
-</head>
+{#<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">#}
+{#<html xmlns="http://www.w3.org/1999/xhtml">#}
+{#<head>#}
+{#<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />#}
+{#<title>Untitled Document</title>#}
+{#</head>#}
+{% extends "admin/index.html" %}
+{% block body %}
+
 
 <body>
 <form id="form1" name="form1" method="post" action="/search_feedback">
 
   </p>
-  <table width="481" height="85" border="1" align="center">
+  <table width="481" height="85"  align="center" class="table table-hover">
     <tr>
       <td height="28" colspan="4" align="right"><label for="textfield5"></label>
-      <input type="text" name="search" placeholder="Search" id="textfield5" />
-      <input type="submit" value="Search" name="btn"/></td>
+      <input type="text" name="search" placeholder="Search" id="textfield5" class="form-round"/>
+      <input type="submit" value="Search" name="btn" class="btn btn-round btn-primary button-mechfinder-search " style="font-size:10px;" /></td>
     </tr>
     <tr>
       <td width="57" height="28">Sl.No</td>
@@ -32,4 +35,5 @@
   </table>
 </form>
 </body>
-</html>
+{% endblock%}
+{#</html>#}

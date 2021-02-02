@@ -8,8 +8,8 @@
 {% block body %}
 <body>
     <div >
-	<form id="form1" name="form1" method="post" action="/approve_workshop_post" >
-  <table width="383" height="543" border="0" align="center" class="box mechfinder-form" >
+	<form id="form1" name="form1" method="post" action="/approve_workshop_post" onsubmit="swal('Approved!','Shop Approved', 'success');" >
+  <table width="469" height="570" border="0" align="center" class="box mechfinder-form"  >
     <tbody>
 	
       <tr>
@@ -19,35 +19,35 @@
         <td colspan="2">&nbsp;</td>
       </tr>
       <tr >
-        <td width="120" style="padding-left:20px"> Shop Name:</td>
-        <td width="172" style="padding-left:20px">{{ data['shop_name'] }}</td>
+        <td width="236" style="padding-left:50px"> Shop Name:</td>
+        <td width="223" style="padding-left:20px">{{ data['shop_name'] }}</td>
       </tr>
       <tr>
-        <td style="padding-left:20px">Place</td>
+        <td style="padding-left:50px">Place</td>
         <td  style="padding-left:20px">{{ data['place'] }}</td>
       </tr>
       <tr>
-        <td style="padding-left:20px">City</td>
+        <td style="padding-left:50px">City</td>
         <td style="padding-left:20px">{{ data['city'] }}</td>
       </tr>
       <tr>
-        <td style="padding-left:20px">District</td>
+        <td style="padding-left:50px">District</td>
         <td style="padding-left:20px">{{ data['district'] }}</td>
       </tr>
       <tr>
-        <td style="padding-left:20px">Pincode</td>
+        <td style="padding-left:50px">Pincode</td>
         <td style="padding-left:20px">{{ data['pincode'] }}</td>
       </tr>
       <tr>
-        <td style="padding-left:20px"><p>E-mail</p></td>
+        <td style="padding-left:50px"><p>E-mail</p></td>
         <td style="padding-left:20px">{{ data['email'] }}</td>
       </tr>
       <tr>
-        <td style="padding-left:20px">Shop License</td>
+        <td style="padding-left:50px">Shop License</td>
           <td style="padding-left:20px"><img src="/static/worckshop/{{ data['shop_lisence'] }}" width="100" height="100" alt="No document"/><a href="/static/worckshop/{{ data['shop_lisence'] }}"><br><span ><i class="ti-fullscreen"></i>   Show Document</span></a></td>
       </tr>
       <tr>
-        <td height="31" style="padding-left:20px">Phone</td>
+        <td height="31" style="padding-left:50px">Phone</td>
         <td style="padding-left:20px">{{ data['phone'] }}</td>
       </tr>
       
@@ -55,7 +55,7 @@
         <td colspan="2">&nbsp;</td>
       </tr>
       <tr>
-        <td colspan="2" align="center"><input type="submit" name="submit" id="submit" value="Approve" class="btn btn-success btn-round">
+        <td height="68" colspan="2" align="center"><input type="submit" name="submit" id="submit" value="Approve" class="btn btn-success btn-round">
       </tr>
       
     </tbody>

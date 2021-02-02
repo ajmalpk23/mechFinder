@@ -1,11 +1,13 @@
-<!doctype html>
-<html>
-<head>
-<meta charset="utf-8">
-</head>
+{#<!doctype html>#}
+{#<html>#}
+{#<head>#}
+{#<meta charset="utf-8">#}
+{#</head>#}
+{% extends "admin/index.html" %}
+{% block body %}
 
 <body>
-	<form id="form1" name="form1" method="post" action="/block_workshop" >
+	<form id="form1" name="form1" method="post" action="/block_workshop" onsubmit="swal('Blocked!','The shop is Blocked', 'error');" >
   <table width="302" border="0" align="center">
     <tbody>
 	
@@ -14,7 +16,7 @@
       </tr>
       <tr>
         <td width="120">Shop Name:</td>
-        <td width="172">{{ data['shop_name'] }}</td>
+        <td width="120">{{ data['shop_name'] }}</td>
       </tr>
       <tr>
         <td>Place</td>
@@ -64,11 +66,12 @@
         <td colspan="2">&nbsp;</td>
       </tr>
       <tr>
-        <td colspan="2" align="center"><input type="submit" name="submit" id="submit" value="Block">         
+        <td colspan="2" align="center"><input type="submit" name="submit" id="submit" value="Block" class="btn btn-danger btn-round">
       </tr>
       
     </tbody>
   </table>
 </form>
 </body>
-</html>
+{% endblock%}
+{#</html>#}

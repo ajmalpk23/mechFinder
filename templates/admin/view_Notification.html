@@ -1,22 +1,23 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Untitled Document</title>
-</head>
-
+{#<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">#}
+{#<html xmlns="http://www.w3.org/1999/xhtml">#}
+{#<head>#}
+{#<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />#}
+{#<title>Untitled Document</title>#}
+{#</head>#}
+{% extends "admin/index.html" %}
+{% block body %}
 <body>
 <form id="form1" name="form1" method="post" action="/search_notification">
   <p ><h2 align="center">View Notification
   </h2>
-  <table width="765" height="184" border="1" align="center">
+  <table width="765" height="184"  align="center" class="table table-hover">
     <tr>
       <td colspan="6" align="right"><label for="textfield4"></label>
-      <input type="text" name="search" id="textfield4" placeholder="Search"/>
-      <input type="submit" value="Search" name="btn"/></td>
+      <input type="text" name="search" id="textfield4" placeholder="Search" class="form-round"/>
+      <input type="submit" value="Search" name="btn" class="btn btn-round btn-primary button-mechfinder-search " style="font-size:10px;"/></td>
     </tr>
     <tr>
-      <td width="50">Sl.No</td>
+      <td width="50" >Sl.No</td>
       <td width="142">Date</td>
       <td width="142">Subject</td>
       <td width="180">Content</td>
@@ -30,10 +31,11 @@
         <td>{{ k['subject'] }}</td>
         <td>{{ k['description'] }}</td>
         <td><img src="static/notification/{{ k['image'] }}" alt="" height="100" width="100" alt=""/></td>
-      <td><a href="/delete_notification/{{ k['notification_id'] }}">Delete</a></td>
+      <td><a href="/delete_notification/{{ k['notification_id'] }}"class="btn btn-danger btn-round btn-mechfinder-verify" style="font-size: 8px;">Delete</a></td>
     </tr>
       {% endfor %}
   </table>
 </form>
 </body>
-</html>
+{% endblock%}
+{#</html>#}

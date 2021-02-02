@@ -1,3 +1,6 @@
+from builtins import memoryview
+from typing import re
+
 from flask import Flask, render_template, session, request, redirect, url_for, jsonify
 from flask_mail import Mail, Message
 import demjson
@@ -122,7 +125,7 @@ def approve_workshop_post():
     db = Db()
     wid=session['wlid']
     db.update("UPDATE login SET user_type='owner' WHERE login_id='"+wid+"'")
-    return '<script>alert("successfully approved");window.location="/view_pending_workshop"</script>'
+    return view_pending_workshop()
 
 
 @app.route('/view_approved_workshop')
@@ -591,7 +594,7 @@ def generate_invoice():
 def service_request_history():
     lid = str(session['lid'])
     db = Db()
-    res=db.select("SELECT service_request.*,user.* FROM workshop,USER,service_request WHERE service_request.user_id=user.login_id AND service_request.workshop_id=workshop.login_id AND workshop.login_id='"+lid+"' AND service_request.status='done' ORDER BY service_request.service_request_id DESC")
+    res=db.select("SELECT service_request.*,user.* FROM workshop,USER,service_request WHERE service_request.user_id=user.login_id AND service_request.workshop_id=workshop.login_id AND workshop.login_id='"+lid+"' AND service_request.status='paid' ORDER BY service_request.service_request_id DESC")
     return render_template('owner/view service requests history.html',data=res)
 
 @app.route('/service_history_more_info/<sid>')
@@ -676,32 +679,45 @@ def and_sinup_locations():
         k['status']='missing'
     return demjson.encode(k)
 
-@app.route('/and_home',methods=['post'])
-def and_home():
-    lid=request.form['login_id']
+@app.route('/and_home_news',methods=['post'])
+def and_home_news():
 
-    db=Db()
-    vehicle = db.selectOne("SELECT company,model,image FROM vehicle WHERE user_id='"+lid+"'")
-    news=db.select("SELECT * FROM news order by desc ")
     k={}
-    if vehicle is not None:
-        k['v_status']="1"
-        k['v_data']=vehicle
-    else:
-        k['v_status']='0'
+    db1=Db()
+    news=db1.select("SELECT * FROM news order by news_id desc ")
     if len(news)>0:
-        k['n_status']="1"
+        k['n_status']="ok"
         k['n_data']=news
     else:
-        k['n_status'] = '0'
+        k['n_status'] = 'no'
+    print(k)
     return demjson.encode(k)
-@app.route('/and_notification')
+@app.route('/and_home_vehicle',methods=['post'])
+def and_home_vehicle():
+    vid=request.form['vid']
+
+    db = Db()
+    vehicle = db.select("SELECT company,model,image FROM vehicle WHERE vehicle_id='"+vid+"'")
+
+    k = {}
+    if vehicle is not None:
+        k['v_status'] = "ok"
+        k['v_data'] = vehicle
+    else:
+        k['v_status'] = 'no'
+    return demjson.encode(k)
+
+
+
+
+@app.route('/and_notification',methods=['post'] )
 def and_notification():
     db=Db()
     notification=db.select("SELECT * FROM notification")
+    print(notification)
     k={}
     if  len(notification)>0:
-        k['not_status'] = "1"
+        k['not_status'] = "ok"
         k['not_data'] = notification
 
     else:
@@ -746,8 +762,9 @@ def and_workshop():
     else:
         k['shop_status'] = '0'
     if len(gallery) > 0:
-        k['gall_status'] = "1"
+        k['gall_status'] = "ok"
         k['gall_data'] = gallery
+        print(gallery)
 
     else:
         k['gall_status'] = '0'
@@ -862,6 +879,7 @@ def and_vehicle():
 def and_add_vehicle():
     db=Db()
     login_id = request.form['lid']
+    print(login_id)
     vehicle_type=request.form['type']
     company=request.form['company']
     model=request.form['model']
@@ -960,15 +978,19 @@ def and_edit_profile_loc():
 @app.route('/and_order_history',methods=['post'])
 def and_order_history():
     db=Db()
-    login_id = request.form['login_id']
-    order_history=db.select("SELECT * FROM service_request,user_service,vehicle,services,workshop WHERE service_request.service_request_id=user_service.service_request_id AND service_request.vehichle_id=vehicle.vehicle_id AND user_service.service_id=services.service_id AND service_request.workshop_id=workshop.shop_id AND service_request.user_id='"+login_id+"'")
+    login_id = request.form['lid']
+    # vehicle_id=request.form['vid']
+    print(login_id)
+    # print(vehicle_id)
+    order_history=db.select("SELECT * FROM service_request,workshop,vehicle WHERE service_request.workshop_id=workshop.shop_id AND service_request.vehichle_id=vehicle.vehicle_id AND service_request.user_id='"+login_id+"'")
+    print(order_history)
     k = {}
     if len(order_history) > 0:
-        k['order_history_status'] = "1"
+        k['order_history_status'] = "ok"
         k['order_history_data'] = order_history
 
     else:
-        k['order_history_status'] = '0'
+        k['order_history_status'] = 'no'
     return demjson.encode(k)
 @app.route('/and_invoice',methods=['post'])
 def and_invoice():
@@ -1137,6 +1159,248 @@ def and_nearest():
 
 
     return jsonify(status="ok",data=res)
+
+@app.route('/and_delete_vehicle',methods=['post'])
+def and_delete_vehicle():
+    db=Db()
+    vehicle_id=request.form['id']
+    delete_vehicle=db.delete("DELETE FROM vehicle WHERE vehicle_id='"+vehicle_id+"'")
+    return jsonify(status="success")
+
+@app.route('/and_orderhistory_pending',methods=['post'])
+def and_orderhistory_pending():
+    db=Db()
+    # shop_id=request.form['shop_id']
+    login_id=request.form['lid']
+    service_request_id=request.form['sid']
+    print(login_id)
+    print(service_request_id)
+    # print(shop_id)
+    # selected_vehicle_id=request.form['vid']
+    # print(shop_id)
+    workshop=db.selectOne("SELECT * FROM service_request,workshop,vehicle WHERE service_request.workshop_id=workshop.shop_id AND service_request.vehichle_id=vehicle.vehicle_id AND service_request.service_request_id='"+service_request_id+"'")
+    print(workshop)
+    user=db.selectOne("SELECT user.name FROM USER WHERE user_id='"+login_id+"'")
+    service=db.select("SELECT * FROM service_request,user_service,services WHERE service_request.service_request_id=user_service.service_request_id AND user_service.service_id=services.service_id AND service_request.service_request_Id='"+service_request_id+"'")
+    print(service)
+    k ={}
+    if workshop is not None:
+        k['wokshop_status']='ok'
+        k['workshop_data']=workshop
+
+    else:
+        k['wokshop_status']='missing'
+    if user is not None:
+        k['user_status']='ok'
+        k['user_data']=user
+
+    else:
+        k['wokshop_status']='missing'
+    if len(service) > 0:
+        k['service_status'] = "ok"
+        k['service_data'] = service
+
+    else:
+        k['service_status'] = 'no'
+    return demjson.encode(k)
+@app.route('/and_orderhistory_rejected',methods=['post'])
+def and_orderhistory_rejected():
+    db=Db()
+    # shop_id=request.form['shop_id']
+    login_id=request.form['lid']
+    service_request_id=request.form['sid']
+    print(login_id)
+    print(service_request_id)
+    # print(shop_id)
+    # selected_vehicle_id=request.form['vid']
+    # print(shop_id)
+    workshop=db.selectOne("SELECT * FROM service_request,workshop,vehicle WHERE service_request.workshop_id=workshop.shop_id AND service_request.vehichle_id=vehicle.vehicle_id AND service_request.service_request_id='"+service_request_id+"'")
+    print(workshop)
+    user=db.selectOne("SELECT user.name FROM USER WHERE user_id='"+login_id+"'")
+    print(user)
+    service=db.select("SELECT * FROM service_request,user_service,services WHERE service_request.service_request_id=user_service.service_request_id AND user_service.service_id=services.service_id AND service_request.service_request_Id='"+service_request_id+"'")
+    print(service)
+    k ={}
+    if workshop is not None:
+        k['wokshop_status']='ok'
+        k['workshop_data']=workshop
+
+    else:
+        k['wokshop_status']='missing'
+    if user is not None:
+        k['user_status']='ok'
+        k['user_data']=user
+
+    else:
+        k['wokshop_status']='missing'
+    if len(service) > 0:
+        k['service_status'] = "ok"
+        k['service_data'] = service
+
+    else:
+        k['service_status'] = 'no'
+    return demjson.encode(k)
+
+
+@app.route('/and_orderhistory_approved',methods=['post'])
+def and_orderhistory_approved():
+    db=Db()
+    # shop_id=request.form['shop_id']
+    login_id=request.form['lid']
+    service_request_id=request.form['sid']
+    print(login_id)
+    print(service_request_id)
+    # print(shop_id)
+    # selected_vehicle_id=request.form['vid']
+    # print(shop_id)
+    workshop=db.selectOne("SELECT * FROM service_request,workshop,vehicle WHERE service_request.workshop_id=workshop.shop_id AND service_request.vehichle_id=vehicle.vehicle_id AND service_request.service_request_id='"+service_request_id+"'")
+    print(workshop)
+    user=db.selectOne("SELECT user.name FROM USER WHERE user_id='"+login_id+"'")
+    print(user)
+    service=db.select("SELECT * FROM service_request,user_service,services WHERE service_request.service_request_id=user_service.service_request_id AND user_service.service_id=services.service_id AND service_request.service_request_Id='"+service_request_id+"'")
+    print(service)
+    k ={}
+    if workshop is not None:
+        k['wokshop_status']='ok'
+        k['workshop_data']=workshop
+
+    else:
+        k['wokshop_status']='missing'
+    if user is not None:
+        k['user_status']='ok'
+        k['user_data']=user
+
+    else:
+        k['wokshop_status']='missing'
+    if len(service) > 0:
+        k['service_status'] = "ok"
+        k['service_data'] = service
+
+    else:
+        k['service_status'] = 'no'
+    return demjson.encode(k)
+
+
+
+@app.route('/and_orderhistory_success',methods=['post'])
+def and_orderhistory_success():
+    db=Db()
+    # shop_id=request.form['shop_id']
+    login_id=request.form['lid']
+    service_request_id=request.form['sid']
+    print(login_id)
+    print(service_request_id)
+    # print(shop_id)
+    # selected_vehicle_id=request.form['vid']
+    # print(shop_id)
+    workshop=db.selectOne("SELECT * FROM service_request,workshop,vehicle WHERE service_request.workshop_id=workshop.shop_id AND service_request.vehichle_id=vehicle.vehicle_id AND service_request.service_request_id='"+service_request_id+"'")
+    print(workshop)
+    user=db.selectOne("SELECT user.name FROM USER WHERE user_id='"+login_id+"'")
+    print(user)
+    service=db.select("SELECT * FROM service_request,user_service,services WHERE service_request.service_request_id=user_service.service_request_id AND user_service.service_id=services.service_id AND service_request.service_request_Id='"+service_request_id+"'")
+    print(service)
+    k ={}
+    if workshop is not None:
+        k['wokshop_status']='ok'
+        k['workshop_data']=workshop
+
+    else:
+        k['wokshop_status']='missing'
+    if user is not None:
+        k['user_status']='ok'
+        k['user_data']=user
+
+    else:
+        k['wokshop_status']='missing'
+    if len(service) > 0:
+        k['service_status'] = "ok"
+        k['service_data'] = service
+
+    else:
+        k['service_status'] = 'no'
+    return demjson.encode(k)
+
+
+@app.route('/and_paid',methods=['post'])
+def and_paid():
+    db=Db()
+    service_request_id=request.form['srid']
+    res=db.update("UPDATE service_request SET STATUS='paid' WHERE service_request_id='"+service_request_id+"'")
+    k ={}
+    if res is not None:
+        k['edt_profile_status'] = 'ok'
+    else:
+        k['edt_profile_status'] = 'missing'
+    return demjson.encode(k)
+
+@app.route('/and_add_review',methods=['post'])
+def and_add_review():
+    db=Db()
+    service_request_id = request.form['srid']
+    feedback=request.form['feedback']
+    rating = request.form['rating']
+    print(service_request_id)
+    add_review=db.insert("INSERT INTO rating (service_request_id,rating,DATE,feedback) VALUE ('"+service_request_id+"','"+rating+"',CURDATE(),'"+feedback+"')")
+    k={}
+    if add_review is not None:
+        k['edt_profile_status'] = 'ok'
+    else:
+        k['edt_profile_status'] = 'missing'
+    return demjson.encode(k)
+
+@app.route('/and_news',methods=['post'])
+def and_news():
+    db=Db()
+    nid=request.form['nid']
+    print(nid)
+    news=db.selectOne("SELECT * FROM news WHERE news_id='"+nid+"'")
+    k={}
+    if news is not None:
+        k['news_status'] = 'ok'
+        k['news_data']=news
+    else:
+        k['news_status'] = 'missing'
+    return demjson.encode(k)
+
+@app.route('/and_chat',methods=['post'])
+def and_chat():
+    db=Db()
+    from_id=request.form['lid']
+    to_id=request.form['shop_id']
+    message=request.form['message']
+    print(from_id)
+    print(to_id)
+    print(message)
+    k={}
+    chat=db.insert("INSERT INTO chat (from_id,to_id,message,DATE) VALUES ('"+from_id+"','"+to_id+"','"+message+"',CURDATE())")
+    if chat is not None:
+        k['status'] = 'ok'
+    else:
+        k['status'] = 'no'
+    return demjson.encode(k)
+
+
+@app.route('/and_show_chat',methods=['post'])
+def and_show_chat():
+    db=Db()
+    from_id = request.form['lid']
+    to_id = request.form['shop_id']
+    lastid = request.form['lastid']
+    chat=db.select("SELECT * FROM chat WHERE ((from_id='"+from_id+"' AND to_id='"+to_id+"')   or  (from_id='"+to_id+"' AND to_id='"+from_id+"') ) and chat_id>"+lastid+"   order by chat_id asc ");
+    k={}
+    if len(chat) > 0:
+        k['status'] = "ok"
+        k['data'] = chat
+
+    else:
+        k['status'] = 'no'
+    return demjson.encode(k)
+
+
+
+
+
+
 
 
 if __name__ == '__main__':

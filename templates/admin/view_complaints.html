@@ -1,18 +1,21 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Untitled Document</title>
-</head>
+{#<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">#}
+{#<html xmlns="http://www.w3.org/1999/xhtml">#}
+{#<head>#}
+{#<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />#}
+{#<title>Untitled Document</title>#}
+{#</head>#}
+{% extends "admin/index.html" %}
+{% block body %}
+
 
 <body>
 <form id="form1" name="form1" method="post" action="/search_complaints">
   <p><h2>View Complaints</h2></p>
-  <table width="435" height="85" border="1" align="center">
+  <table width="435" height="85"  align="center" class="table table-hover">
     <tr>
-      <td height="31" colspan="7" align="right"><label for="textfield5"></label>
-      <input type="text" name="search" placeholder="Search" id="textfield5" />
-      <input type="submit" name="btn" value="Search"/></td>
+      <td height="31" colspan="7" align="right"><label for="textfield5" ></label>
+      <input type="text" name="search" placeholder="Search" id="textfield5" class="form-round"/>
+      <input type="submit" name="btn" value="Search" class="btn btn-round btn-primary button-mechfinder-search " style="font-size:10px;" /></td>
     </tr>
     <tr>
       <td width="60" height="31">Sl.No</td>
@@ -31,10 +34,11 @@
       <td>{{ k['complaint_date'] }}</td>
       <td>{{ k['replay'] }}</td>
       <td>{{ k['replay_date'] }}</td>
-      <td><a href="/send_reply/{{ k['complaint_id'] }}">Reply</a></td>
+      <td><a href="/send_reply/{{ k['complaint_id'] }}"class="btn btn-info btn-round btn-mechfinder-verify" style="font-size: 8px;">Reply</a></td>
     </tr>
       {% endfor %}
   </table>
 </form>
 </body>
-</html>
+{% endblock%}
+{#</html>#}
