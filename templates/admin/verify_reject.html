@@ -1,20 +1,21 @@
-<!doctype html>
-<html>
-<head>
-<meta charset="utf-8">
-</head>
-
+{#<!doctype html>#}
+{#<html>#}
+{#<head>#}
+{#<meta charset="utf-8">#}
+{#</head>#}
+{% extends "admin/index.html" %}
+{% block body %}
 <body>
-	<form id="form1" name="form1" method="post" action="/approve_rejected_workshop" >
-  <table width="302" border="0" align="center">
+	<form id="form1" name="form1" method="post" action="/approve_rejected_workshop" onsubmit="swal('Approved!','Shop Approved!', 'success');">
+  <table width="336" border="0" align="center">
     <tbody>
 	
       <tr>
         <td colspan="2">&nbsp;</td>
       </tr>
       <tr>
-        <td width="120">Shop Name:</td>
-        <td width="172">{{ data['shop_name'] }}</td>
+        <td width="123">Shop Name:</td>
+        <td width="203" >{{ data['shop_name'] }}</td>
       </tr>
       <tr>
         <td>Place</td>
@@ -64,11 +65,12 @@
         <td colspan="2">&nbsp;</td>
       </tr>
       <tr>
-        <td colspan="2" align="center"><input type="submit" name="submit" id="submit" value="Approve">         
+        <td colspan="2" align="center"><input type="submit" name="submit" id="submit" value="Approve" class="btn btn-round btn-success button-mechfinder-search " style="font-size:15px;">
       </tr>
       
     </tbody>
   </table>
 </form>
 </body>
-</html>
+{% endblock%}
+{#</html>#}

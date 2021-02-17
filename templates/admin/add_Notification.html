@@ -9,33 +9,33 @@
 
 <body>
 
-<form method="post" enctype="multipart/form-data" name="form1" id="form1" onsubmit="swal('Added!','Notifiaction Added!', 'success');" action="/Add_Notification_post">
+<form method="post" enctype="multipart/form-data" name="form1" id="form1" action="/Add_Notification_post" onsubmit="swal('Added!','News Added!', 'success');" >
   <p>&nbsp;</p>
   <p>&nbsp;</p>
   <p>&nbsp;</p>
   <table width="577" height="244" border="0" align="center">
     <tbody>
       <tr>
-        <td width="246" height="47">Subject</td>
-        <td width="273"><input type="text" name="textfield" id="textfield" required></td>
+        <td width="100" height="47">Subject</td>
+        <td width="230"><input type="text" name="textfield" id="textfield" required class="form-control"  style="border-radius: 50px"></td>
       </tr>
       <tr>
         <td height="80">Content</td>
-        <td><textarea name="textarea" id="textarea" required></textarea></td>
+        <td><textarea name="textarea" id="textarea" required class="form-control"  style="border-radius: 50px"></textarea></td>
       </tr>
       <tr>
         <td>image</td>
-        <td><input type="file" name="fileField" id="fileField" required></td>
+        <td><input type="file" name="fileField" id="fileField" required class="form-control btn-round" style="border-radius: 50px; background:#C7EDF5"></td>
       </tr>
       <tr>
-        <td colspan="2" align="center"><input type="submit" name="submit" id="submit" value="add"></td>
+        <td colspan="2" align="center" style="padding-top: 20px";"><input type="submit" name="submit" id="submit" value="add" class="btn btn-round btn-success button-mechfinder-search " style="font-size:15px;"></td>
       </tr>
     </tbody>
   </table>
   <p>&nbsp;</p>
 </form>
 <form  action="and_nearest" method="post">
-    <input type="submit" value="jhh">
+
 </form>
 </body>
     

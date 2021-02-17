@@ -1,27 +1,29 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Untitled Document</title>
-</head>
-
+{#<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">#}
+{#<html xmlns="http://www.w3.org/1999/xhtml">#}
+{#<head>#}
+{#<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />#}
+{#<title>Untitled Document</title>#}
+{#</head>#}
+{% extends "admin/index.html" %}
+{% block body %}
 <body>
-<form id="form1" name="form1" method="post" action="/send_reply_post">
+<form id="form1" name="form1" method="post" action="/send_reply_post" onsubmit="swal('Sended!','Reply sended!', 'success');">
 
   <table width="200" border="0" align="center">
    
     <tr>
-      <td>reply</td>
+
       <td>
-        <textarea name="reply" required></textarea></td>
+        <textarea name="reply" required class="form-control"  style="border-radius: 50px" placeholder="Reply"></textarea></td>
     </tr>
     <tr>
       <td colspan="2" align="center">&nbsp;</td>
     </tr>
     <tr>
-      <td colspan="2" align="center"><input type="submit" name="button" id="button" value="reply" />         <input type="reset" name="button2" id="button2" value="Clear" /></td>
+      <td colspan="2" align="center"><input type="submit" name="button" id="button" value="reply" class="btn btn-round btn-success button-mechfinder-search " style="font-size:15px;"/>    &nbsp&nbsp     <input type="reset" name="button2" id="button2" value="Clear" class="btn btn-round btn-danger button-mechfinder-search " style="font-size:15px;"/></td>
     </tr>
   </table>
 </form>
 </body>
-</html>
+{% endblock%}
+{#</html>#}

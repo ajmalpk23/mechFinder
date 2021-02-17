@@ -8,7 +8,7 @@
 {% block body %}
 <body>
 <form id="form1" name="form1" method="post" action="/searcch_pending_workshop">
-  <table width="1002" height="151" border="0" align="center" class="table table-hover">
+  <table width="1002" height="151" border="0" align="center" class="table table-hover" style="table-layout: fixed">
     <tbody>
       <tr>
 
@@ -31,14 +31,14 @@
       {% for k in data %}
       <tr align="center" style="vertical-align: text-bottom">
         <td>{{ loop.index }}</td>
-        <td>{{ k['shop_name'] }}</td>
-        <td>&nbsp;{{ k['place'] }}</td>
-        <td>&nbsp;{{ k['city'] }}</td>
-        <td>{{ k['pincode'] }}</td>
-        <td>&nbsp;{{ k['district'] }}</td>
+        <td style="white-space: unset">{{ k['shop_name'] }}</td>
+        <td style="white-space: unset">&nbsp;{{ k['place'] }}</td>
+        <td style="white-space: unset">&nbsp;{{ k['city'] }}</td>
+        <td style="white-space: unset">{{ k['pincode'] }}</td>
+        <td style="white-space: unset">&nbsp;{{ k['district'] }}</td>
         <td><img src="static/worckshop/{{ k['shop_lisence'] }}" width="50" height="50" /></td>
-        <td>{{ k['email'] }}</td>
-        <td>&nbsp;{{ k['phone'] }}</td>
+        <td style="white-space: unset">{{ k['email'] }}</td>
+        <td style="white-space: unset">&nbsp;{{ k['phone'] }}</td>
         <td><a href="/approve_workshop/{{ k['login_id'] }}" class="btn btn-success btn-round btn-mechfinder-verify" style="font-size: 8px;" >verify</a></td>
       </tr>
     {% endfor %}

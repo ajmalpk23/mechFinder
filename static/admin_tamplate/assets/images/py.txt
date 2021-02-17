@@ -1,0 +1,33 @@
+@app.route('/and_chat',methods=['post'])
+def and_chat():
+    db=Db()
+    from_id=request.form['lid']
+    to_id=request.form['shop_id']
+    message=request.form['message']
+    print(from_id)
+    print(to_id)
+    print(message)
+    k={}
+    chat=db.insert("INSERT INTO chat (from_id,to_id,message,DATE) VALUES ('"+from_id+"','"+to_id+"','"+message+"',CURDATE())")
+    if chat is not None:
+        k['status'] = 'ok'
+    else:
+        k['status'] = 'no'
+    return demjson.encode(k)
+
+
+@app.route('/and_show_chat',methods=['post'])
+def and_show_chat():
+    db=Db()
+    from_id = request.form['lid']
+    to_id = request.form['shop_id']
+    lastid = request.form['lastid']
+    chat=db.select("SELECT * FROM chat WHERE ((from_id='"+from_id+"' AND to_id='"+to_id+"')   or  (from_id='"+to_id+"' AND to_id='"+from_id+"') ) and chat_id>"+lastid+"   order by chat_id asc ");
+    k={}
+    if len(chat) > 0:
+        k['status'] = "ok"
+        k['data'] = chat
+
+    else:
+        k['status'] = 'no'
+    return demjson.encode(k)

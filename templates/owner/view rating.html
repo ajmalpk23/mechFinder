@@ -1,15 +1,17 @@
-<!doctype html>
-<html>
-<head>
-<meta charset="utf-8">
-<title>Untitled Document</title>
-</head>
+{#<!doctype html>#}
+{#<html>#}
+{#<head>#}
+{#<meta charset="utf-8">#}
+{#<title>Untitled Document</title>#}
+{#</head>#}
+{% extends "owner/index.html" %}
+{% block body %}
 
 <body>
-<table width="766" border="1">
+<table width="766"  class="table table-hover">
   <tbody>
     <tr>
-      <th width="62" height="49" scope="col">Sl.No</th>
+      <th width="62" scope="col">Sl.No</th>
       <th width="121" scope="col">Name</th>
       <th width="126" scope="col">Place</th>
       <th width="97" scope="col">Date</th>
@@ -18,6 +20,7 @@
     </tr>
     {% for k in data %}
     <tr>
+
       <td>{{ loop.index}}</td>
       <td>{{ k['name'] }}</td>
       <td>&nbsp;{{ k['place'] }}</td>
@@ -29,4 +32,5 @@
   </tbody>
 </table>
 </body>
-</html>
+{% endblock%}
+{#</html>#}

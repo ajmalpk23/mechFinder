@@ -1,55 +1,101 @@
 {% extends "admin/index.html" %}
 {% block body %}
 <body>
-<form id="form1" name="form1" method="post">
-  <p>&nbsp;</p>
-  <table width="210" height="452" border="1">
-    <tbody>
-      <tr>
-        <td><a href="/view_pending_workshop">View pending workshop</a></td>
-      </tr>
-      <tr>
-        <td><a href="/view_approved_workshop">View approved workshops</a></td>
-      </tr>
-      <tr>
-        <td><a href="/view_rejected_workshop">View rejected workshop</a></td>
-      </tr>
-      <tr>
-        <td><a href="/Manage_complaints">Manage complaints</a></td>
-      </tr>
-      <tr>
-        <td><a href="/View_feedback">View feedback</a></td>
-      </tr>
-      <tr>
-        <td><a href="/View_rating">View rating</a></td>
-      </tr>
-      <tr>
-        <td><a href="/Add_Notification">Add Notification</a></td>
-      </tr>
-      <tr>
-        <td><a href="/View_Notification">View Notification</a></td>
-      </tr>
-      <tr>
-        <td><a href="/Add_news">Add news</a></td>
-      </tr>
-      <tr>
-        <td><a href="/view_news">view news</a></td>
-      </tr>
-      <tr>
-        <td><a href="#">Shop owner chat</a></td>
-      </tr>
-      <tr>
-        <td><a href="/change_password">change password</a></td>
-      </tr>
-      <tr>
-        <td><a href="/logout_admin">Logout</a></td>
-      </tr>
-    </tbody>
-  </table>
-  <p>&nbsp;</p>
-  <p>&nbsp;</p>
-  <p>&nbsp;</p>
-  <p>&nbsp;</p>
-</form>
+<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" style="padding-top: 30px;">
+  <ol class="carousel-indicators" >
+    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+  </ol>
+  <div class="carousel-inner" style="height: 300px">
+    <div class="carousel-item active">
+      <img class="d-block w-100" src="static/admin_tamplate/assets/images/car1.jpg" alt="First slide">
+    </div>
+    <div class="carousel-item">
+      <img class="d-block w-100" src="static/admin_tamplate/assets/images/car2.jpg" alt="Second slide">
+    </div>
+    <div class="carousel-item">
+      <img class="d-block w-100" src="static/admin_tamplate/assets/images/image3.jpg" alt="Third slide">
+    </div>
+  </div>
+  <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
+</div>
+<div style="padding: 30px; font-size: 15px;">
+    <p style="font-size: 15px;">We connecting you to your mechanic with just a click of a button. We provides you timely notifications and relevant tips to help you communicate better with your member.
+We provides you timely notifications and relevant tips to help you communicate better with your member.
+
+Mechfinder is vehichle Care System. It is definitely your one-stop shop for enhancing and changing the way you manage your vehichle.</p>
+
+<h5 style="padding: 30px 0;">Our Key Features are:</h5>
+
+ <p><b>Vehicle:</b>  it allows users to upload the picture of his/her vehicle and add the vehicle details.</p>
+ <p><b>Appointments:</b>  here, you will see upcoming appointments for their vehicle.</p>
+ <p><b>Gallery:</b>  In this section shop owners can upload all his images related to his works</p>
+ <p><b>Notification:</b>  It provide notification about vehichles and services</p>
+ <p><b>Review:</b> Customers can give review to workshops for their service.</p>
+ <p><b>Bot: </b> It provide quick responces for simple problems</p>
+ <p><b>Chat:</b> it provide facility to chatting with shop owners</p>
+ <p ><b>Feedback:</b>  customers can give feedback about the app.</p>
+ <p><b>Account:</b> Here customers can upload their personal profile details.</p>
+ <p><b>Workshop Profile:</b>  This will contain the Business card of their workshop to contact them</p>
+
+</div>
+{#<form id="form1" name="form1" method="post">#}
+{#  <p>&nbsp;</p>#}
+{#  <table width="210" height="452" border="1">#}
+{#    <tbody>#}
+{#      <tr>#}
+{#        <td><a href="/view_pending_workshop">View pending workshop</a></td>#}
+{#      </tr>#}
+{#      <tr>#}
+{#        <td><a href="/view_approved_workshop">View approved workshops</a></td>#}
+{#      </tr>#}
+{#      <tr>#}
+{#        <td><a href="/view_rejected_workshop">View rejected workshop</a></td>#}
+{#      </tr>#}
+{#      <tr>#}
+{#        <td><a href="/Manage_complaints">Manage complaints</a></td>#}
+{#      </tr>#}
+{#      <tr>#}
+{#        <td><a href="/View_feedback">View feedback</a></td>#}
+{#      </tr>#}
+{#      <tr>#}
+{#        <td><a href="/View_rating">View rating</a></td>#}
+{#      </tr>#}
+{#      <tr>#}
+{#        <td><a href="/Add_Notification">Add Notification</a></td>#}
+{#      </tr>#}
+{#      <tr>#}
+{#        <td><a href="/View_Notification">View Notification</a></td>#}
+{#      </tr>#}
+{#      <tr>#}
+{#        <td><a href="/Add_news">Add news</a></td>#}
+{#      </tr>#}
+{#      <tr>#}
+{#        <td><a href="/view_news">view news</a></td>#}
+{#      </tr>#}
+{#      <tr>#}
+{#        <td><a href="#">Shop owner chat</a></td>#}
+{#      </tr>#}
+{#      <tr>#}
+{#        <td><a href="/change_password">change password</a></td>#}
+{#      </tr>#}
+{#      <tr>#}
+{#        <td><a href="/logout_admin">Logout</a></td>#}
+{#      </tr>#}
+{#    </tbody>#}
+{#  </table>#}
+{#  <p>&nbsp;</p>#}
+{#  <p>&nbsp;</p>#}
+{#  <p>&nbsp;</p>#}
+{#  <p>&nbsp;</p>#}
+{#</form>#}
 </body>
 {% endblock %}

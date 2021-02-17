@@ -1,12 +1,13 @@
-<!doctype html>
-<html>
-<head>
-<meta charset="utf-8">
-<title>Untitled Document</title>
-</head>
-
+{#<!doctype html>#}
+{#<html>#}
+{#<head>#}
+{#<meta charset="utf-8">#}
+{#<title>Untitled Document</title>#}
+{#</head>#}
+{% extends "owner/index.html" %}
+{% block body %}
 <body>  
-<form id="form1" name="form1" method="post" action="/update_view_profile"  enctype="multipart/form-data">
+<form id="form1" name="form1" method="post" action="/update_view_profile"  enctype="multipart/form-data" onsubmit="swal('Updated!','Profile Updated!', 'success');">
   <table width="302" border="0" align="center">
     <tbody>
 	
@@ -14,47 +15,50 @@
         <td colspan="2">&nbsp;</td>
       </tr>
       <tr>
-        <td width="120">Shop Name:</td>
-        <td width="172"><input type="text" name="textfield5" id="textfield5" value="{{ data['shop_name'] }}"></td>
+        <td width="120" >Shop Name:</td>
+        <td width="172"><input type="text" name="textfield5" id="textfield5"  value="{{ data['shop_name'] }}" class="form-control"  style="border-radius: 50px"></td>
       </tr>
       <tr>
         <td>Place</td>
-        <td><input type="text" name="textfield2" id="textfield2" value="{{ data['place'] }}"></td>
+        <td><input type="text" name="textfield2" id="textfield2" value="{{ data['place'] }}" class="form-control"  style="border-radius: 50px"></td>
       </tr>
       <tr>
         <td>City</td>
-        <td><input type="text" name="textfield3" id="textfield3" value="{{ data['city'] }}"> </td>
+        <td><input type="text" name="textfield3" id="textfield3" value="{{ data['city'] }}" class="form-control"  style="border-radius: 50px"> </td>
       </tr>
       <tr>
         <td>District</td>
-        <td><input type="text" name="textfield4" id="textfield4" value="{{ data['district'] }}"></td>
+        <td><input type="text" name="textfield4" id="textfield4" value="{{ data['district'] }}" class="form-control"  style="border-radius: 50px"></td>
       </tr>
       <tr>
         <td>Pincode</td>
-        <td><input type="number" name="number" id="number" value="{{ data['pincode'] }}"></td>
+        <td><input type="number" name="number" id="number" value="{{ data['pincode'] }}" class="form-control"  style="border-radius: 50px"></td>
       </tr>
       <tr>
         <td><p>E-mail</p></td>
-        <td><input type="email" name="email" id="email" value="{{ data['email'] }}"></td>
+        <td><input type="email" name="email" id="email" value="{{ data['email'] }}" class="form-control"  style="border-radius: 50px"></td>
       </tr>
 
       <tr>
         <td>Shop License</td>
         <td><img src="static/worckshop/{{ data['shop_lisence'] }}" height="100" width="100">
             <br>
-            <input type="file" name="file" id="file" value="{{ data['shop_lisence'] }}"></td>
+            <input type="file" name="file" id="file" value="{{ data['shop_lisence'] }}" class="form-control btn-round" style="border-radius: 50px; background:#C7EDF5">
+            </td>
+
+
       </tr>
       <tr>
         <td height="31">Phone</td>
-        <td><input type="number" name="number2" id="number2" value="{{ data['phone'] }}"></td>
+        <td><input type="number" name="number2" id="number2" value="{{ data['phone'] }}" class="form-control"  style="border-radius: 50px"></td>
       </tr>
 	        <tr>
         <td height="31">Latitude</td>
-        <td><input type="text" name="latitude" id="latitude"value="{{ data['lati'] }}"></td>
+        <td><input type="text" name="latitude" id="latitude"value="{{ data['lati'] }}" class="form-control"  style="border-radius: 50px"></td>
       </tr>
 	        <tr>
         <td height="31">Longitude</td>
-        <td><input type="text" name="longitude" id="longitude" value="{{ data['longi'] }}"></td>
+        <td><input type="text" name="longitude" id="longitude" value="{{ data['longi'] }}" class="form-control"  style="border-radius: 50px"></td>
       </tr>
 
   
@@ -62,12 +66,13 @@
         <td colspan="2">&nbsp;</td>
       </tr>
       <tr>
-        <td align="right"><input type="submit" name="submit" id="submit" value="Update"></td>
-        <td align="center"><input type="reset" name="reset" id="reset" value="Reset"></td>
+        <td align="right"><input type="submit" name="submit" id="submit" value="Update" class="btn btn-info btn-round"></td>
+        <td align="center"><input type="reset" name="reset" id="reset" value="Reset" class="btn btn-danger btn-round"></td>
       </tr>
      
     </tbody>
   </table>
 </form>
 </body>
-</html>
+{% endblock%}
+{#</html>#}

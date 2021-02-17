@@ -8,28 +8,28 @@
 {% block body %}
 <body>
 <form id="form1" name="form1" method="post" action="/search_notification">
-  <p ><h2 align="center">View Notification
+  <p ><h2 align="center">
   </h2>
-  <table width="765" height="184"  align="center" class="table table-hover">
+  <table width="765" height="184"  align="center" class="table table-hover" style="table-layout:fixed">
     <tr>
       <td colspan="6" align="right"><label for="textfield4"></label>
       <input type="text" name="search" id="textfield4" placeholder="Search" class="form-round"/>
       <input type="submit" value="Search" name="btn" class="btn btn-round btn-primary button-mechfinder-search " style="font-size:10px;"/></td>
     </tr>
     <tr>
-      <td width="50" >Sl.No</td>
-      <td width="142">Date</td>
+      <td width="35">Sl.No</td>
+      <td width="50">Date</td>
       <td width="142">Subject</td>
-      <td width="180">Content</td>
+      <td width="250">Content</td>
       <td width="62">Image</td>
       <td width="62">&nbsp;</td>
     </tr>
       {% for k in data %}
-    <tr>
-      <td> {{ loop.index }}</td>
+    <tr style="word-break: break-all">
+      <td width="35"> {{ loop.index }}</td>
         <td>{{ k['date'] }}</td>
-        <td>{{ k['subject'] }}</td>
-        <td>{{ k['description'] }}</td>
+        <td style="white-space: unset">{{ k['subject'] }}</td>
+        <td style="white-space: unset">{{ k['description'] }}</td>
         <td><img src="static/notification/{{ k['image'] }}" alt="" height="100" width="100" alt=""/></td>
       <td><a href="/delete_notification/{{ k['notification_id'] }}"class="btn btn-danger btn-round btn-mechfinder-verify" style="font-size: 8px;">Delete</a></td>
     </tr>

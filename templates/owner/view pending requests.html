@@ -1,19 +1,21 @@
-<!doctype html>
-<html>
-<head>
-<meta charset="utf-8">
-<title>Untitled Document</title>
-</head>
+{#<!doctype html>#}
+{#<html>#}
+{#<head>#}
+{#<meta charset="utf-8">#}
+{#<title>Untitled Document</title>#}
+{#</head>#}
+{% extends "owner/index.html" %}
+{% block body %}
 
 <body>
-<table width="699" border="1">
+<table width="699" class="table table-hover">
   <tbody>
     <tr>
       <th width="62" height="49" scope="col">Sl.No</th>
       <th width="121" scope="col">Name</th>
       <th width="86" scope="col">Place</th>
       <th width="79" scope="col">Date</th>
-      <th width="218" scope="col">Description</th>
+      <th width="200" scope="col">Description</th>
       <th width="93" scope="col">&nbsp;</th>
     </tr>
     {% for k in data %}
@@ -23,10 +25,12 @@
       <td>{{ k['place'] }}</td>
       <td>{{ k['request_date']}}</td>
       <td>{{ k['description'] }}</td>
-      <td><a href="/more_info_pending_request/{{ k['service_request_id'] }}">more info</a></td>
+        <td><a href="/more_info_pending_request/{{ k['service_request_id'] }}" class="btn btn-round btn-success button-mechfinder-search " style="font-size:10px;">more info</a></td>
+        <td><a href="/chat/{{ k['login_id'] }}" class="btn btn-primary btn-round">Chat</a></td>
     </tr>
   {% endfor %}
   </tbody>
 </table>
 </body>
-</html>
+{% endblock%}
+{#</html>#}

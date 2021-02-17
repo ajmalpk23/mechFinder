@@ -1,34 +1,45 @@
-<!doctype html>
-<html>
-<head>
-<meta charset="utf-8">
-<title>Untitled Document</title>
-</head>
-
-<body><form action="/add_services_post" method="post"><table width="471" border="0" align="center">
+{#<!doctype html>#}
+{#<html>#}
+{#<head>#}
+{#<meta charset="utf-8">#}
+{#<title>Untitled Document</title>#}
+{#</head>#}
+{% extends "owner/index.html" %}
+{% block body %}
+<body><form action="/add_services_post" method="post" onsubmit="swal('Added!','Service Added!', 'success');"><table width="471" border="0" align="center" >
   <tbody>
     <tr>
-      <td align="center" colspan="2">Add Services</td>
+      <td align="center" colspan="2" style="padding-bottom: 15px;">Add Services</td>
       </tr>
   
     <tr>
       <td>Service</td>
       
       <td>
-	   <select  name="filed">
-           <option>water service</option>
-           <option>oile change</option>
-           <option>Ac service</option>
-	  
+	   <select  name="filed" class="form-control" style="border-radius: 50px">
+           <option>Painting</option>
+           <option>Electrical Works</option>
+           <option>Water Service</option>
+           <option>Wheel Care</option>`
+           <option>Periodic Service</option>
+           <option>Deatiled Service</option>
+           <option>Accessories</option>
+           <option>Polution Certificate</option>
+
+
+
 	  </select>
 	  </td>
+        <br>
       </tr>
+
     <tr>
       <td>Vehicle Type</td>
     
-      <td><select name="service">
-          <option> 3 wheeler</option>
-          <option>2 wheeler</option>
+      <td style="padding: 20px 0"><select name="service" class="form-control" style="border-radius: 50px">
+          <option>3 Wheeler</option>
+          <option>2 Wheeler</option>
+          <option>4 Wheeler</option>
 	  
 	  </select>
 	  </td>
@@ -36,13 +47,14 @@
     <tr>
       <td>Price</td>
     
-      <td><input type="text" name="price"/></td>
+      <td><input type="text" name="price" class="form-control"  style="border-radius: 50px"/></td>
     </tr>
     <tr>
-      <td colspan="2" align="center"><input type="submit" name="button" id="button" value="Add"></td>
+      <td colspan="2" align="center" style="padding-top: 20px;"><input type="submit" name="button" id="button" value="Add" class="btn btn-round btn-success button-mechfinder-search " style="font-size:15px;"></td>
     </tr>
   </tbody>
 </table>
 </form>
 </body>
-</html>
+{% endblock%}
+{#</html>#}

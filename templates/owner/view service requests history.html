@@ -1,12 +1,13 @@
-<!doctype html>
-<html>
-<head>
-<meta charset="utf-8">
-<title>Untitled Document</title>
-</head>
-
+{#<!doctype html>#}
+{#<html>#}
+{#<head>#}
+{#<meta charset="utf-8">#}
+{#<title>Untitled Document</title>#}
+{#</head>#}
+{% extends "owner/index.html" %}
+{% block body %}
 <body>
-<table width="699" border="1">
+<table width="699" class="table table-hover">
   <tbody>
     <tr>
       <th width="62" height="49" scope="col">Sl.No</th>
@@ -23,10 +24,12 @@
       <td>{{ k['place'] }}</td>
       <td>&nbsp;{{ k['request_date'] }}</td>
       <td>&nbsp;{{ k['description'] }}</td>
-      <td><a href="/service_history_more_info/{{ k['service_request_id'] }}">More info</a></td>
+      <td><a href="/service_history_more_info/{{ k['service_request_id'] }}" class="btn btn-round btn-success button-mechfinder-search " style="font-size:10px;"
+>More info</a></td>
     </tr>
   {% endfor %}
   </tbody>
 </table>
 </body>
-</html>
+{% endblock%}
+{#</html>#}

@@ -1,8 +1,8 @@
-<!doctype html>
-<html>
-<head>
-<meta charset="utf-8">
-<title>Untitled Document</title>
+{#<!doctype html>#}
+{#<html>#}
+{#<head>#}
+{#<meta charset="utf-8">#}
+{#<title>Untitled Document</title>#}
     <script>
         function  calculate() {
 
@@ -53,11 +53,13 @@
 
     </script>
 
-</head>
+{#</head>#}
+{% extends "owner/index.html" %}
+{% block body %}
 
 <body onload="calculate()">
 
-<form id="form1" name="form1" method="post" action="/generate_invoice">
+<form id="form1" name="form1" method="post" action="/generate_invoice" onsubmit="swal('Success!','Confirmed!', 'success');">
 <div id="to_print">
 <input type="hidden" id="no_service" value="{{ data1|length }}">
 <input type="hidden" id="pa" value="{{ parts }}">
@@ -68,7 +70,7 @@
         <td width="228">{{ data['name'] }}</td>
         <td width="150">Vehicle Type</td>
         <td width="155">{{ data['vehicle_type'] }}</td>
-        <td width="126" rowspan="4"><img src="/static/user/{{ data['user_image'] }}" width="120" height="120"/>&nbsp;</td>
+{#        <td width="126" rowspan="4"><img src="/static/user/{{ data['user_image'] }}" width="120" height="120"/>&nbsp;</td>#}
       </tr>
       <tr>
         <td>Place</td>
@@ -83,8 +85,8 @@
         <td>{{ data['manfctr_year'] }}</td>
       </tr>
       <tr>
-        <td align="justify">Description</td>
-        <td>&nbsp;{{ data['description'] }}</td>
+        <td align="justify"></td>
+        <td></td>
         <td colspan="2">&nbsp;</td>
       </tr>
     </tbody>
@@ -93,14 +95,14 @@
   <table width="786" border="0">
     <tbody>
       <tr>
-        <th height="37" colspan="2" scope="col">Services</th>
-		  <td><table width="267" height="37" border="1">
+        <th height="37" colspan="2" scope="col">The Order is ready for pay</th>
+		  <td><table width="267" height="37" border="0">
 		     <tbody>
             {% for k in data1 %}
 		      <tr>
 		        <td>{{ k['service'] }}</td>
-		        <td><input type="number" value="{{ k['uamount'] }}" name="number" id="{{ loop.index }}" onkeyup="calculate()">
-                <input type="hidden" value="{{ k['user_service_id'] }}" name="user_service_id"></td>
+		        <td><input type="number" value="{{ k['uamount'] }}" name="number" id="{{ loop.index }}" onkeyup="calculate()" class="form-control"  style="border-radius: 50px">
+                <input type="hidden" value="{{ k['user_service_id'] }}" name="user_service_id" class="form-control"  style="border-radius: 50px"></td>
 	          </tr>
             {% endfor %}
 	        </tbody>
@@ -114,12 +116,12 @@
       <tr>
         <td height="30">&nbsp;</td>
         <td align="right">parts</td>
-        <td><input type="number" name="part" id="part" value="0"   onkeyup="total()"></td>
+        <td><input type="number" name="part" id="part" value="0"   onkeyup="total()" class="form-control"  style="border-radius: 50px"></td>
       </tr>
       <tr>
         <td height="30">&nbsp;</td>
         <td align="right">Discount</td>
-        <td><input type="number" name="dis" id="discount" value="0" onkeyup="total()"></td>
+        <td><input type="number" name="dis" id="discount" value="0" onkeyup="total()" class="form-control"  style="border-radius: 50px"></td>
       </tr>
 		      <tr>
         <td height="43">&nbsp;</td>
@@ -133,8 +135,8 @@
 <table width="786" border="0">
 <tr>
 
-        <td height="57" colspan="2" align="right"><input type="button" name="submit2" id="submit2" value="print" onclick="printDiv()"></td>
-        <td><input type="submit" name="submit" id="submit" value="Conform"></td>
+        <td height="57" colspan="2" align="center"><input type="button" name="submit2" id="submit2" value="print" onclick="printDiv()" class="btn btn-primary btn-round"></td>
+        <td><input type="submit" name="submit" id="submit" value="Conform" class="btn btn-success btn-round"></td>
       </tr>
  </table>
   <p>&nbsp;</p>
@@ -143,4 +145,5 @@
 </form>
 
 </body>
-</html>
+{% endblock %}
+{#</html>#}

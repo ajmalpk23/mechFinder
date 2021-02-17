@@ -1,12 +1,13 @@
-<!doctype html>
-<html>
-<head>
-<meta charset="utf-8">
-<title>Untitled Document</title>
-</head>
-
+{#<!doctype html>#}
+{#<html>#}
+{#<head>#}
+{#<meta charset="utf-8">#}
+{#<title>Untitled Document</title>#}
+{#</head>#}
+{% extends "owner/index.html" %}
+{% block body %}
 <body>
-<form id="form1" name="form1" method="post" action="/accepet_reject_service_request">
+<form id="form1" name="form1" method="post" action="/accepet_reject_service_request" onsubmit="swal('Success!','Operation Success!', 'success');">
   <table width="789" height="164" border="0">
     <tbody>
       <tr>
@@ -14,7 +15,7 @@
         <td width="228">{{ data['name'] }}</td>
         <td width="150">Vehicle Type</td>
         <td width="155">{{ data['vehicle_type'] }}</td>
-        <td width="126" rowspan="4"><img src="/static/user/{{ data['user_image'] }}" width="120" height="120"/>&nbsp;</td>
+{#        <td width="126" rowspan="4"><img src="/static/user/{{ data['user_image'] }}" width="120" height="120"/>&nbsp;</td>#}
       </tr>
       <tr>
         <td>Place</td>
@@ -29,8 +30,8 @@
         <td>{{ data['manfctr_year'] }}</td>
       </tr>
       <tr>
-        <td align="justify">Description</td>
-        <td>&nbsp;{{ data['description'] }}</td>
+        <td ></td>
+        <td>&nbsp;</td>
         <td colspan="2">&nbsp;</td>
       </tr>
     </tbody>
@@ -39,7 +40,7 @@
   <table width="786" border="0">
     <tbody>
       <tr>
-        <th height="37" colspan="2" scope="col">Services</th>
+        <th height="37" colspan="2" scope="col">The Order is pending</th>
 		  <td><table width="256" height="35" border="0">
 		    <tbody>
             {% for k in data1 %}
@@ -69,8 +70,8 @@
       
       <tr>
         <td width="549">&nbsp;</td>
-        <td width="129"><input type="submit" name="submit" id="submit" value="Accept"></td>
-        <td width="94"><input type="submit" name="submit" id="submit" value="Reject"></td>
+        <td width="129"><input type="submit" name="submit" id="submit" value="Accept" class="btn btn-round btn-success button-mechfinder-search " style="font-size:15px;"></td>
+        <td width="94"><input type="submit" name="submit" id="submit" value="Reject" class="btn btn-round btn-danger button-mechfinder-search " style="font-size:15px;"></td>
       </tr>
     </tbody>
   </table>
@@ -78,4 +79,5 @@
   <p>&nbsp;</p>
 </form>
 </body>
-</html>
+{% endblock%}
+{#</html>#}

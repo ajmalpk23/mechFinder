@@ -1,12 +1,13 @@
-<!doctype html>
-<html>
-<head>
-<meta charset="utf-8">
-	<title>edit news  </title>
-</head>
-
+{#<!doctype html>#}
+{#<html>#}
+{#<head>#}
+{#<meta charset="utf-8">#}
+{#	<title>edit news  </title>#}
+{#</head>#}
+{% extends "admin/index.html" %}
+{% block body %}
 <body>
-<form method="post" enctype="multipart/form-data" name="form1" id="form1" action="/edit_news_post">
+<form method="post" enctype="multipart/form-data" name="form1" id="form1" action="/edit_news_post" onsubmit="swal('Edited!','News Edited!', 'success');">
   <p>&nbsp;</p>
   <p>&nbsp;</p>
   <p>&nbsp;</p>
@@ -14,26 +15,27 @@
     <tbody>
       <tr>
         <td width="246" height="47">title</td>
-        <td width="273"><input type="text" name="textfield" id="textfield" value="{{ data['news_title'] }}" required></td>
+        <td width="273"><input type="text" name="textfield" id="textfield" value="{{ data['news_title'] }}" required class="form-control"  style="border-radius: 50px"></td>
       </tr>
       <tr>
         <td height="80">Discription</td>
-        <td><textarea name="textarea" id="textarea" {{ data['news_discription'] }} required >{{ data['news_description'] }}</textarea></td>
+        <td><textarea name="textarea" id="textarea" {{ data['news_discription'] }} required class="form-control"  style="border-radius: 50px">{{ data['news_description'] }}</textarea></td>
       </tr>
       <tr>
         <td height="63"> image</td>
-        <td><img src="/static/news/{{ data['image'] }}" height="100" width="100" alt="no image"></td>
+        <td><img src="/static/news/{{ data['image'] }}" height="100" width="100" alt="no image" style="padding-bottom: 13px;"></td>
       </tr>
       <tr>
         <td>replace</td>
-        <td><input type="file" name="fileField" id="fileField" required></td>
+        <td style="padding-bottom: 20px;"><input type="file" name="fileField" id="fileField" required class="form-control btn-round" style="border-radius: 50px; background:#C7EDF5;" ></td>
       </tr>
       <tr>
-        <td colspan="2" align="center"><input type="submit" name="submit" id="submit" value="edit">
+        <td colspan="2" align="center"><input type="submit" name="submit" id="submit" value="edit" class="btn btn-round btn-success button-mechfinder-search " style="font-size:15px;">
       </tr>
     </tbody>
   </table>
   <p>&nbsp;</p>
 </form>
 </body>
-</html>
+{% endblock%}
+{#</html>#}

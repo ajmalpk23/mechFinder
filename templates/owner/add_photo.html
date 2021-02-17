@@ -1,25 +1,26 @@
-<!doctype html>
-<html>
-<head>
-<meta charset="utf-8">
-<title>Untitled Document</title>
-</head>
-
-<body><form action="/add_photo_post" method="post" enctype="multipart/form-data"><table width="471" border="0" align="center">
+{#<!doctype html>#}
+{#<html>#}
+{#<head>#}
+{#<meta charset="utf-8">#}
+{#<title>Untitled Document</title>#}
+{#</head>#}
+{% extends "owner/index.html" %}
+{% block body %}
+<body><form action="/add_photo_post" method="post" enctype="multipart/form-data" onsubmit="swal('Added!','Photo Added!', 'success');"><table width="471" border="0" align="center" >
   <tbody>
-    <tr>
-      <td align="center">Add Photo</td>
+    <tr >
+      <td colspan="2" style="padding-left: 35%">Add Photo</td>
       </tr>
     <tr>
-      <td width="232">&nbsp;</td>
+      <td width="224">&nbsp;</td>
       </tr>
     <tr>
       <td align="center">Photo</td>
-	  <td><input type="file" name="file" id="file" required></td>
+	  <td width="237"><input type="file" name="file" id="file" required></td>
       </tr>
     
     <tr>
-      <td align="center" colspan="2" height="100"><input type="submit" name="button" id="button" value="Add"></td>
+      <td align="center" colspan="2" height="100"><input type="submit" name="button" id="button" value="Add" class="btn btn-success btn-round"></td>
     </tr>
     <tr>
       <td>&nbsp;</td>
@@ -28,4 +29,5 @@
 </table>
 </form>
 </body>
-</html>
+{% endblock%}
+{#</html>#}

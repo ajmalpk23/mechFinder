@@ -1,21 +1,22 @@
-<!doctype html>
-<html>
-<head>
-<meta charset="utf-8">
-<title>Untitled Document</title>
-</head>
-
-<body><form action="/edit_service_post" method="post"><table width="471" border="0" align="center" >
+{#<!doctype html>#}
+{#<html>#}
+{#<head>#}
+{#<meta charset="utf-8">#}
+{#<title>Untitled Document</title>#}
+{#</head>#}
+{% extends "owner/index.html" %}
+{% block body %}
+<body><form action="/edit_service_post" method="post" onsubmit="swal('Edited!','Service Edited!', 'success');"><table width="382" border="0" align="center" >
   <tbody>
     <tr>
       <td align="center" colspan="2">Edit Services</td>
       </tr>
   
     <tr>
-      <td>Service</td>
+      <td width="165">Service</td>
       
-      <td>
-	  <select name="filde" >
+      <td width="149">
+	  <select name="filde" class="form-control" style="border-radius: 50px" >
           <option {% if data['service']=='water service' %} selected {% endif %}>water service</option>
            <option {% if data['service']=='oile change' %} selected {% endif %}>oile change</option>
            <option {% if data['service']=='Ac service' %} selected {% endif %}> Ac service</option>
@@ -24,9 +25,9 @@
 	  </td>
       </tr>
     <tr>
-      <td>Vehicle Type</td>
+      <td >Vehicle Type</td>
     
-      <td><select name="service">
+      <td><select name="service" class="form-control" style="border-radius: 50px">
           <option  {% if data['service']=='3 wheeler' %} selected {% endif %}> 3 wheeler</option>
           <option {% if data['service']=='2 wheeler' %} selected {% endif %}>2 wheeler</option>
 	  
@@ -36,13 +37,14 @@
     <tr>
       <td>Price</td>
     
-      <td><input type="text" name="price" value="{{ data['amount'] }}"/></td>
+      <td style="padding: 7px 0 22px"><input type="text" name="price" value="{{ data['amount'] }}" class="form-control"  style="border-radius: 50px"/></td>
     </tr>
     <tr>
-      <td colspan="2" align="center"><input type="submit" name="button" id="button" value="Update"></td>
+      <td colspan="2" align="center"><input type="submit" name="button" id="button" value="Update" class="btn btn-round btn-success button-mechfinder-search " style="font-size:15px;"></td>
     </tr>
   </tbody>
 </table>
 </form>
 </body>
-</html>
+{% endblock%}
+{#</html>#}

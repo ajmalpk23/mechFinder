@@ -67,7 +67,7 @@
                       <div class="circle"></div>
                   </div>
               </div>
-            
+
               <div class="spinner-layer spinner-yellow">
                   <div class="circle-clipper left">
                       <div class="circle"></div>
@@ -79,7 +79,7 @@
                       <div class="circle"></div>
                   </div>
               </div>
-            
+
               <div class="spinner-layer spinner-green">
                   <div class="circle-clipper left">
                       <div class="circle"></div>
@@ -100,43 +100,40 @@
       <div class="pcoded-container navbar-wrapper">
           <nav class="navbar header-navbar pcoded-header">
               <div class="navbar-wrapper">
-                  <div class="navbar-logo">
+                  <div class="navbar-logo" style="width:50px">
                       <a class="mobile-menu waves-effect waves-light" id="mobile-collapse" href="#!">
                           <i class="ti-menu"></i>
                       </a>
-                      <div class="mobile-search waves-effect waves-light">
-                          <div class="header-search">
-                              <div class="main-search morphsearch-search">
-                                  <div class="input-group">
-                                      <span class="input-group-addon search-close"><i class="ti-close"></i></span>
-                                      <input type="text" class="form-control" placeholder="Enter Keyword">
-                                      <span class="input-group-addon search-btn"><i class="ti-search"></i></span>
-                                  </div>
-                              </div>
-                          </div>
-                      </div>
-                      <a href="index.html">
-                          <img class="img-fluid" src="assets/images/logo.png" alt="Theme-Logo" />
-                      </a>
+{#                      <div class="mobile-search waves-effect waves-light">#}
+{#                          <div class="header-search">#}
+{#                              <div class="main-search morphsearch-search">#}
+{#                                  <div class="input-group">#}
+{#                                      <span class="input-group-addon search-close"><i class="ti-close"></i></span>#}
+{#                                      <input type="text" class="form-control" placeholder="Enter Keyword">#}
+{#                                      <span class="input-group-addon search-btn"><i class="ti-search"></i></span>#}
+{#                                  </div>#}
+{#                              </div>#}
+{#                          </div>#}
+{#                      </div>#}
                       <a class="mobile-options waves-effect waves-light">
                           <i class="ti-more"></i>
                       </a>
                   </div>
-                
+
                   <div class="navbar-container container-fluid">
                       <ul class="nav-left">
                           <li>
                               <div class="sidebar_toggle"><a href="javascript:void(0)"><i class="ti-menu"></i></a></div>
                           </li>
-                          <li class="header-search">
-                              <div class="main-search morphsearch-search">
-                                  <div class="input-group">
-                                      <span class="input-group-addon search-close"><i class="ti-close"></i></span>
-                                      <input type="text" class="form-control">
-                                      <span class="input-group-addon search-btn"><i class="ti-search"></i></span>
-                                  </div>
-                              </div>
-                          </li>
+{#                          <li class="header-search">#}
+{#                              <div class="main-search morphsearch-search">#}
+{#                                  <div class="input-group">#}
+{#                                      <span class="input-group-addon search-close"><i class="ti-close"></i></span>#}
+{#                                      <input type="text" class="form-control">#}
+{#                                      <span class="input-group-addon search-btn"><i class="ti-search"></i></span>#}
+{#                                  </div>#}
+{#                              </div>#}
+{#                          </li>#}
                           <li>
                               <a href="#!" onclick="javascript:toggleFullScreen()" class="waves-effect waves-light">
                                   <i class="ti-fullscreen"></i>
@@ -145,24 +142,24 @@
                       </ul>
                       <ul class="nav-right">
                           <li class="header-notification">
-                              <a href="#!" class="waves-effect waves-light">
-                                  <i class="ti-bell"></i>
-                                  <span class="badge bg-c-red"></span>
-                              </a>
+{#                              <a href="#!" class="waves-effect waves-light">#}
+{#                                  <i class="ti-bell"></i>#}
+{#                                  <span class="badge bg-c-red"></span>#}
+{#                              </a>#}
                               <ul class="show-notification">
-                                  <li>
-                                      <h6>Notifications</h6>
-                                      <label class="label label-danger">New</label>
-                                  </li>
+{#                                  <li>#}
+{#                                      <h6>Notifications</h6>#}
+{#                                      <label class="label label-danger">New</label>#}
+{#                                  </li>#}
                                   <li class="waves-effect waves-light">
-                                      <div class="media">
-                                          <img class="d-flex align-self-center img-radius" src="assets/images/avatar-2.jpg" alt="Generic placeholder image">
-                                          <div class="media-body">
-                                              <h5 class="notification-user">John Doe</h5>
-                                              <p class="notification-msg">Lorem ipsum dolor sit amet, consectetuer elit.</p>
-                                              <span class="notification-time">30 minutes ago</span>
-                                          </div>
-                                      </div>
+{#                                      <div class="media">#}
+{#                                          <img class="d-flex align-self-center img-radius" src="assets/images/avatar-2.jpg" alt="Generic placeholder image">#}
+{#                                          <div class="media-body">#}
+{#                                              <h5 class="notification-user">John Doe</h5>#}
+{#                                              <p class="notification-msg">Lorem ipsum dolor sit amet, consectetuer elit.</p>#}
+{#                                              <span class="notification-time">30 minutes ago</span>#}
+{#                                          </div>#}
+{#                                      </div>#}
                                   </li>
                                   <li class="waves-effect waves-light">
                                       <div class="media">
@@ -188,33 +185,33 @@
                           </li>
                           <li class="user-profile header-notification">
                               <a href="#!" class="waves-effect waves-light">
-                                  <img src="assets/images/avatar-4.jpg" class="img-radius" alt="User-Profile-Image">
-                                  <span>John Doe</span>
+                                  <img src="/static/admin_tamplate/assets/images/user.png" class="img-radius" alt="User-Profile-Image">
+                                  <span>Account</span>
                                   <i class="ti-angle-down"></i>
                               </a>
                               <ul class="show-notification profile-notification">
+{#                                  <li class="waves-effect waves-light">#}
+{#                                      <a href="#!">#}
+{#                                          <i class="ti-settings"></i> Settings#}
+{#                                      </a>#}
+{#                                  </li>#}
                                   <li class="waves-effect waves-light">
-                                      <a href="#!">
-                                          <i class="ti-settings"></i> Settings
-                                      </a>
-                                  </li>
-                                  <li class="waves-effect waves-light">
-                                      <a href="user-profile.html">
+                                      <a href="/view_profile">
                                           <i class="ti-user"></i> Profile
                                       </a>
                                   </li>
+{#                                  <li class="waves-effect waves-light">#}
+{#                                      <a href="email-inbox.html">#}
+{#                                          <i class="ti-email"></i> My Messages#}
+{#                                      </a>#}
+{#                                  </li>#}
                                   <li class="waves-effect waves-light">
-                                      <a href="email-inbox.html">
-                                          <i class="ti-email"></i> My Messages
+                                      <a href="/change_owner_password">
+                                          <i class="ti-lock"></i> Change password
                                       </a>
                                   </li>
                                   <li class="waves-effect waves-light">
-                                      <a href="auth-lock-screen.html">
-                                          <i class="ti-lock"></i> Lock Screen
-                                      </a>
-                                  </li>
-                                  <li class="waves-effect waves-light">
-                                      <a href="auth-normal-sign-in.html">
+                                      <a href="/logout_shop">
                                           <i class="ti-layout-sidebar-left"></i> Logout
                                       </a>
                                   </li>
@@ -231,13 +228,11 @@
                       <div class="sidebar_toggle"><a href="#"><i class="icon-close icons"></i></a></div>
                       <div class="pcoded-inner-navbar main-menu">
                           <div class="">
-                              <div class="main-menu-header">
-                                  <img class="img-80 img-radius" src="assets/images/avatar-4.jpg" alt="User-Profile-Image">
-                                  <div class="user-details">
-                                      <span id="more-details">John Doe<i class="fa fa-caret-down"></i></span>
-                                  </div>
+                              <div class="main-menu-header" style="padding: 0">
+                                  <img class="img-80 " src="/static/admin_tamplate/assets/images/jpgicon.jpg" alt="User-Profile-Image" style="width: 100%">
+
                               </div>
-        
+
                               <div class="main-menu-content">
                                   <ul>
                                       <li class="more-details">
@@ -250,17 +245,17 @@
                           </div>
                           <div class="p-15 p-b-0">
                               <form class="form-material">
-                                  <div class="form-group form-primary">
-                                      <input type="text" name="footer-email" class="form-control" required="">
-                                      <span class="form-bar"></span>
-                                      <label class="float-label"><i class="fa fa-search m-r-10"></i>Search Friend</label>
-                                  </div>
+{#                                  <div class="form-group form-primary">#}
+{#                                      <input type="text" name="footer-email" class="form-control" required="">#}
+{#                                      <span class="form-bar"></span>#}
+{#                                      <label class="float-label"><i class="fa fa-search m-r-10"></i>Search Friend</label>#}
+{#                                  </div>#}
                               </form>
                           </div>
-                          <div class="pcoded-navigation-label" data-i18n="nav.category.navigation">Layout</div>
+                          <div class="pcoded-navigation-label" data-i18n="nav.category.navigation" ></div>
                           <ul class="pcoded-item pcoded-left-item">
                               <li class="active">
-                                  <a href="/admin_home" class="waves-effect waves-dark">
+                                  <a href="/owner_home" class="waves-effect waves-dark">
                                       <span class="pcoded-micon"><i class="ti-home"></i><b>D</b></span>
                                       <span class="pcoded-mtext" data-i18n="nav.dash.main">Dashboard</span>
                                       <span class="pcoded-mcaret"></span>
@@ -269,17 +264,106 @@
                               <li class="pcoded-hasmenu">
                                   <a href="javascript:void(0)" class="waves-effect waves-dark">
                                       <span class="pcoded-micon"><i class="ti-layout-grid2-alt"></i></span>
-                                      <span class="pcoded-mtext"  data-i18n="nav.basic-components.main">Workshop</span>
+                                      <span class="pcoded-mtext"  data-i18n="nav.basic-components.main">Service requests</span>
                                       <span class="pcoded-mcaret"></span>
                                   </a>
                                   <ul class="pcoded-submenu">
                                       <li class=" ">
-                                          <a href="/view_pending_workshop" class="waves-effect waves-dark">
+                                          <a href="/pending_service_requestes" class="waves-effect waves-dark">
                                               <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                              <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Pending workshop</span>
+                                              <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Pending</span>
                                               <span class="pcoded-mcaret"></span>
                                           </a>
                                       </li>
+                                      <li class=" ">
+                                          <a href="/approved_service_requestes" class="waves-effect waves-dark">
+                                              <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                                              <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Approved</span>
+                                              <span class="pcoded-mcaret"></span>
+                                          </a>
+                                      </li>
+
+                                      <li class=" ">
+                                          <a href="/service_request_history" class="waves-effect waves-dark">
+                                              <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                                              <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">History</span>
+                                              <span class="pcoded-mcaret"></span>
+                                          </a>
+                                      </li>
+                                     </ul>
+                              </li>
+                                <li class="pcoded-hasmenu">
+                                  <a href="javascript:void(0)" class="waves-effect waves-dark">
+                                      <span class="pcoded-micon"><i class="ti-layout-grid2-alt"></i></span>
+                                      <span class="pcoded-mtext"  data-i18n="nav.basic-components.main">Gallery</span>
+                                      <span class="pcoded-mcaret"></span>
+                                  </a>
+                                  <ul class="pcoded-submenu">
+                                      <li class=" ">
+                                          <a href="/gallery_management" class="waves-effect waves-dark">
+                                              <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                                              <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">View</span>
+                                              <span class="pcoded-mcaret"></span>
+                                          </a>
+                                      </li>
+                                      <li class=" ">
+                                          <a href="/add_photo" class="waves-effect waves-dark">
+                                              <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                                              <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Add</span>
+                                              <span class="pcoded-mcaret"></span>
+                                          </a>
+                                      </li>
+                                  </ul>
+                               </li>
+                           <li class="pcoded-hasmenu">
+                                  <a href="javascript:void(0)" class="waves-effect waves-dark">
+                                      <span class="pcoded-micon"><i class="ti-layout-grid2-alt"></i></span>
+                                      <span class="pcoded-mtext"  data-i18n="nav.basic-components.main">Services</span>
+                                      <span class="pcoded-mcaret"></span>
+                                  </a>
+                                  <ul class="pcoded-submenu">
+                                      <li class=" ">
+                                          <a href="/add_services" class="waves-effect waves-dark">
+                                              <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                                              <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Add</span>
+                                              <span class="pcoded-mcaret"></span>
+                                          </a>
+                                      </li>
+                                      <li class=" ">
+                                          <a href="/view_services" class="waves-effect waves-dark">
+                                              <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                                              <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">View</span>
+                                              <span class="pcoded-mcaret"></span>
+                                          </a>
+                                      </li>
+                                  </ul>
+                               </li>
+{#                              <li class="pcoded-hasmenu">#}
+{#                                  <a href="javascript:void(0)" class="waves-effect waves-dark">#}
+{#                                      <span class="pcoded-micon"><i class="ti-layout-grid2-alt"></i></span>#}
+{#                                      <span class="pcoded-mtext"  data-i18n="nav.basic-components.main">Feedback & Rating</span>#}
+{#                                      <span class="pcoded-mcaret"></span>#}
+{#                                  </a>#}
+{#                                  <ul class="pcoded-submenu">#}
+{#                                      <li class=" ">#}
+{#                                          <a href="/View_feedback" class="waves-effect waves-dark">#}
+{#                                              <span class="pcoded-micon"><i class="ti-angle-right"></i></span>#}
+{#                                              <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Feedback</span>#}
+{#                                              <span class="pcoded-mcaret"></span>#}
+{#                                          </a>#}
+{#                                      </li>#}
+{#                                      <li class=" ">#}
+{#                                          <a href="/View_rating" class="waves-effect waves-dark">#}
+{#                                              <span class="pcoded-micon"><i class="ti-angle-right"></i></span>#}
+{#                                              <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Rating</span>#}
+{#                                              <span class="pcoded-mcaret"></span>#}
+{#                                          </a>#}
+{#                                      </li>#}
+{#                                  </ul>#}
+{#                               </li>#}
+
+
+
 {#                                      <li class=" ">#}
 {#                                          <a href="breadcrumb.html" class="waves-effect waves-dark">#}
 {#                                              <span class="pcoded-micon"><i class="ti-angle-right"></i></span>#}
@@ -343,120 +427,135 @@
 {#                                              <span class="pcoded-mcaret"></span>#}
 {#                                          </a>#}
 {#                                      </li>#}
-                
-                                  </ul>
-                              </li>
-                          </ul>
-                          <div class="pcoded-navigation-label" data-i18n="nav.category.forms">Forms &amp; Tables</div>
+
+
+
                           <ul class="pcoded-item pcoded-left-item">
                               <li>
-                                  <a href="form-elements-component.html" class="waves-effect waves-dark">
-                                      <span class="pcoded-micon"><i class="ti-layers"></i><b>FC</b></span>
-                                      <span class="pcoded-mtext" data-i18n="nav.form-components.main">Form Components</span>
+                                  <a href="/view_profile" class="waves-effect waves-dark">
+                                      <span class="pcoded-micon"><i class="ti-layout-grid2-alt"></i><b></b></span>
+                                      <span class="pcoded-mtext" data-i18n="nav.form-components.main">Profile</span>
                                       <span class="pcoded-mcaret"></span>
                                   </a>
                               </li>
                               <li>
-                                  <a href="bs-basic-table.html" class="waves-effect waves-dark">
-                                      <span class="pcoded-micon"><i class="ti-layers"></i><b>FC</b></span>
-                                      <span class="pcoded-mtext" data-i18n="nav.form-components.main">Basic Table</span>
+                                  <a href="/view_rating" class="waves-effect waves-dark">
+                                      <span class="pcoded-micon"><i class="ti-layout-grid2-alt"></i><b>FC</b></span>
+                                      <span class="pcoded-mtext" data-i18n="nav.form-components.main">Rating and Feedback</span>
                                       <span class="pcoded-mcaret"></span>
                                   </a>
                               </li>
-        
+                              <li>
+                                  <a href="/change_owner_password" class="waves-effect waves-dark">
+                                      <span class="pcoded-micon"><i class="ti-layout-grid2-alt"></i><b>FC</b></span>
+                                      <span class="pcoded-mtext" data-i18n="nav.form-components.main">Change password</span>
+                                      <span class="pcoded-mcaret"></span>
+                                  </a>
+                              </li>
+                              <li>
+                                  <a href="/logout_shop" class="waves-effect waves-dark">
+                                      <span class="pcoded-micon"><i class="ti-layout-grid2-alt"></i><b></b></span>
+                                      <span class="pcoded-mtext" data-i18n="nav.form-components.main">Logout</span>
+                                      <span class="pcoded-mcaret"></span>
+                                  </a>
+                              </li>
+
                           </ul>
-        
-                          <div class="pcoded-navigation-label" data-i18n="nav.category.forms">Chart &amp; Maps</div>
-                          <ul class="pcoded-item pcoded-left-item">
-                              <li>
-                                  <a href="chart.html" class="waves-effect waves-dark">
-                                      <span class="pcoded-micon"><i class="ti-layers"></i><b>FC</b></span>
-                                      <span class="pcoded-mtext" data-i18n="nav.form-components.main">Chart</span>
-                                      <span class="pcoded-mcaret"></span>
-                                  </a>
+                       </ul>
                               </li>
-                              <li>
-                                  <a href="map-google.html" class="waves-effect waves-dark">
-                                      <span class="pcoded-micon"><i class="ti-layers"></i><b>FC</b></span>
-                                      <span class="pcoded-mtext" data-i18n="nav.form-components.main">Maps</span>
-                                      <span class="pcoded-mcaret"></span>
-                                  </a>
-                              </li>
-                              <li class="pcoded-hasmenu">
-                                  <a href="javascript:void(0)" class="waves-effect waves-dark">
-                                      <span class="pcoded-micon"><i class="ti-layout-grid2-alt"></i></span>
-                                      <span class="pcoded-mtext"  data-i18n="nav.basic-components.main">Pages</span>
-                                      <span class="pcoded-mcaret"></span>
-                                  </a>
-                                  <ul class="pcoded-submenu">
-                                      <li class=" ">
-                                          <a href="auth-normal-sign-in.html" class="waves-effect waves-dark">
-                                              <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                              <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Login</span>
-                                              <span class="pcoded-mcaret"></span>
-                                          </a>
-                                      </li>
-                                      <li class=" ">
-                                          <a href="auth-sign-up.html" class="waves-effect waves-dark">
-                                              <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                              <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">Register</span>
-                                              <span class="pcoded-mcaret"></span>
-                                          </a>
-                                      </li>
-                                      <li class=" ">
-                                          <a href="sample-page.html" class="waves-effect waves-dark">
-                                              <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                              <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">Sample Page</span>
-                                              <span class="pcoded-mcaret"></span>
-                                          </a>
-                                      </li>
-                                  </ul>
-                              </li>
-        
                           </ul>
-        
-                          <div class="pcoded-navigation-label" data-i18n="nav.category.other">Other</div>
-                          <ul class="pcoded-item pcoded-left-item">
-                              <li class="pcoded-hasmenu ">
-                                  <a href="javascript:void(0)" class="waves-effect waves-dark">
-                                      <span class="pcoded-micon"><i class="ti-direction-alt"></i><b>M</b></span>
-                                      <span class="pcoded-mtext" data-i18n="nav.menu-levels.main">Menu Levels</span>
-                                      <span class="pcoded-mcaret"></span>
-                                  </a>
-                                  <ul class="pcoded-submenu">
-                                      <li class="">
-                                          <a href="javascript:void(0)" class="waves-effect waves-dark">
-                                              <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                              <span class="pcoded-mtext" data-i18n="nav.menu-levels.menu-level-21">Menu Level 2.1</span>
-                                              <span class="pcoded-mcaret"></span>
-                                          </a>
-                                      </li>
-                                      <li class="pcoded-hasmenu ">
-                                          <a href="javascript:void(0)" class="waves-effect waves-dark">
-                                              <span class="pcoded-micon"><i class="ti-direction-alt"></i></span>
-                                              <span class="pcoded-mtext" data-i18n="nav.menu-levels.menu-level-22.main">Menu Level 2.2</span>
-                                              <span class="pcoded-mcaret"></span>
-                                          </a>
-                                          <ul class="pcoded-submenu">
-                                              <li class="">
-                                                  <a href="javascript:void(0)" class="waves-effect waves-dark">
-                                                      <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                                      <span class="pcoded-mtext" data-i18n="nav.menu-levels.menu-level-22.menu-level-31">Menu Level 3.1</span>
-                                                      <span class="pcoded-mcaret"></span>
-                                                  </a>
-                                              </li>
-                                          </ul>
-                                      </li>
-                                      <li class="">
-                                          <a href="javascript:void(0)" class="waves-effect waves-dark">
-                                              <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                              <span class="pcoded-mtext" data-i18n="nav.menu-levels.menu-level-23">Menu Level 2.3</span>
-                                              <span class="pcoded-mcaret"></span>
-                                          </a>
-                                      </li>
-                
-                                  </ul>
-                              </li>
+{#        #}
+{#                          <div class="pcoded-navigation-label" data-i18n="nav.category.forms">Chart &amp; Maps</div>#}
+{#                          <ul class="pcoded-item pcoded-left-item">#}
+{#                              <li>#}
+{#                                  <a href="chart.html" class="waves-effect waves-dark">#}
+{#                                      <span class="pcoded-micon"><i class="ti-layers"></i><b>FC</b></span>#}
+{#                                      <span class="pcoded-mtext" data-i18n="nav.form-components.main">Chart</span>#}
+{#                                      <span class="pcoded-mcaret"></span>#}
+{#                                  </a>#}
+{#                              </li>#}
+{#                              <li>#}
+{#                                  <a href="map-google.html" class="waves-effect waves-dark">#}
+{#                                      <span class="pcoded-micon"><i class="ti-layers"></i><b>FC</b></span>#}
+{#                                      <span class="pcoded-mtext" data-i18n="nav.form-components.main">Maps</span>#}
+{#                                      <span class="pcoded-mcaret"></span>#}
+{#                                  </a>#}
+{#                              </li>#}
+{#                              <li class="pcoded-hasmenu">#}
+{#                                  <a href="javascript:void(0)" class="waves-effect waves-dark">#}
+{#                                      <span class="pcoded-micon"><i class="ti-layout-grid2-alt"></i></span>#}
+{#                                      <span class="pcoded-mtext"  data-i18n="nav.basic-components.main">Pages</span>#}
+{#                                      <span class="pcoded-mcaret"></span>#}
+{#                                  </a>#}
+{#                                  <ul class="pcoded-submenu">#}
+{#                                      <li class=" ">#}
+{#                                          <a href="auth-normal-sign-in.html" class="waves-effect waves-dark">#}
+{#                                              <span class="pcoded-micon"><i class="ti-angle-right"></i></span>#}
+{#                                              <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Login</span>#}
+{#                                              <span class="pcoded-mcaret"></span>#}
+{#                                          </a>#}
+{#                                      </li>#}
+{#                                      <li class=" ">#}
+{#                                          <a href="auth-sign-up.html" class="waves-effect waves-dark">#}
+{#                                              <span class="pcoded-micon"><i class="ti-angle-right"></i></span>#}
+{#                                              <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">Register</span>#}
+{#                                              <span class="pcoded-mcaret"></span>#}
+{#                                          </a>#}
+{#                                      </li>#}
+{#                                      <li class=" ">#}
+{#                                          <a href="sample-page.html" class="waves-effect waves-dark">#}
+{#                                              <span class="pcoded-micon"><i class="ti-angle-right"></i></span>#}
+{#                                              <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">Sample Page</span>#}
+{#                                              <span class="pcoded-mcaret"></span>#}
+{#                                          </a>#}
+{#                                      </li>#}
+{#                                  </ul>#}
+{#                              </li>#}
+{#        #}
+{#                          </ul>#}
+{#        #}
+{#                          <div class="pcoded-navigation-label" data-i18n="nav.category.other">Other</div>#}
+{#                          <ul class="pcoded-item pcoded-left-item">#}
+{#                              <li class="pcoded-hasmenu ">#}
+{#                                  <a href="javascript:void(0)" class="waves-effect waves-dark">#}
+{#                                      <span class="pcoded-micon"><i class="ti-direction-alt"></i><b>M</b></span>#}
+{#                                      <span class="pcoded-mtext" data-i18n="nav.menu-levels.main">Menu Levels</span>#}
+{#                                      <span class="pcoded-mcaret"></span>#}
+{#                                  </a>#}
+{#                                  <ul class="pcoded-submenu">#}
+{#                                      <li class="">#}
+{#                                          <a href="javascript:void(0)" class="waves-effect waves-dark">#}
+{#                                              <span class="pcoded-micon"><i class="ti-angle-right"></i></span>#}
+{#                                              <span class="pcoded-mtext" data-i18n="nav.menu-levels.menu-level-21">Menu Level 2.1</span>#}
+{#                                              <span class="pcoded-mcaret"></span>#}
+{#                                          </a>#}
+{#                                      </li>#}
+{#                                      <li class="pcoded-hasmenu ">#}
+{#                                          <a href="javascript:void(0)" class="waves-effect waves-dark">#}
+{#                                              <span class="pcoded-micon"><i class="ti-direction-alt"></i></span>#}
+{#                                              <span class="pcoded-mtext" data-i18n="nav.menu-levels.menu-level-22.main">Menu Level 2.2</span>#}
+{#                                              <span class="pcoded-mcaret"></span>#}
+{#                                          </a>#}
+{#                                          <ul class="pcoded-submenu">#}
+{#                                              <li class="">#}
+{#                                                  <a href="javascript:void(0)" class="waves-effect waves-dark">#}
+{#                                                      <span class="pcoded-micon"><i class="ti-angle-right"></i></span>#}
+{#                                                      <span class="pcoded-mtext" data-i18n="nav.menu-levels.menu-level-22.menu-level-31">Menu Level 3.1</span>#}
+{#                                                      <span class="pcoded-mcaret"></span>#}
+{#                                                  </a>#}
+{#                                              </li>#}
+{#                                          </ul>#}
+{#                                      </li>#}
+{#                                      <li class="">#}
+{#                                          <a href="javascript:void(0)" class="waves-effect waves-dark">#}
+{#                                              <span class="pcoded-micon"><i class="ti-angle-right"></i></span>#}
+{#                                              <span class="pcoded-mtext" data-i18n="nav.menu-levels.menu-level-23">Menu Level 2.3</span>#}
+{#                                              <span class="pcoded-mcaret"></span>#}
+{#                                          </a>#}
+{#                                      </li>#}
+{#                #}
+{#                                  </ul>#}
+{#                              </li>#}
                           </ul>
                       </div>
                   </nav>
@@ -594,7 +693,7 @@
 {#                                                </div>#}
 {#                                            </div>#}
                                             <!-- task, page, download counter  end -->
-    
+
                                             <!--  sale analytics start -->
                                             <div class="col-sm-12">
                                                 <div class="card">
@@ -619,240 +718,240 @@
 {#                                                    </div>#}
                                                 </div>
                                             </div>
-                                            <div class="col-xl-4 col-md-12">
-                                                <div class="card">
-                                                    <div class="card-block">
-                                                        <div class="row">
-                                                            <div class="col">
-                                                                <h4>$256.23</h4>
-                                                                <p class="text-muted">This Month</p>
-                                                            </div>
-                                                            <div class="col-auto">
-                                                                <label class="label label-success">+20%</label>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row">
-                                                            <div class="col-sm-8">
-                                                                <canvas id="this-month" style="height: 150px;"></canvas>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="card quater-card">
-                                                    <div class="card-block">
-                                                        <h6 class="text-muted m-b-15">This Quarter</h6>
-                                                        <h4>$3,9452.50</h4>
-                                                        <p class="text-muted">$3,9452.50</p>
-                                                        <h5>87</h5>
-                                                        <p class="text-muted">Online Revenue<span class="f-right">80%</span></p>
-                                                        <div class="progress"><div class="progress-bar bg-c-blue" style="width: 80%"></div></div>
-                                                        <h5 class="m-t-15">68</h5>
-                                                        <p class="text-muted">Offline Revenue<span class="f-right">50%</span></p>
-                                                        <div class="progress"><div class="progress-bar bg-c-green" style="width: 50%"></div></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!--  sale analytics end -->
-    
-                                            <!--  project and team member start -->
-                                            <div class="col-xl-8 col-md-12">
-                                                <div class="card table-card">
-                                                    <div class="card-header">
-                                                        <h5>Projects</h5>
-                                                        <div class="card-header-right">
-                                                            <ul class="list-unstyled card-option">
-                                                                <li><i class="fa fa fa-wrench open-card-option"></i></li>
-                                                                <li><i class="fa fa-window-maximize full-card"></i></li>
-                                                                <li><i class="fa fa-minus minimize-card"></i></li>
-                                                                <li><i class="fa fa-refresh reload-card"></i></li>
-                                                                <li><i class="fa fa-trash close-card"></i></li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                    <div class="card-block">
-                                                        <div class="table-responsive">
-                                                            <table class="table table-hover">
-                                                                <thead>
-                                                                <tr>
-                                                                    <th>
-                                                                        <div class="chk-option">
-                                                                            <div class="checkbox-fade fade-in-primary">
-                                                                                <label class="check-task">
-                                                                                    <input type="checkbox" value="">
-                                                                                    <span class="cr">
-                                                                                            <i class="cr-icon fa fa-check txt-default"></i>
-                                                                                        </span>
-                                                                                </label>
-                                                                            </div>
-                                                                        </div>
-                                                                        Assigned</th>
-                                                                    <th>Name</th>
-                                                                    <th>Due Date</th>
-                                                                    <th class="text-right">Priority</th>
-                                                                </tr>
-                                                                </thead>
-                                                                <tbody>
-                                                                <tr>
-                                                                    <td>
-                                                                        <div class="chk-option">
-                                                                            <div class="checkbox-fade fade-in-primary">
-                                                                                <label class="check-task">
-                                                                                    <input type="checkbox" value="">
-                                                                                    <span class="cr">
-                                                                                                <i class="cr-icon fa fa-check txt-default"></i>
-                                                                                            </span>
-                                                                                </label>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="d-inline-block align-middle">
-                                                                            <img src="assets/images/avatar-4.jpg" alt="user image" class="img-radius img-40 align-top m-r-15">
-                                                                            <div class="d-inline-block">
-                                                                                <h6>John Deo</h6>
-                                                                                <p class="text-muted m-b-0">Graphics Designer</p>
-                                                                            </div>
-                                                                        </div>
-                                                                    </td>
-                                                                    <td>Able Pro</td>
-                                                                    <td>Jun, 26</td>
-                                                                    <td class="text-right"><label class="label label-danger">Low</label></td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>
-                                                                        <div class="chk-option">
-                                                                            <div class="checkbox-fade fade-in-primary">
-                                                                                <label class="check-task">
-                                                                                    <input type="checkbox" value="">
-                                                                                    <span class="cr">
-                                                                                                <i class="cr-icon fa fa-check txt-default"></i>
-                                                                                            </span>
-                                                                                </label>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="d-inline-block align-middle">
-                                                                            <img src="assets/images/avatar-5.jpg" alt="user image" class="img-radius img-40 align-top m-r-15">
-                                                                            <div class="d-inline-block">
-                                                                                <h6>Jenifer Vintage</h6>
-                                                                                <p class="text-muted m-b-0">Web Designer</p>
-                                                                            </div>
-                                                                        </div>
-                                                                    </td>
-                                                                    <td>Mashable</td>
-                                                                    <td>March, 31</td>
-                                                                    <td class="text-right"><label class="label label-primary">high</label></td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>
-                                                                        <div class="chk-option">
-                                                                            <div class="checkbox-fade fade-in-primary">
-                                                                                <label class="check-task">
-                                                                                    <input type="checkbox" value="">
-                                                                                    <span class="cr">
-                                                                                                <i class="cr-icon fa fa-check txt-default"></i>
-                                                                                            </span>
-                                                                                </label>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="d-inline-block align-middle">
-                                                                            <img src="assets/images/avatar-3.jpg" alt="user image" class="img-radius img-40 align-top m-r-15">
-                                                                            <div class="d-inline-block">
-                                                                                <h6>William Jem</h6>
-                                                                                <p class="text-muted m-b-0">Developer</p>
-                                                                            </div>
-                                                                        </div>
-                                                                    </td>
-                                                                    <td>Flatable</td>
-                                                                    <td>Aug, 02</td>
-                                                                    <td class="text-right"><label class="label label-success">medium</label></td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>
-                                                                        <div class="chk-option">
-                                                                            <div class="checkbox-fade fade-in-primary">
-                                                                                <label class="check-task">
-                                                                                    <input type="checkbox" value="">
-                                                                                    <span class="cr">
-                                                                                                <i class="cr-icon fa fa-check txt-default"></i>
-                                                                                            </span>
-                                                                                </label>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="d-inline-block align-middle">
-                                                                            <img src="assets/images/avatar-2.jpg" alt="user image" class="img-radius img-40 align-top m-r-15">
-                                                                            <div class="d-inline-block">
-                                                                                <h6>David Jones</h6>
-                                                                                <p class="text-muted m-b-0">Developer</p>
-                                                                            </div>
-                                                                        </div>
-                                                                    </td>
-                                                                    <td>Guruable</td>
-                                                                    <td>Sep, 22</td>
-                                                                    <td class="text-right"><label class="label label-primary">high</label></td>
-                                                                </tr>
-                                                                </tbody>
-                                                            </table>
-                                                            <div class="text-right m-r-20">
-                                                                <a href="#!" class=" b-b-primary text-primary">View all Projects</a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-xl-4 col-md-12">
-                                                <div class="card ">
-                                                    <div class="card-header">
-                                                        <h5>Team Members</h5>
-                                                        <div class="card-header-right">
-                                                            <ul class="list-unstyled card-option">
-                                                                <li><i class="fa fa fa-wrench open-card-option"></i></li>
-                                                                <li><i class="fa fa-window-maximize full-card"></i></li>
-                                                                <li><i class="fa fa-minus minimize-card"></i></li>
-                                                                <li><i class="fa fa-refresh reload-card"></i></li>
-                                                                <li><i class="fa fa-trash close-card"></i></li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                    <div class="card-block">
-                                                        <div class="align-middle m-b-30">
-                                                            <img src="assets/images/avatar-2.jpg" alt="user image" class="img-radius img-40 align-top m-r-15">
-                                                            <div class="d-inline-block">
-                                                                <h6>David Jones</h6>
-                                                                <p class="text-muted m-b-0">Developer</p>
-                                                            </div>
-                                                        </div>
-                                                        <div class="align-middle m-b-30">
-                                                            <img src="assets/images/avatar-1.jpg" alt="user image" class="img-radius img-40 align-top m-r-15">
-                                                            <div class="d-inline-block">
-                                                                <h6>David Jones</h6>
-                                                                <p class="text-muted m-b-0">Developer</p>
-                                                            </div>
-                                                        </div>
-                                                        <div class="align-middle m-b-30">
-                                                            <img src="assets/images/avatar-3.jpg" alt="user image" class="img-radius img-40 align-top m-r-15">
-                                                            <div class="d-inline-block">
-                                                                <h6>David Jones</h6>
-                                                                <p class="text-muted m-b-0">Developer</p>
-                                                            </div>
-                                                        </div>
-                                                        <div class="align-middle m-b-30">
-                                                            <img src="assets/images/avatar-4.jpg" alt="user image" class="img-radius img-40 align-top m-r-15">
-                                                            <div class="d-inline-block">
-                                                                <h6>David Jones</h6>
-                                                                <p class="text-muted m-b-0">Developer</p>
-                                                            </div>
-                                                        </div>
-                                                        <div class="align-middle m-b-10">
-                                                            <img src="assets/images/avatar-5.jpg" alt="user image" class="img-radius img-40 align-top m-r-15">
-                                                            <div class="d-inline-block">
-                                                                <h6>David Jones</h6>
-                                                                <p class="text-muted m-b-0">Developer</p>
-                                                            </div>
-                                                        </div>
-                                                        <div class="text-center">
-                                                            <a href="#!" class="b-b-primary text-primary">View all Projects</a>
-                                                        </div>
-                                                    </div>
+{#                                            <div class="col-xl-4 col-md-12">#}
+{#                                                <div class="card">#}
+{#                                                    <div class="card-block">#}
+{#                                                        <div class="row">#}
+{#                                                            <div class="col">#}
+{#                                                                <h4>$256.23</h4>#}
+{#                                                                <p class="text-muted">This Month</p>#}
+{#                                                            </div>#}
+{#                                                            <div class="col-auto">#}
+{#                                                                <label class="label label-success">+20%</label>#}
+{#                                                            </div>#}
+{#                                                        </div>#}
+{#                                                        <div class="row">#}
+{#                                                            <div class="col-sm-8">#}
+{#                                                                <canvas id="this-month" style="height: 150px;"></canvas>#}
+{#                                                            </div>#}
+{#                                                        </div>#}
+{#                                                    </div>#}
+{#                                                </div>#}
+{#                                                <div class="card quater-card">#}
+{#                                                    <div class="card-block">#}
+{#                                                        <h6 class="text-muted m-b-15">This Quarter</h6>#}
+{#                                                        <h4>$3,9452.50</h4>#}
+{#                                                        <p class="text-muted">$3,9452.50</p>#}
+{#                                                        <h5>87</h5>#}
+{#                                                        <p class="text-muted">Online Revenue<span class="f-right">80%</span></p>#}
+{#                                                        <div class="progress"><div class="progress-bar bg-c-blue" style="width: 80%"></div></div>#}
+{#                                                        <h5 class="m-t-15">68</h5>#}
+{#                                                        <p class="text-muted">Offline Revenue<span class="f-right">50%</span></p>#}
+{#                                                        <div class="progress"><div class="progress-bar bg-c-green" style="width: 50%"></div></div>#}
+{#                                                    </div>#}
+{#                                                </div>#}
+{#                                            </div>#}
+{#                                            <!--  sale analytics end -->#}
+{#    #}
+{#                                            <!--  project and team member start -->#}
+{#                                            <div class="col-xl-8 col-md-12">#}
+{#                                                <div class="card table-card">#}
+{#                                                    <div class="card-header">#}
+{#                                                        <h5>Projects</h5>#}
+{#                                                        <div class="card-header-right">#}
+{#                                                            <ul class="list-unstyled card-option">#}
+{#                                                                <li><i class="fa fa fa-wrench open-card-option"></i></li>#}
+{#                                                                <li><i class="fa fa-window-maximize full-card"></i></li>#}
+{#                                                                <li><i class="fa fa-minus minimize-card"></i></li>#}
+{#                                                                <li><i class="fa fa-refresh reload-card"></i></li>#}
+{#                                                                <li><i class="fa fa-trash close-card"></i></li>#}
+{#                                                            </ul>#}
+{#                                                        </div>#}
+{#                                                    </div>#}
+{#                                                    <div class="card-block">#}
+{#                                                        <div class="table-responsive">#}
+{#                                                            <table class="table table-hover">#}
+{#                                                                <thead>#}
+{#                                                                <tr>#}
+{#                                                                    <th>#}
+{#                                                                        <div class="chk-option">#}
+{#                                                                            <div class="checkbox-fade fade-in-primary">#}
+{#                                                                                <label class="check-task">#}
+{#                                                                                    <input type="checkbox" value="">#}
+{#                                                                                    <span class="cr">#}
+{#                                                                                            <i class="cr-icon fa fa-check txt-default"></i>#}
+{#                                                                                        </span>#}
+{#                                                                                </label>#}
+{#                                                                            </div>#}
+{#                                                                        </div>#}
+{#                                                                        Assigned</th>#}
+{#                                                                    <th>Name</th>#}
+{#                                                                    <th>Due Date</th>#}
+{#                                                                    <th class="text-right">Priority</th>#}
+{#                                                                </tr>#}
+{#                                                                </thead>#}
+{#                                                                <tbody>#}
+{#                                                                <tr>#}
+{#                                                                    <td>#}
+{#                                                                        <div class="chk-option">#}
+{#                                                                            <div class="checkbox-fade fade-in-primary">#}
+{#                                                                                <label class="check-task">#}
+{#                                                                                    <input type="checkbox" value="">#}
+{#                                                                                    <span class="cr">#}
+{#                                                                                                <i class="cr-icon fa fa-check txt-default"></i>#}
+{#                                                                                            </span>#}
+{#                                                                                </label>#}
+{#                                                                            </div>#}
+{#                                                                        </div>#}
+{#                                                                        <div class="d-inline-block align-middle">#}
+{#                                                                            <img src="assets/images/avatar-4.jpg" alt="user image" class="img-radius img-40 align-top m-r-15">#}
+{#                                                                            <div class="d-inline-block">#}
+{#                                                                                <h6>John Deo</h6>#}
+{#                                                                                <p class="text-muted m-b-0">Graphics Designer</p>#}
+{#                                                                            </div>#}
+{#                                                                        </div>#}
+{#                                                                    </td>#}
+{#                                                                    <td>Able Pro</td>#}
+{#                                                                    <td>Jun, 26</td>#}
+{#                                                                    <td class="text-right"><label class="label label-danger">Low</label></td>#}
+{#                                                                </tr>#}
+{#                                                                <tr>#}
+{#                                                                    <td>#}
+{#                                                                        <div class="chk-option">#}
+{#                                                                            <div class="checkbox-fade fade-in-primary">#}
+{#                                                                                <label class="check-task">#}
+{#                                                                                    <input type="checkbox" value="">#}
+{#                                                                                    <span class="cr">#}
+{#                                                                                                <i class="cr-icon fa fa-check txt-default"></i>#}
+{#                                                                                            </span>#}
+{#                                                                                </label>#}
+{#                                                                            </div>#}
+{#                                                                        </div>#}
+{#                                                                        <div class="d-inline-block align-middle">#}
+{#                                                                            <img src="assets/images/avatar-5.jpg" alt="user image" class="img-radius img-40 align-top m-r-15">#}
+{#                                                                            <div class="d-inline-block">#}
+{#                                                                                <h6>Jenifer Vintage</h6>#}
+{#                                                                                <p class="text-muted m-b-0">Web Designer</p>#}
+{#                                                                            </div>#}
+{#                                                                        </div>#}
+{#                                                                    </td>#}
+{#                                                                    <td>Mashable</td>#}
+{#                                                                    <td>March, 31</td>#}
+{#                                                                    <td class="text-right"><label class="label label-primary">high</label></td>#}
+{#                                                                </tr>#}
+{#                                                                <tr>#}
+{#                                                                    <td>#}
+{#                                                                        <div class="chk-option">#}
+{#                                                                            <div class="checkbox-fade fade-in-primary">#}
+{#                                                                                <label class="check-task">#}
+{#                                                                                    <input type="checkbox" value="">#}
+{#                                                                                    <span class="cr">#}
+{#                                                                                                <i class="cr-icon fa fa-check txt-default"></i>#}
+{#                                                                                            </span>#}
+{#                                                                                </label>#}
+{#                                                                            </div>#}
+{#                                                                        </div>#}
+{#                                                                        <div class="d-inline-block align-middle">#}
+{#                                                                            <img src="assets/images/avatar-3.jpg" alt="user image" class="img-radius img-40 align-top m-r-15">#}
+{#                                                                            <div class="d-inline-block">#}
+{#                                                                                <h6>William Jem</h6>#}
+{#                                                                                <p class="text-muted m-b-0">Developer</p>#}
+{#                                                                            </div>#}
+{#                                                                        </div>#}
+{#                                                                    </td>#}
+{#                                                                    <td>Flatable</td>#}
+{#                                                                    <td>Aug, 02</td>#}
+{#                                                                    <td class="text-right"><label class="label label-success">medium</label></td>#}
+{#                                                                </tr>#}
+{#                                                                <tr>#}
+{#                                                                    <td>#}
+{#                                                                        <div class="chk-option">#}
+{#                                                                            <div class="checkbox-fade fade-in-primary">#}
+{#                                                                                <label class="check-task">#}
+{#                                                                                    <input type="checkbox" value="">#}
+{#                                                                                    <span class="cr">#}
+{#                                                                                                <i class="cr-icon fa fa-check txt-default"></i>#}
+{#                                                                                            </span>#}
+{#                                                                                </label>#}
+{#                                                                            </div>#}
+{#                                                                        </div>#}
+{#                                                                        <div class="d-inline-block align-middle">#}
+{#                                                                            <img src="assets/images/avatar-2.jpg" alt="user image" class="img-radius img-40 align-top m-r-15">#}
+{#                                                                            <div class="d-inline-block">#}
+{#                                                                                <h6>David Jones</h6>#}
+{#                                                                                <p class="text-muted m-b-0">Developer</p>#}
+{#                                                                            </div>#}
+{#                                                                        </div>#}
+{#                                                                    </td>#}
+{#                                                                    <td>Guruable</td>#}
+{#                                                                    <td>Sep, 22</td>#}
+{#                                                                    <td class="text-right"><label class="label label-primary">high</label></td>#}
+{#                                                                </tr>#}
+{#                                                                </tbody>#}
+{#                                                            </table>#}
+{#                                                            <div class="text-right m-r-20">#}
+{#                                                                <a href="#!" class=" b-b-primary text-primary">View all Projects</a>#}
+{#                                                            </div>#}
+{#                                                        </div>#}
+{#                                                    </div>#}
                                                 </div>
                                             </div>
+{#                                            <div class="col-xl-4 col-md-12">#}
+{#                                                <div class="card ">#}
+{#                                                    <div class="card-header">#}
+{#                                                        <h5>Team Members</h5>#}
+{#                                                        <div class="card-header-right">#}
+{#                                                            <ul class="list-unstyled card-option">#}
+{#                                                                <li><i class="fa fa fa-wrench open-card-option"></i></li>#}
+{#                                                                <li><i class="fa fa-window-maximize full-card"></i></li>#}
+{#                                                                <li><i class="fa fa-minus minimize-card"></i></li>#}
+{#                                                                <li><i class="fa fa-refresh reload-card"></i></li>#}
+{#                                                                <li><i class="fa fa-trash close-card"></i></li>#}
+{#                                                            </ul>#}
+{#                                                        </div>#}
+{#                                                    </div>#}
+{#                                                    <div class="card-block">#}
+{#                                                        <div class="align-middle m-b-30">#}
+{#                                                            <img src="assets/images/avatar-2.jpg" alt="user image" class="img-radius img-40 align-top m-r-15">#}
+{#                                                            <div class="d-inline-block">#}
+{#                                                                <h6>David Jones</h6>#}
+{#                                                                <p class="text-muted m-b-0">Developer</p>#}
+{#                                                            </div>#}
+{#                                                        </div>#}
+{#                                                        <div class="align-middle m-b-30">#}
+{#                                                            <img src="assets/images/avatar-1.jpg" alt="user image" class="img-radius img-40 align-top m-r-15">#}
+{#                                                            <div class="d-inline-block">#}
+{#                                                                <h6>David Jones</h6>#}
+{#                                                                <p class="text-muted m-b-0">Developer</p>#}
+{#                                                            </div>#}
+{#                                                        </div>#}
+{#                                                        <div class="align-middle m-b-30">#}
+{#                                                            <img src="assets/images/avatar-3.jpg" alt="user image" class="img-radius img-40 align-top m-r-15">#}
+{#                                                            <div class="d-inline-block">#}
+{#                                                                <h6>David Jones</h6>#}
+{#                                                                <p class="text-muted m-b-0">Developer</p>#}
+{#                                                            </div>#}
+{#                                                        </div>#}
+{#                                                        <div class="align-middle m-b-30">#}
+{#                                                            <img src="assets/images/avatar-4.jpg" alt="user image" class="img-radius img-40 align-top m-r-15">#}
+{#                                                            <div class="d-inline-block">#}
+{#                                                                <h6>David Jones</h6>#}
+{#                                                                <p class="text-muted m-b-0">Developer</p>#}
+{#                                                            </div>#}
+{#                                                        </div>#}
+{#                                                        <div class="align-middle m-b-10">#}
+{#                                                            <img src="assets/images/avatar-5.jpg" alt="user image" class="img-radius img-40 align-top m-r-15">#}
+{#                                                            <div class="d-inline-block">#}
+{#                                                                <h6>David Jones</h6>#}
+{#                                                                <p class="text-muted m-b-0">Developer</p>#}
+{#                                                            </div>#}
+{#                                                        </div>#}
+{#                                                        <div class="text-center">#}
+{#                                                            <a href="#!" class="b-b-primary text-primary">View all Projects</a>#}
+{#                                                        </div>#}
+{#                                                    </div>#}
+{#                                                </div>#}
+{#                                            </div>#}
                                             <!--  project and team member end -->
                                         </div>
                                     </div>

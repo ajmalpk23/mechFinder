@@ -1,12 +1,13 @@
-<!doctype html>
-<html>
-<head>
-<meta charset="utf-8">
-<title>Untitled Document</title>
-</head>
-
+{#<!doctype html>#}
+{#<html>#}
+{#<head>#}
+{#<meta charset="utf-8">#}
+{#<title>Untitled Document</title>#}
+{#</head>#}
+{% extends "owner/index.html" %}
+{% block body %}
 <body>
-<form id="form1" name="form1" method="post">
+<form id="form1" name="form1" method="post" onsubmit="swal('Deleted!','Photo Deleted!', 'error');">
 	<table width="780" border="0" align="center">
   <tbody>
     <tr>
@@ -18,29 +19,29 @@
     <tr>
     {% if count.value<data|length %}
       <td align="center">
-          <img src="/static/gallery/{{ data[count.value]['image'] }}" width="180" height="180"/><br/>
+          <img src="/static/gallery/{{ data[count.value]['image'] }}" width="180" height="195"/><br/>
 
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          <a href="/gallery_delete/{{ data[count.value]['gallery_id'] }}"><input type="button" value="Delete"></a>
-      </td>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="/gallery_delete/{{ data[count.value]['gallery_id'] }}">
+          <input type="button" value="Delete" class="btn btn-danger btn-round">
+          </a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
         {% endif %}
     {% set count.value = count.value + 1 %}
      {% if count.value<data|length %}
       <td align="center">
-          <img src="/static/gallery/{{ data[count.value]['image'] }}" width="180" height="180"/><br/>
+          <img src="/static/gallery/{{ data[count.value]['image'] }}" width="180" height="196"/><br/>
 
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          <a href="/gallery_delete/{{ data[count.value]['gallery_id'] }}"><input type="button" value="Delete"></a>
-      </td>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="/gallery_delete/{{ data[count.value]['gallery_id'] }}">
+          <input type="button" value="Delete" class="btn btn-danger btn-round">
+          </a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
         {% endif %}
     {% set count.value = count.value + 1 %}
       {% if count.value<data|length %}
       <td align="center">
-          <img src="/static/gallery/{{ data[count.value]['image'] }}" width="180" height="180"/><br/>
+          <img src="/static/gallery/{{ data[count.value]['image'] }}" width="180" height="198"/><br/>
 
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          <a href="/gallery_delete/{{ data[count.value]['gallery_id'] }}"><input type="button" value="Delete"></a>
-      </td>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="/gallery_delete/{{ data[count.value]['gallery_id'] }}">
+          <input type="button" value="Delete" class="btn btn-danger btn-round" align="center" onsubmit="swal('Deleted!','Photo Deleted!', 'error');">
+          </a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
           {% endif %}
     {% set count.value = count.value + 1 %}
 
@@ -53,4 +54,5 @@
 
 </form>
 </body>
-</html>
+{% endblock%}
+{#</html>#}
